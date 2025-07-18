@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://c1lhoo3nuiyi6"]
+[gd_scene load_steps=4 format=3 uid="uid://c1lhoo3nuiyi6"]
 
-[ext_resource type="PackedScene" uid="uid://ys13wbnt12p6" path="res://scenes/asteroid.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/asteroid.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://txf7hmrxck16" path="res://assets/sprites/Earth.png" id="2"]
 
 [sub_resource type="CircleShape2D" id="1"]
