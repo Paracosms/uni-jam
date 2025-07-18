@@ -8,4 +8,3 @@ var earthPos : Vector2 = Vector2(0,0)
 # Hello
 
 # this is a comment
-
