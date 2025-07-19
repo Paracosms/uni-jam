@@ -6,8 +6,7 @@ extends Node2D
 var shopOpened : bool = false
 
 # Core Difficulty (0 - Easy, 1 - Hard)
-@export var difficulty = 0.5
-var scaled_difficulty = pow(difficulty, 1) # I feel like the 0-1 was too easy
+@export var difficulty = 1
 
 var spawn_timer := Timer.new()
 
@@ -69,20 +68,38 @@ func spawn_asteroid():
 	
 	### ASTEROID BALANCING BASED ON DIFFICULTY ###
 	
-	# Scale of Asteroid based on difficulty
-	var scale_min = 0.7 - scaled_difficulty * 0.3
-	var scale_max = 1.2 - scaled_difficulty * 0.2
-	asteroid.scale = Vector2.ONE * randf_range(scale_min, scale_max)
+	# Scale of Asteroid based on dificulty
+	var base = randf_range(-1.0, 1.0) # Base random value
 	
-	# Scale of Asteroid based on difficulty
-	var speed_min = 100 + scaled_difficulty * 50
-	var speed_max = 250 + scaled_difficulty * 250
-	asteroid.speed = randf_range(speed_min, speed_max)
+	# Gets exponent based on difficulty
+	# When exponent is higher, extreme values are rare
+	# Opposite for low exponent
+	var exponent = 1.0 + (1.0 - difficulty) * 1.0
+	var shaped_value = sign(base) * pow(abs(base), exponent)
+	shaped_value = clamp(shaped_value, -0.8, 0.8) # Prevents far extremes hopefully
+	
+	# Allows for the full range but biases towards the specified areas
+	var spread = 0.5 + difficulty * 0.4
+	var result = clamp((1.0 + shaped_value * spread), 0.1, 1.9)
+	
+	# Sets the scale
+	asteroid.scale = Vector2.ONE * result
+	
+	# Scale of Asteroid based on size
+	
+	var weight = (1.9 - result) / (1.9 - 0.1)
+	var base_speed = lerp(50.0, 300.0, weight)
+	
+	var variation = base_speed * 0.1
+	var speed = randf_range(base_speed - variation, base_speed + variation)
+	
+	asteroid.speed = speed
 	
 	# Scale of Asteroid based on difficulty and size (Bigger = more health)
-	var size_factor = asteroid.scale.x
-	var base_health = lerp(1.0, 7.0, scaled_difficulty)
-	asteroid.health = clamp(round(base_health * size_factor), 1, 5)
+	var base_health = round(lerp(1.0, 2.0, result))
+	asteroid.health = base_health
+	
+	
 	
 	### END SPAWN LOGIC ###
 	
@@ -103,8 +120,8 @@ func tryMeteorShower():
 		spawn_timer.paused = true
 		meteorShower_timer.paused = true
 		var old = difficulty
-		difficulty = 0.1
-		for n in range(11): # n = number of asteroids minus 1
+		difficulty = 0.05
+		for n in range(7): # n = number of asteroids but not actually idk why
 			spawn_asteroid()
 			await get_tree().create_timer(0.2).timeout # Wait for 0.2 seconds
 		difficulty = old
