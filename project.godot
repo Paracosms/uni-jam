@@ -11,9 +11,8 @@ config_version=5
 [application]
 
 config/name="uni jam"
-run/main_scene="uid://c1lhoo3nuiyi6"
+run/main_scene="uid://cjmxijp0t3jr5"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
 
 [autoload]
 
