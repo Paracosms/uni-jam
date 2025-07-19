@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://ygqyjex4xl27" path="res://assets/resources/starpoints.tres" id="2_x4jx1"]
 
 [node name="Ui" type="Control"]
+z_index = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

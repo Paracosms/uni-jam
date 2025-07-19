@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cafa1kp7jmpc5"]
+[gd_scene load_steps=6 format=3 uid="uid://cafa1kp7jmpc5"]
 
 [ext_resource type="Script" uid="uid://paykvh3r5l5g" path="res://scripts/asteroid.gd" id="1_6mo6b"]
 [ext_resource type="Texture2D" uid="uid://ctl1hiytwc25e" path="res://assets/sprites/asteroid.png" id="1_akfqu"]
+[ext_resource type="Texture2D" uid="uid://ccsviqut7bc6d" path="res://assets/sprites/fire.png" id="3_t4se3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_akfqu"]
 radius = 40.0
@@ -26,5 +27,20 @@ collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea"]
 shape = SubResource("CircleShape2D_6mo6b")
+
+[node name="fireParticles" type="CPUParticles2D" parent="."]
+z_index = -1
+amount = 12
+texture = ExtResource("3_t4se3")
+lifetime = 0.35
+lifetime_randomness = 0.58
+emission_shape = 1
+emission_sphere_radius = 40.0
+direction = Vector2(0, 0)
+spread = 180.0
+initial_velocity_min = 113.76
+initial_velocity_max = 325.88
+scale_amount_min = 0.1
+scale_amount_max = 0.25
 
 [connection signal="input_event" from="ClickArea" to="." method="_on_click_area_input_event"]
