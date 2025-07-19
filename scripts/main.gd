@@ -1,6 +1,9 @@
 extends Node2D
 
 @export var asteroid_scene: PackedScene
+@onready var shop_scene = preload("res://scenes/shop.tscn")
+
+var shopOpened : bool = false
 
 
 var spawn_timer := Timer.new()
@@ -75,3 +78,17 @@ func tryMeteorShower():
 		meteorShower_timer.paused = false
 	else:
 		print("\nMeteor Failed\n")
+
+
+func _on_change_scene_pressed():
+	var screen_size = get_viewport().get_visible_rect().size
+	var shop = shop_scene.instantiate()
+	
+	if shopOpened:
+		get_node("Shop").queue_free()
+		shopOpened = false
+	else:
+		add_child(shop)
+		shop.position = Vector2(screen_size.x / 2, 0)
+		shopOpened = true
+	
