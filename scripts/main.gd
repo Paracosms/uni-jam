@@ -148,6 +148,7 @@ func playChipSound():
 	print("chip")
 	var soundPlayer = AudioStreamPlayer.new()
 	soundPlayer.stream = chipAudio.pick_random()
+	soundPlayer.volume_db = Globals.volume
 	add_child(soundPlayer)
 	soundPlayer.play()
 	soundPlayer.finished.connect(soundPlayer.queue_free)
@@ -155,6 +156,7 @@ func playChipSound():
 func playExplosionSound():
 	var soundPlayer = AudioStreamPlayer.new()
 	soundPlayer.stream = explosionAudio.pick_random()
+	soundPlayer.volume_db = Globals.volume
 	add_child(soundPlayer)
 	soundPlayer.play()
 	soundPlayer.finished.connect(soundPlayer.queue_free)
