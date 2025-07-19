@@ -64,6 +64,15 @@ text = "Your clicks have a 1 in 4 chance to
  yield double the starpoints.
 [100 Starpoints]"
 
+[node name="enableBinoculars" type="Button" parent="MarginContainer/upgrades"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "Your view range expands based on 
+your cursor location
+[200 Starpoints]"
+
 [connection signal="pressed" from="MarginContainer/upgrades/doubleYield" to="." method="_on_double_yield_pressed"]
 [connection signal="pressed" from="MarginContainer/upgrades/doubleDamage" to="." method="_on_double_damage_pressed"]
 [connection signal="pressed" from="MarginContainer/upgrades/enableCrit" to="." method="_on_enable_crit_pressed"]
+[connection signal="pressed" from="MarginContainer/upgrades/enableBinoculars" to="." method="_on_enable_binoculars_pressed"]

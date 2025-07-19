@@ -3,7 +3,7 @@ extends Node2D
 @export var asteroid_scene: PackedScene
 @onready var shop_scene = preload("res://scenes/shop.tscn")
 
-var shopOpened : bool = false
+
 var chipAudio = [
 	preload("res://assets/audio/Chip0.wav"),
 	preload("res://assets/audio/Chip1.wav"),
@@ -18,7 +18,7 @@ var explosionAudio = [
 
 
 # Core Difficulty (0 - Easy, 1 - Hard)
-@export var difficulty = 1
+@export var difficulty = 0.5
 
 var spawn_timer := Timer.new()
 
@@ -32,15 +32,15 @@ func get_offscreen_position() -> Vector2: # I still dont know what a vector2 is
 	match edge:
 		0:  # top edge
 			pos.x = randf_range(0, screen_size.x)
-			pos.y = -100  # 100 pixels above top
+			pos.y = -150  # 100 pixels above top
 		1:  # right edge
-			pos.x = screen_size.x + 100 # 100px to the right
+			pos.x = screen_size.x + 150 # 100px to the right
 			pos.y = randf_range(0, screen_size.y)
 		2:  # bottom edge
 			pos.x = randf_range(0, screen_size.x)
-			pos.y = screen_size.y + 100 # 100px below
+			pos.y = screen_size.y + 150 # 100px below
 		3:  # left edge
-			pos.x = -100 # 100px to left
+			pos.x = -150 # 100px to left
 			pos.y = randf_range(0, screen_size.y)
 	return pos # returns (x,y)
 
@@ -91,16 +91,16 @@ func spawn_asteroid():
 	shaped_value = clamp(shaped_value, -0.8, 0.8) # Prevents far extremes hopefully
 	
 	# Allows for the full range but biases towards the specified areas
-	var spread = 0.5 + difficulty * 0.4
-	var result = clamp((1.0 + shaped_value * spread), 0.1, 1.9)
+	var spread = 0.5 + difficulty * 0.4 # Lower numbers = more spread
+	var result = clamp((1.0 + shaped_value * spread), 0.4, 1.9) # Last two numbers are min and max
 	
 	# Sets the scale
 	asteroid.scale = Vector2.ONE * result
 	
-	# Scale of Asteroid based on size
+	# Speed of Asteroid based on size
 	
-	var weight = (1.9 - result) / (1.9 - 0.1)
-	var base_speed = lerp(50.0, 300.0, weight)
+	var weight = (2 - result) / (1.9 - 0.1)
+	var base_speed = lerp(50.0, 300.0, weight) # y = a + x*(b-a) https://www.desmos.com/calculator/4xo9bmhyq1
 	
 	var variation = base_speed * 0.1
 	var speed = randf_range(base_speed - variation, base_speed + variation)
@@ -110,8 +110,6 @@ func spawn_asteroid():
 	# Scale of Asteroid based on difficulty and size (Bigger = more health)
 	var base_health = round(lerp(1.0, 2.0, result))
 	asteroid.health = base_health
-	
-	
 	
 	### END SPAWN LOGIC ###
 	
@@ -165,9 +163,9 @@ func playExplosionSound():
 
 func _on_toggle_shop_pressed():
 	# Toggles the shop
-	if shopOpened:
+	if Globals.shopOpened:
 		get_node("Shop").visible = false
-		shopOpened = false
+		Globals.shopOpened = false
 	else:
 		get_node("Shop").visible = true
-		shopOpened = true
+		Globals.shopOpened = true
