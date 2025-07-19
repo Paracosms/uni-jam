@@ -48,6 +48,15 @@ func get_offscreen_position() -> Vector2: # I still dont know what a vector2 is
 func _ready():
 	randomize() # Create random seed i think?
 	
+	### MAP SELECTION LOGIC ###
+	var mapUI = $"UI Controller/UI/bottomRight/VBoxContainer/mapUI"
+	mapUI.connect("alphaClicked", switchToAlpha)
+	mapUI.connect("betaClicked", switchToBeta)
+	mapUI.connect("gammaClicked", switchToGamma)
+	mapUI.connect("deltaClicked", switchToDelta)
+	
+	
+	
 	### CONSTANT METEOR SPAWNING LOGIC ###
 	spawn_timer.wait_time = 1  # Delay, i tried to make it an exported variable but it didnt work :(
 	spawn_timer.one_shot = false
@@ -65,6 +74,7 @@ func _ready():
 	
 	
 	### SHOP SCREEN LOGIC ###
+	$"UI Controller/UI/bottomLeft/toggleShop".connect("shopToggled", toggleShop)
 	var screen_size = get_viewport().get_visible_rect().size
 	var shop = shop_scene.instantiate()
 	add_child(shop)
@@ -145,7 +155,6 @@ func tryMeteorShower():
 		print("\nMeteor Failed\n")
 
 func playChipSound():
-	print("chip")
 	var soundPlayer = AudioStreamPlayer.new()
 	soundPlayer.stream = chipAudio.pick_random()
 	soundPlayer.volume_db = Globals.volume
@@ -161,11 +170,28 @@ func playExplosionSound():
 	soundPlayer.play()
 	soundPlayer.finished.connect(soundPlayer.queue_free)
 
-func _on_toggle_shop_pressed():
+func toggleShop():
 	# Toggles the shop
 	if Globals.shopOpened:
 		get_node("Shop").visible = false
 		Globals.shopOpened = false
 	else:
 		get_node("Shop").visible = true
-		Globals.shopOpened = true
+    Globals.shopOpened = true
+
+# Alpha is bottom (earth)
+func switchToAlpha():
+	print("alpha")
+
+# Beta is left
+func switchToBeta():
+	print("beta")
+
+# Gamma is top
+func switchToGamma():
+	print("gamma")
+
+# Delta is right
+func switchToDelta():
+	print("delta")
+  

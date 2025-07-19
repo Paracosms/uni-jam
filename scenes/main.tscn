@@ -12,20 +12,15 @@
 script = ExtResource("1_jyhfs")
 asteroid_scene = ExtResource("1")
 
-[node name="Ui" parent="." instance=ExtResource("3_tbgi4")]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_bottom = 0.0
-offset_left = 1914.0
-offset_top = -2.0
-offset_right = 1914.0
-offset_bottom = -2.0
-grow_horizontal = 0
-grow_vertical = 1
+[node name="UI Controller" type="CanvasLayer" parent="."]
+
+[node name="UI" parent="UI Controller" instance=ExtResource("3_tbgi4")]
+metadata/_edit_use_anchors_ = true
 
 [node name="Globals" parent="." instance=ExtResource("4_jyhfs")]
 
 [node name="Earth" parent="." instance=ExtResource("2_0wfyh")]
+
 position = Vector2(960, 440)
 
 [node name="ToggleShop" type="Button" parent="."]
