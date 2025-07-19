@@ -1,7 +1,14 @@
 extends Node2D
 
 @export var asteroid_scene: PackedScene
+
 @onready var shop_scene = preload("res://scenes/shop.tscn")
+@onready var alpha_scene = preload("res://scenes/earth.tscn")
+@onready var beta_scene = preload("res://scenes/beta.tscn")
+@onready var gamma_scene = preload("res://scenes/gamma.tscn")
+@onready var delta_scene = preload("res://scenes/delta.tscn")
+
+
 
 
 var chipAudio = [
@@ -47,15 +54,7 @@ func get_offscreen_position() -> Vector2: # I still dont know what a vector2 is
 
 func _ready():
 	randomize() # Create random seed i think?
-	
-	### MAP SELECTION LOGIC ###
-	var mapUI = $"UI Controller/UI/bottomRight/VBoxContainer/mapUI"
-	mapUI.connect("alphaClicked", switchToAlpha)
-	mapUI.connect("betaClicked", switchToBeta)
-	mapUI.connect("gammaClicked", switchToGamma)
-	mapUI.connect("deltaClicked", switchToDelta)
-	
-	
+	call_deferred("trulyReady") # Executes when everything has loaded in
 	
 	### CONSTANT METEOR SPAWNING LOGIC ###
 	spawn_timer.wait_time = 1  # Delay, i tried to make it an exported variable but it didnt work :(
@@ -71,18 +70,29 @@ func _ready():
 	meteorShower_timer.connect("timeout", Callable(self, "tryMeteorShower"))
 	add_child(meteorShower_timer)
 	meteorShower_timer.start()
-	
+
+func _process(_delta):
+	### STAR CENTERING LOGIC ###
+	get_tree().call_group("earth", "set_global_position", Globals.centerScreen)
+
+# This function executes after ALL nodes in every scene has loaded in
+func trulyReady():
+	### MAP SELECTION LOGIC ###
+	var mapUI = $"UIResizer/UIRenderer/UI/windowScale/Info/bottomRight/VBoxContainer/mapUI"
+	mapUI.connect("alphaClicked", switchToAlpha)
+	mapUI.connect("betaClicked", switchToBeta)
+	mapUI.connect("gammaClicked", switchToGamma)
+	mapUI.connect("deltaClicked", switchToDelta)
 	
 	### SHOP SCREEN LOGIC ###
-	$"UI Controller/UI/bottomLeft/toggleShop".connect("shopToggled", toggleShop)
+	$UIResizer/UIRenderer/UI/windowScale/Info/bottomLeft/toggleShop.connect("shopToggled", toggleShop)
 	var screen_size = get_viewport().get_visible_rect().size
 	var shop = shop_scene.instantiate()
 	add_child(shop)
 	get_node("Shop").position = Vector2(screen_size.x / 2, 0)
 	get_node("Shop").visible = false
-	
 
-func spawn_asteroid():
+func spawn_asteroid(type : String = "base"):
 	var asteroid = asteroid_scene.instantiate()
 	
 	# Asteroid spawning location
@@ -104,28 +114,51 @@ func spawn_asteroid():
 	var spread = 0.5 + difficulty * 0.4 # Lower numbers = more spread
 	var result = clamp((1.0 + shaped_value * spread), 0.4, 1.9) # Last two numbers are min and max
 	
-	# Sets the scale
-	asteroid.scale = Vector2.ONE * result
-	
 	# Speed of Asteroid based on size
 	
 	var weight = (2 - result) / (1.9 - 0.1)
 	var base_speed = lerp(50.0, 300.0, weight) # y = a + x*(b-a) https://www.desmos.com/calculator/4xo9bmhyq1
+	
+	# Health Variable
+	var base_health = round(lerp(1.0, 2.0, result))
+	
+	### ASTEROID TYPE LOGIC ###
+	var asteroidRandomizer = 0
+	
+	# TODO: change sprite depending on the type of asteroid
+	match Globals.currentStar:
+		3: asteroidRandomizer = randi() % 3
+		2: asteroidRandomizer = randi() % 2
+		1: asteroidRandomizer = randi() % 1
+		# 0 should do nothing as it is the base asteroid, so this case is not included
+	
+	match asteroidRandomizer:
+		2: 
+			result = clamp(result, 0.4, 1.0)
+		1:
+			base_speed += 50
+			# change sprite here
+		0: 
+			base_health += 2
+			# change sprite here
+	
+	if type == "speed" && asteroidRandomizer != 1:
+		base_speed += 50
+	
+	### SET ASTEROID PROPERTIES ###
 	
 	var variation = base_speed * 0.1
 	var speed = randf_range(base_speed - variation, base_speed + variation)
 	
 	asteroid.speed = speed
 	
+	# Sets the scale
+	asteroid.scale = Vector2.ONE * result
+	
 	# Scale of Asteroid based on difficulty and size (Bigger = more health)
-	var base_health = round(lerp(1.0, 2.0, result))
 	asteroid.health = base_health
 	
 	### END SPAWN LOGIC ###
-	
-	# Thank you stack overflow for whatever this means
-	var earth_node = get_node("Earth")
-	asteroid.earth = earth_node
 	
 	asteroid.connect("asteroidChipped", playChipSound)
 	asteroid.connect("asteroidExploded", playExplosionSound)
@@ -179,19 +212,63 @@ func toggleShop():
 		get_node("Shop").visible = true
     Globals.shopOpened = true
 
+# All switchTo functions changes stars and respawns all removed asteroids with +50 base speed
 # Alpha is bottom (earth)
 func switchToAlpha():
-	print("alpha")
+	var alpha = alpha_scene.instantiate()
+	var asteroidsToSpawn : int = 0
+	for star in get_tree().get_nodes_in_group("earth"):
+		star.queue_free()
+	for asteroid in get_tree().get_nodes_in_group("asteroid"):
+		asteroid.queue_free()
+		if asteroidsToSpawn < 5:
+			asteroidsToSpawn += 1
+	for newAsteroid in asteroidsToSpawn:
+		spawn_asteroid("speed")
+	add_child(alpha)
+	Globals.currentStar = 0
 
 # Beta is left
 func switchToBeta():
-	print("beta")
+	var beta = beta_scene.instantiate()
+	var asteroidsToSpawn : int = 0
+	for star in get_tree().get_nodes_in_group("earth"):
+		star.queue_free()
+	for asteroid in get_tree().get_nodes_in_group("asteroid"):
+		asteroid.queue_free()
+		if asteroidsToSpawn < 5:
+			asteroidsToSpawn += 1
+	for newAsteroid in asteroidsToSpawn:
+		spawn_asteroid("speed")
+	add_child(beta)
+	Globals.currentStar = 1
 
 # Gamma is top
 func switchToGamma():
-	print("gamma")
+	var gamma = gamma_scene.instantiate()
+	var asteroidsToSpawn : int = 0
+	for star in get_tree().get_nodes_in_group("earth"):
+		star.queue_free()
+	for asteroid in get_tree().get_nodes_in_group("asteroid"):
+		asteroid.queue_free()
+		if asteroidsToSpawn < 5:
+			asteroidsToSpawn += 1
+	for newAsteroid in asteroidsToSpawn:
+		spawn_asteroid("speed")
+	add_child(gamma)
+	Globals.currentStar = 2
 
 # Delta is right
 func switchToDelta():
-	print("delta")
-  
+	var delta = delta_scene.instantiate()
+	var asteroidsToSpawn : int = 0
+	for star in get_tree().get_nodes_in_group("earth"):
+		star.queue_free()
+	for asteroid in get_tree().get_nodes_in_group("asteroid"):
+		asteroid.queue_free()
+		if asteroidsToSpawn < 5:
+			asteroidsToSpawn += 1
+	for newAsteroid in asteroidsToSpawn:
+		spawn_asteroid("speed")
+	add_child(delta)
+	Globals.currentStar = 3
