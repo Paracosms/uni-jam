@@ -177,7 +177,7 @@ func toggleShop():
 		Globals.shopOpened = false
 	else:
 		get_node("Shop").visible = true
-    Globals.shopOpened = true
+		Globals.shopOpened = true
 
 # Alpha is bottom (earth)
 func switchToAlpha():

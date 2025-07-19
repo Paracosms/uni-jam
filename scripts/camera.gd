@@ -1,7 +1,6 @@
 extends Node2D
 
 @onready var binocularsCamera = $BinocularsCamera
-@onready var earthNode = $"/root/Main/Earth"
 
 var camera_speed = 50.0 # Speed 
 var camera_max_offset = 100.0

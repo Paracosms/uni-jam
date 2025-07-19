@@ -17,4 +17,3 @@ var deltaUnlocked : bool = false # right, 4th planet unlock
 # special upgrades
 var critEnabled : bool = false
 var binocularsEnabled : bool = false
-
