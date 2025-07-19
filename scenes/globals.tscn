@@ -1,6 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://rj1qruh2kyqx"]
+[gd_scene load_steps=4 format=3 uid="uid://rj1qruh2kyqx"]
 
 [ext_resource type="Script" uid="uid://bxr5pnry6titu" path="res://scripts/globals.gd" id="1_e82qx"]
+[ext_resource type="Script" uid="uid://btoba4j5yk7k4" path="res://scripts/label.gd" id="2_uf85h"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_e82qx"]
+font_size = 40
 
 [node name="Globals" type="Node2D"]
 script = ExtResource("1_e82qx")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 1408.0
+offset_right = 1920.0
+offset_bottom = 128.0
+text = "Lives: _____
+Star Points: _____"
+label_settings = SubResource("LabelSettings_e82qx")
+script = ExtResource("2_uf85h")
