@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cafa1kp7jmpc5" path="res://scenes/asteroid.tscn" id="1"]
 [ext_resource type="Script" uid="uid://8o3ytshbr1qp" path="res://scripts/main.gd" id="1_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://c53rpnk5xwo62" path="res://scenes/earth.tscn" id="2_0wfyh"]
-[ext_resource type="PackedScene" uid="uid://cynt3lbt5jsyb" path="res://scenes/ui.tscn" id="3_tbgi4"]
+[ext_resource type="PackedScene" path="res://scenes/ui.tscn" id="3_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://rj1qruh2kyqx" path="res://scenes/globals.tscn" id="4_jyhfs"]
 [ext_resource type="Script" uid="uid://db0mx56hqgh0i" path="res://scenes/volume.gd" id="6_tefeu"]
 
@@ -45,5 +45,4 @@ max_value = 10.0
 value = -20.0
 script = ExtResource("6_tefeu")
 
-[connection signal="pressed" from="ToggleShop" to="." method="_on_change_scene_pressed"]
 [connection signal="pressed" from="ToggleShop" to="." method="_on_toggle_shop_pressed"]
