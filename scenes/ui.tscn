@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=3 uid="uid://cynt3lbt5jsyb"]
+
+[ext_resource type="Texture2D" uid="uid://7mtyqv42wlaf" path="res://assets/resources/lives.tres" id="1_nt7q6"]
+[ext_resource type="Script" uid="uid://b04y5fmvggnk5" path="res://scripts/ui.gd" id="1_yev5y"]
+[ext_resource type="Texture2D" uid="uid://ygqyjex4xl27" path="res://assets/resources/starpoints.tres" id="2_x4jx1"]
+
+[node name="Ui" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yev5y")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -117.0
+offset_bottom = 107.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 20
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+columns = 2
+
+[node name="lives" type="Label" parent="MarginContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "000"
+horizontal_alignment = 2
+
+[node name="livesAnimation" type="TextureRect" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("1_nt7q6")
+stretch_mode = 2
+
+[node name="starpoints" type="Label" parent="MarginContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "000"
+horizontal_alignment = 2
+
+[node name="starpointsAnimation" type="TextureRect" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("2_x4jx1")
+stretch_mode = 2

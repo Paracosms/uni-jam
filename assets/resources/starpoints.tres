@@ -1,0 +1,14 @@
+[gd_resource type="AnimatedTexture" load_steps=4 format=3 uid="uid://ygqyjex4xl27"]
+
+[ext_resource type="Texture2D" uid="uid://c6g6ns4y3rpta" path="res://assets/sprites/animations/starpoints0.png" id="1_6ofqr"]
+[ext_resource type="Texture2D" uid="uid://jcq6uujhasnu" path="res://assets/sprites/animations/starpoints1.png" id="2_8npuu"]
+[ext_resource type="Texture2D" uid="uid://cp74qspg64qvw" path="res://assets/sprites/animations/starpoints2.png" id="3_qxmrv"]
+
+[resource]
+frames = 3
+speed_scale = 8.0
+frame_0/texture = ExtResource("1_6ofqr")
+frame_1/texture = ExtResource("2_8npuu")
+frame_1/duration = 1.0
+frame_2/texture = ExtResource("3_qxmrv")
+frame_2/duration = 1.0
