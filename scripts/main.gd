@@ -4,6 +4,18 @@ extends Node2D
 @onready var shop_scene = preload("res://scenes/shop.tscn")
 
 var shopOpened : bool = false
+var chipAudio = [
+	preload("res://assets/audio/Chip0.wav"),
+	preload("res://assets/audio/Chip1.wav"),
+	preload("res://assets/audio/Chip2.wav"),
+	preload("res://assets/audio/Chip3.wav")]
+var explosionAudio = [
+	preload("res://assets/audio/Explosion0.wav"),
+	preload("res://assets/audio/Explosion1.wav"),
+	preload("res://assets/audio/Explosion2.wav"),
+	preload("res://assets/audio/Explosion3.wav")]
+
+
 
 # Core Difficulty (0 - Easy, 1 - Hard)
 @export var difficulty = 1
@@ -106,6 +118,10 @@ func spawn_asteroid():
 	# Thank you stack overflow for whatever this means
 	var earth_node = get_node("Earth")
 	asteroid.earth = earth_node
+	
+	asteroid.connect("asteroidChipped", playChipSound)
+	asteroid.connect("asteroidExploded", playExplosionSound)
+	
 	add_child(asteroid)
 	print("Asteroid spawned with " + str(snapped(asteroid.scale.x, 0.01)) + " scale, " 
 									+ str(round(asteroid.speed)) + " speed, and "
@@ -129,6 +145,21 @@ func tryMeteorShower():
 		meteorShower_timer.paused = false
 	else:
 		print("\nMeteor Failed\n")
+
+func playChipSound():
+	print("chip")
+	var soundPlayer = AudioStreamPlayer.new()
+	soundPlayer.stream = chipAudio.pick_random()
+	add_child(soundPlayer)
+	soundPlayer.play()
+	soundPlayer.finished.connect(soundPlayer.queue_free)
+
+func playExplosionSound():
+	var soundPlayer = AudioStreamPlayer.new()
+	soundPlayer.stream = explosionAudio.pick_random()
+	add_child(soundPlayer)
+	soundPlayer.play()
+	soundPlayer.finished.connect(soundPlayer.queue_free)
 
 func _on_toggle_shop_pressed():
 	# Toggles the shop

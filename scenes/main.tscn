@@ -16,19 +16,15 @@ offset_right = 1900.0
 
 [node name="Globals" parent="." instance=ExtResource("4_jyhfs")]
 
-[node name="Asteroid" parent="." instance=ExtResource("1")]
-position = Vector2(960, -96)
-collision_layer = 1
-
 [node name="Earth" parent="." instance=ExtResource("2_0wfyh")]
 position = Vector2(960, 448)
 
 [node name="ToggleShop" type="Button" parent="."]
 z_index = 1
-offset_left = 32.0
-offset_top = 843.0
-offset_right = 354.0
-offset_bottom = 1041.0
+offset_left = 90.0
+offset_top = 800.0
+offset_right = 412.0
+offset_bottom = 998.0
 text = "shop"
 
 [connection signal="pressed" from="ToggleShop" to="." method="_on_toggle_shop_pressed"]
