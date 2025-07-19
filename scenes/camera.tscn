@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxxtc0hd1v12c"]
+
+[ext_resource type="Script" uid="uid://dddxsfs6yewqn" path="res://scripts/camera.gd" id="1_cvpoc"]
+
+[node name="Camera" type="Node2D"]
+script = ExtResource("1_cvpoc")
+
+[node name="BinocularsCamera" type="Camera2D" parent="."]
+position = Vector2(960, 540)

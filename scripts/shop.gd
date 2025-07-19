@@ -23,3 +23,11 @@ func _on_enable_crit_pressed():
 		Globals.starPoints -= price
 		Globals.critEnabled = true
 		%enableCrit.disabled = true
+
+# Your view range expands based on your cursor location [200 Starpoints]
+func _on_enable_binoculars_pressed():
+	var price = 200
+	if Globals.starPoints >= price:
+		Globals.starPoints -= price
+		Globals.binocularsEnabled = true
+		%enableBinoculars.disabled = true
