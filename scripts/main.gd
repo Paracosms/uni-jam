@@ -5,6 +5,9 @@ extends Node2D
 
 var shopOpened : bool = false
 
+# Core Difficulty (0 - Easy, 1 - Hard)
+@export var difficulty = 0.5
+var scaled_difficulty = pow(difficulty, 1) # I feel like the 0-1 was too easy
 
 var spawn_timer := Timer.new()
 
@@ -52,28 +55,50 @@ func _ready():
 func spawn_asteroid():
 	var asteroid = asteroid_scene.instantiate()
 	
-	# Asteroid spawning logic
+	# Asteroid spawning location
 	asteroid.global_position = get_offscreen_position() # Location off-screen
-	asteroid.speed = randf_range(100,500) # Random speed
-	asteroid.scale = Vector2.ONE * randf_range(0.5,1.7)
+	
+	### ASTEROID BALANCING BASED ON DIFFICULTY ###
+	
+	# Scale of Asteroid based on difficulty
+	var scale_min = 0.7 - scaled_difficulty * 0.3
+	var scale_max = 1.2 - scaled_difficulty * 0.2
+	asteroid.scale = Vector2.ONE * randf_range(scale_min, scale_max)
+	
+	# Scale of Asteroid based on difficulty
+	var speed_min = 100 + scaled_difficulty * 50
+	var speed_max = 250 + scaled_difficulty * 250
+	asteroid.speed = randf_range(speed_min, speed_max)
+	
+	# Scale of Asteroid based on difficulty and size (Bigger = more health)
+	var size_factor = asteroid.scale.x
+	var base_health = lerp(1.0, 7.0, scaled_difficulty)
+	asteroid.health = clamp(round(base_health * size_factor), 1, 5)
+	
+	### END SPAWN LOGIC ###
 	
 	# Thank you stack overflow for whatever this means
 	var earth_node = get_node("Earth")
 	asteroid.earth = earth_node
-	
 	add_child(asteroid)
+	print("Asteroid spawned with " + str(snapped(asteroid.scale.x, 0.01)) + " scale, " 
+									+ str(round(asteroid.speed)) + " speed, and "
+									+ str(asteroid.health) + " health at difficulty: " + str(snapped(difficulty, 0.01)))
 
 func tryMeteorShower():
 	# Multiply this number by 10 to get expected number of seconds inbetween meteor shower
-	var chance = randi() % 26
+	var chance = randi() % 6
 	
 	if chance == 1:
 		print("\n\nMeteor Shower!\n\n")
 		spawn_timer.paused = true
 		meteorShower_timer.paused = true
+		var old = difficulty
+		difficulty = 0.1
 		for n in range(11): # n = number of asteroids minus 1
 			spawn_asteroid()
 			await get_tree().create_timer(0.2).timeout # Wait for 0.2 seconds
+		difficulty = old
 		spawn_timer.paused = false
 		meteorShower_timer.paused = false
 	else:
