@@ -5,6 +5,8 @@ extends Node2D
 
 var spawn_timer := Timer.new()
 
+var meteorShower_timer := Timer.new()
+
 func get_offscreen_position() -> Vector2: # I still dont know what a vector2 is
 	var screen_size = get_viewport().get_visible_rect().size
 	var edge = randi() % 4  # 0=top,1=right,2=bottom,3=left
@@ -28,11 +30,21 @@ func get_offscreen_position() -> Vector2: # I still dont know what a vector2 is
 
 func _ready():
 	randomize() # Create random seed i think?
+	
+	### CONSTANT METEOR SPAWNING LOGIC ###
 	spawn_timer.wait_time = 1  # Delay, i tried to make it an exported variable but it didnt work :(
 	spawn_timer.one_shot = false
 	spawn_timer.connect("timeout", Callable(self, "spawn_asteroid")) # I think this makes it run when the time is up
 	add_child(spawn_timer)
 	spawn_timer.start()
+	
+	### OCCASIONAL METEOR SHOWER LOGIC ###
+	
+	meteorShower_timer.wait_time = 10
+	meteorShower_timer.one_shot = false
+	meteorShower_timer.connect("timeout", Callable(self, "tryMeteorShower"))
+	add_child(meteorShower_timer)
+	meteorShower_timer.start()
 	
 func spawn_asteroid():
 	var asteroid = asteroid_scene.instantiate()
@@ -40,9 +52,26 @@ func spawn_asteroid():
 	# Asteroid spawning logic
 	asteroid.global_position = get_offscreen_position() # Location off-screen
 	asteroid.speed = randf_range(100,500) # Random speed
+	asteroid.scale = Vector2.ONE * randf_range(0.5,1.7)
 	
 	# Thank you stack overflow for whatever this means
 	var earth_node = get_node("Earth")
 	asteroid.earth = earth_node
 	
 	add_child(asteroid)
+
+func tryMeteorShower():
+	# Multiply this number by 10 to get expected number of seconds inbetween meteor shower
+	var chance = randi() % 26
+	
+	if chance == 1:
+		print("\n\nMeteor Shower!\n\n")
+		spawn_timer.paused = true
+		meteorShower_timer.paused = true
+		for n in range(11): # n = number of asteroids minus 1
+			spawn_asteroid()
+			await get_tree().create_timer(0.2).timeout # Wait for 0.2 seconds
+		spawn_timer.paused = false
+		meteorShower_timer.paused = false
+	else:
+		print("\nMeteor Failed\n")

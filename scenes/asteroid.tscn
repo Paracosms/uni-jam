@@ -7,9 +7,10 @@
 radius = 40.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6mo6b"]
-radius = 40.0
+radius = 48.0
 
 [node name="Asteroid" type="CharacterBody2D"]
+collision_layer = 0
 script = ExtResource("1_6mo6b")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
