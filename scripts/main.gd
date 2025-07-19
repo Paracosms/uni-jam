@@ -52,6 +52,15 @@ func _ready():
 	add_child(meteorShower_timer)
 	meteorShower_timer.start()
 	
+	
+	### SHOP SCREEN LOGIC ###
+	var screen_size = get_viewport().get_visible_rect().size
+	var shop = shop_scene.instantiate()
+	add_child(shop)
+	get_node("Shop").position = Vector2(screen_size.x / 2, 0)
+	get_node("Shop").visible = false
+	
+
 func spawn_asteroid():
 	var asteroid = asteroid_scene.instantiate()
 	
@@ -104,16 +113,11 @@ func tryMeteorShower():
 	else:
 		print("\nMeteor Failed\n")
 
-
-func _on_change_scene_pressed():
-	var screen_size = get_viewport().get_visible_rect().size
-	var shop = shop_scene.instantiate()
-	
+func _on_toggle_shop_pressed():
+	# Toggles the shop
 	if shopOpened:
-		get_node("Shop").queue_free()
+		get_node("Shop").visible = false
 		shopOpened = false
 	else:
-		add_child(shop)
-		shop.position = Vector2(screen_size.x / 2, 0)
+		get_node("Shop").visible = true
 		shopOpened = true
-	

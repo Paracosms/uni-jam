@@ -43,18 +43,27 @@ theme_override_constants/v_separation = 50
 columns = 2
 
 [node name="doubleYield" type="Button" parent="MarginContainer/upgrades"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "Breaking asteroids yields 2 star points.
-[50 Starpoints]"
+text = "Breaking asteroids yields 2 starpoints.
+[30 Starpoints]"
 
 [node name="doubleDamage" type="Button" parent="MarginContainer/upgrades"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
 text = "Your clicks break asteroids twice as fast.
 [50 Starpoints]"
 
+[node name="enableCrit" type="Button" parent="MarginContainer/upgrades"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "Your clicks have a 1 in 4 chance to
+ yield double the starpoints.
+[100 Starpoints]"
+
 [connection signal="pressed" from="MarginContainer/upgrades/doubleYield" to="." method="_on_double_yield_pressed"]
 [connection signal="pressed" from="MarginContainer/upgrades/doubleDamage" to="." method="_on_double_damage_pressed"]
+[connection signal="pressed" from="MarginContainer/upgrades/enableCrit" to="." method="_on_enable_crit_pressed"]

@@ -25,6 +25,13 @@ func _physics_process(delta):
 func _process(_delta):
 	# Kill asteroids if they are dead # wow that sounds stupid
 	if health <= 0:
+  	### STARPOINTS AWARDED LOGIC ###
+		var critActive : int = 0 #
+		if Globals.critEnabled && (randi() % 4) == 0: # Critical hit procs if a random integer between 0 - 3 is equal to 0 (aka 1 in 4 chance)
+			critActive = 1
+			print("Critical hit!")
+		Globals.starPoints += Globals.baseYield + (Globals.baseYield * Globals.critMultiplier * critActive)
+		critActive = 0 # Prepares for next click
 		queue_free()
 		
 		print("Asteroid Broken")
@@ -32,7 +39,5 @@ func _process(_delta):
 
 func _on_click_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		Globals.starPoints += 1 * int(Globals.yieldMultiplier)
-		
 		health -= Globals.clickDamage
 		print("Health is now " + str(health) + ", you did " + str(Globals.clickDamage) + " damage")
