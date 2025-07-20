@@ -182,7 +182,7 @@ var upgrades = {
 		"price": 300,
 		"title": "Overkill II",
 		"description": "Excess damage gives 15 bonus starpoints",
-		"prerequisites": ["gamma"],
+		"prerequisites": ["damage_output2"],
 		"effect": func():
 	Globals.overkill = 15
 	},
@@ -218,7 +218,7 @@ var upgrades = {
 		"price": 1000,
 		"title": "MIMOSA | BETA CRUCIS",
 		"description": "Unlock Mimosa!",
-		"prerequisites": ["small_crush","binoculars"],
+		"prerequisites": ["crush_small","binoculars"],
 		"effect": func():
 	Globals.betaUnlocked = true
 	},
@@ -243,12 +243,33 @@ var upgrades = {
 
 var purchases = []
 
+
 func _ready():
 	
 	var buttons_list = get_tree().get_nodes_in_group("texture_buttons")
 	for button in buttons_list:
 		if button.name != "starpoint_yield":
 			button.disabled = true
+
+func _process(_delta):
+	var buttons_list = get_tree().get_nodes_in_group("texture_buttons")
+	
+	for button in buttons_list:
+		var upgrade = upgrades.get(button.name)
+		
+		var already_purchased = button.name in purchases
+		
+		var has_all_prereqs = true
+		for req in upgrade.prerequisites:
+			if req not in purchases:
+				has_all_prereqs = false
+				break
+		
+		button.disabled = not has_all_prereqs
+		
+		if already_purchased:
+			button.modulate = Color(0.0,0.6,0.6,1)
+			
 
 func _on_upgrade_button_pressed(button_name):
 	button_name = button_name.replace("\"", "")
