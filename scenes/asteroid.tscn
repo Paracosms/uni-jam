@@ -1,8 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://cafa1kp7jmpc5"]
+[gd_scene load_steps=7 format=3 uid="uid://cafa1kp7jmpc5"]
 
 [ext_resource type="Script" uid="uid://paykvh3r5l5g" path="res://scripts/asteroid.gd" id="1_6mo6b"]
 [ext_resource type="Texture2D" uid="uid://ctl1hiytwc25e" path="res://assets/sprites/asteroid.png" id="1_akfqu"]
 [ext_resource type="Texture2D" uid="uid://ccsviqut7bc6d" path="res://assets/sprites/fire.png" id="3_t4se3"]
+
+[sub_resource type="Environment" id="Environment_t4se3"]
+background_mode = 3
+glow_enabled = true
+glow_blend_mode = 1
+glow_hdr_threshold = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_akfqu"]
 radius = 40.0
@@ -15,10 +21,14 @@ texture_filter = 1
 collision_layer = 0
 script = ExtResource("1_6mo6b")
 
+[node name="Glow" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_t4se3")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_akfqu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(3, 3, 3, 1)
 position = Vector2(5.96046e-08, 5.96046e-08)
 scale = Vector2(0.39125, 0.39125)
 texture = ExtResource("1_akfqu")

@@ -56,6 +56,9 @@ func _ready():
 	randomize() # Create random seed i think?
 	call_deferred("trulyReady") # Executes when everything has loaded in
 	
+	### BACKGROUND LOGIC ###
+	%background.position = Vector2(Globals.screenSize.x - Globals.screenSize.x * 0.8, Globals.screenSize.y / 2)
+	
 	### CONSTANT METEOR SPAWNING LOGIC ###
 	spawn_timer.wait_time = 1  # Delay, i tried to make it an exported variable but it didnt work :(
 	spawn_timer.one_shot = false
@@ -72,8 +75,14 @@ func _ready():
 	meteorShower_timer.start()
 
 func _process(_delta):
-	### STAR CENTERING LOGIC ###
+	### SCENERY LOGIC ###
 	get_tree().call_group("earth", "set_global_position", Globals.centerScreen)
+	var scaleFactor = Globals.screenSize.y / 1440.0
+	%background.scale = Vector2(scaleFactor, scaleFactor) 
+	if %background.position.x < -Globals.screenSize.x / 2:
+		%background.position.x += 4794 * scaleFactor
+	else: %background.position.x -= 0.2
+	
 
 # This function executes after ALL nodes in every scene has loaded in
 func trulyReady():
@@ -123,7 +132,7 @@ func spawn_asteroid(type : String = "base"):
 	var base_health = round(lerp(1.0, 2.0, result))
 	
 	### ASTEROID TYPE LOGIC ###
-	var asteroidRandomizer = 0
+	var asteroidRandomizer = -1
 	
 	# TODO: change sprite depending on the type of asteroid
 	match Globals.currentStar:
