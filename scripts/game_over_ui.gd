@@ -29,7 +29,7 @@ func resetGlobals():
 	Globals.parallaxSpeed = 0.2
 	Globals.meteorShower = false
 	
-	Globals.lives = 50
+	Globals.lives = 100
 	Globals.starPoints = 0
 	Globals.currentStar = 0 # such that alpha = 0, beta = 1, etc.
 	Globals.currentSkillTree = 0 # 0 - Lyra, 1 - Cepheus 2 - Perseus
