@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://bq8mcfvfvpeof"]
+[gd_scene load_steps=29 format=3 uid="uid://bq8mcfvfvpeof"]
 
 [ext_resource type="Texture2D" uid="uid://r114exs72lxa" path="res://assets/sprites/iconSkills/enabled/crush_small.png" id="1_n0rm1"]
 [ext_resource type="Script" uid="uid://3s1ase5ebu8y" path="res://scripts/skill_tree.gd" id="1_p21vy"]
@@ -28,18 +28,10 @@
 [ext_resource type="Texture2D" uid="uid://bca7itk1w8gre" path="res://assets/sprites/iconSkills/enabled/gamma.png" id="26_s0fa6"]
 [ext_resource type="Texture2D" uid="uid://d2sp0lvk0ryck" path="res://assets/sprites/iconSkills/disabled/disabled_gamma.png" id="27_huajd"]
 
-[sub_resource type="Environment" id="Environment_dp4hp"]
-background_mode = 3
-glow_enabled = true
-glow_blend_mode = 1
-
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dp4hp"]
 
 [node name="skill_tree" type="Node2D"]
 script = ExtResource("1_p21vy")
-
-[node name="Glow" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_dp4hp")
 
 [node name="tooltip" type="Label" parent="."]
 top_level = true
