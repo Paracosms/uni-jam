@@ -11,5 +11,15 @@ glow_blend_mode = 1
 self_modulate = Color(2, 2, 2, 1)
 texture = ExtResource("1_bkp1e")
 
+[node name="bottom padding" type="Sprite2D" parent="."]
+self_modulate = Color(2, 2, 2, 1)
+position = Vector2(0, 1440)
+texture = ExtResource("1_bkp1e")
+
+[node name="top padding" type="Sprite2D" parent="."]
+self_modulate = Color(2, 2, 2, 1)
+position = Vector2(0, -1428)
+texture = ExtResource("1_bkp1e")
+
 [node name="Glow" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_bkp1e")

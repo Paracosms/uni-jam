@@ -3,8 +3,10 @@ extends Node2D
 # code helpers - on ready, values are initialized correctly
 var centerScreen : Vector2
 var screenSize : Vector2
+var parallaxSpeed: float = 0.2
+var meteorShower : bool = false
 
-var lives : int = 50
+var lives : int = 1
 var starPoints : int = 0
 var currentStar : int = 0 # such that alpha = 0, beta = 1, etc.
 var skillsOpened : bool = false
@@ -15,9 +17,9 @@ var yieldMultiplier : int = 1
 var critMultiplier : int = 1 # Such that a critMultiplier of n will yield n+1 starpoints
 
 # star unlocks
-var betaUnlocked : bool = false # left, 2nd planet unlock
-var gammaUnlocked : bool = false # top, 3rd planet unlock
-var deltaUnlocked : bool = false # right, 4th planet unlock
+var betaUnlocked : bool = true # left, 2nd planet unlock
+var gammaUnlocked : bool = true # top, 3rd planet unlock
+var deltaUnlocked : bool = true # right, 4th planet unlock
 
 # special upgrades
 var critEnabled : bool = false
