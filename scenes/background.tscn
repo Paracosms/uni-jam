@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://8kjgtlpptmp4"]
+
+[ext_resource type="Texture2D" uid="uid://3ghga0gb6cw1" path="res://assets/sprites/background.png" id="1_bkp1e"]
+
+[sub_resource type="Environment" id="Environment_bkp1e"]
+background_mode = 3
+glow_enabled = true
+glow_blend_mode = 1
+
+[node name="background" type="Sprite2D"]
+self_modulate = Color(2, 2, 2, 1)
+texture = ExtResource("1_bkp1e")
+
+[node name="Glow" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_bkp1e")

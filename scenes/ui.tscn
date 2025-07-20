@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cynt3lbt5jsyb"]
+[gd_scene load_steps=18 format=3 uid="uid://cynt3lbt5jsyb"]
 
 [ext_resource type="Texture2D" uid="uid://7mtyqv42wlaf" path="res://assets/resources/lives.tres" id="1_nt7q6"]
 [ext_resource type="Script" uid="uid://b04y5fmvggnk5" path="res://scripts/ui.gd" id="1_yev5y"]
@@ -9,12 +9,14 @@
 [ext_resource type="Script" uid="uid://dbwo657rywmdn" path="res://scripts/map_ui.gd" id="7_7dvkv"]
 [ext_resource type="Texture2D" uid="uid://cy4dlainxcfny" path="res://assets/sprites/crux.png" id="7_cgfq5"]
 [ext_resource type="Script" uid="uid://qsan87i1eo7w" path="res://scripts/constellation_name.gd" id="7_qsv74"]
-[ext_resource type="Texture2D" uid="uid://txf7hmrxck16" path="res://assets/sprites/Earth.png" id="8_7dvkv"]
 [ext_resource type="Script" uid="uid://cwkygcvqoairj" path="res://scripts/earth_alpha.gd" id="9_vdcm2"]
-[ext_resource type="Texture2D" uid="uid://c1xxd14b4ixnq" path="res://assets/sprites/animations/alpha.png" id="10_h1mc3"]
+[ext_resource type="Texture2D" uid="uid://dwti00axm3p3t" path="res://assets/sprites/stars/alpha.png" id="10_f7tlh"]
 [ext_resource type="Script" uid="uid://bhu5q7bmd3rle" path="res://scripts/beta_mimosa.gd" id="11_vsj0x"]
+[ext_resource type="Texture2D" uid="uid://by8hq4bc77w5q" path="res://assets/sprites/stars/beta.png" id="12_8k7j3"]
 [ext_resource type="Script" uid="uid://ko6mq3ywcmji" path="res://scripts/gamma_gacrux.gd" id="12_qsv74"]
 [ext_resource type="Script" path="res://scripts/delta_imai.gd" id="13_h1mc3"]
+[ext_resource type="Texture2D" uid="uid://bnc7vhojayye2" path="res://assets/sprites/stars/gamma.png" id="14_jkdwc"]
+[ext_resource type="Texture2D" uid="uid://lmfq8ongfe61" path="res://assets/sprites/stars/delta.png" id="16_rlppe"]
 
 [node name="UI" type="SubViewportContainer"]
 z_index = 1
@@ -199,46 +201,51 @@ offset_bottom = 40.0
 texture = ExtResource("7_cgfq5")
 
 [node name="alphaEarth" type="TextureRect" parent="windowScale/Info/bottomRight/VBoxContainer/mapUI"]
+texture_filter = 1
 layout_mode = 0
 offset_left = 136.0
 offset_top = 228.0
 offset_right = 192.0
 offset_bottom = 284.0
 mouse_filter = 0
-texture = ExtResource("10_h1mc3")
+texture = ExtResource("10_f7tlh")
 expand_mode = 1
 script = ExtResource("9_vdcm2")
 
 [node name="betaMimosa" type="TextureRect" parent="windowScale/Info/bottomRight/VBoxContainer/mapUI"]
+texture_filter = 1
 layout_mode = 0
 offset_left = 49.0
 offset_top = 115.0
 offset_right = 91.0
 offset_bottom = 157.0
 mouse_filter = 0
-texture = ExtResource("8_7dvkv")
+texture = ExtResource("12_8k7j3")
 expand_mode = 1
 script = ExtResource("11_vsj0x")
 
 [node name="gammaGacrux" type="TextureRect" parent="windowScale/Info/bottomRight/VBoxContainer/mapUI"]
+self_modulate = Color(2, 1.4, 1.4, 1)
+texture_filter = 1
 layout_mode = 0
 offset_left = 125.0
 offset_top = 21.0
 offset_right = 165.0
 offset_bottom = 61.0
 mouse_filter = 0
-texture = ExtResource("8_7dvkv")
+texture = ExtResource("14_jkdwc")
 expand_mode = 1
 script = ExtResource("12_qsv74")
 
 [node name="deltaImai" type="TextureRect" parent="windowScale/Info/bottomRight/VBoxContainer/mapUI"]
+texture_filter = 1
 layout_mode = 0
 offset_left = 206.0
 offset_top = 88.0
 offset_right = 232.0
 offset_bottom = 114.0
 mouse_filter = 0
-texture = ExtResource("8_7dvkv")
+texture = ExtResource("16_rlppe")
 expand_mode = 1
 script = ExtResource("13_h1mc3")
 

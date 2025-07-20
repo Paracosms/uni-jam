@@ -8,7 +8,7 @@ glow_enabled = true
 glow_blend_mode = 1
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2umt7"]
-radius = 96.0
+radius = 113.04
 
 [node name="Earth" type="Node2D"]
 
@@ -21,5 +21,5 @@ environment = SubResource("Environment_afhwv")
 shape = SubResource("CircleShape2D_2umt7")
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
-self_modulate = Color(2, 2, 2, 1)
+self_modulate = Color(1.4, 1.8, 2, 1)
 texture = ExtResource("1_afhwv")
