@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://cynt3lbt5jsyb"]
+[gd_scene load_steps=20 format=3 uid="uid://cynt3lbt5jsyb"]
 
 [ext_resource type="Texture2D" uid="uid://7mtyqv42wlaf" path="res://assets/resources/lives.tres" id="1_nt7q6"]
 [ext_resource type="Script" uid="uid://b04y5fmvggnk5" path="res://scripts/ui.gd" id="1_yev5y"]
+[ext_resource type="StyleBox" uid="uid://fxb75dkg8ryi" path="res://assets/resources/panelBackground.tres" id="2_8k7j3"]
 [ext_resource type="Texture2D" uid="uid://ygqyjex4xl27" path="res://assets/resources/starpoints.tres" id="2_x4jx1"]
 [ext_resource type="Texture2D" uid="uid://d08k12a7h80bk" path="res://assets/resources/volume.tres" id="4_wm3ai"]
 [ext_resource type="Script" uid="uid://db0mx56hqgh0i" path="res://scripts/volume.gd" id="5_8dubc"]
@@ -9,23 +10,22 @@
 [ext_resource type="Script" uid="uid://dbwo657rywmdn" path="res://scripts/map_ui.gd" id="7_7dvkv"]
 [ext_resource type="Texture2D" uid="uid://cy4dlainxcfny" path="res://assets/sprites/crux.png" id="7_cgfq5"]
 [ext_resource type="Script" uid="uid://qsan87i1eo7w" path="res://scripts/constellation_name.gd" id="7_qsv74"]
-[ext_resource type="Script" uid="uid://cwkygcvqoairj" path="res://scripts/earth_alpha.gd" id="9_vdcm2"]
 [ext_resource type="Texture2D" uid="uid://dwti00axm3p3t" path="res://assets/sprites/stars/alpha.png" id="10_f7tlh"]
-[ext_resource type="Script" uid="uid://bhu5q7bmd3rle" path="res://scripts/beta_mimosa.gd" id="11_vsj0x"]
+[ext_resource type="Texture2D" uid="uid://50i8qk2j810k" path="res://assets/sprites/stars/alphaDisabled.png" id="11_8k7j3"]
 [ext_resource type="Texture2D" uid="uid://by8hq4bc77w5q" path="res://assets/sprites/stars/beta.png" id="12_8k7j3"]
-[ext_resource type="Script" uid="uid://ko6mq3ywcmji" path="res://scripts/gamma_gacrux.gd" id="12_qsv74"]
-[ext_resource type="Script" path="res://scripts/delta_imai.gd" id="13_h1mc3"]
+[ext_resource type="Texture2D" uid="uid://dvjba0rdw6ryq" path="res://assets/sprites/stars/betaDisabled.png" id="13_jkdwc"]
 [ext_resource type="Texture2D" uid="uid://bnc7vhojayye2" path="res://assets/sprites/stars/gamma.png" id="14_jkdwc"]
+[ext_resource type="Texture2D" uid="uid://crm6uxah53mh3" path="res://assets/sprites/stars/gammaDisabled.png" id="15_rlppe"]
 [ext_resource type="Texture2D" uid="uid://lmfq8ongfe61" path="res://assets/sprites/stars/delta.png" id="16_rlppe"]
+[ext_resource type="Texture2D" uid="uid://c213p0sw3n7dd" path="res://assets/sprites/stars/deltaDisabled.png" id="17_ycmcx"]
+[ext_resource type="Script" uid="uid://cwx5syvfolhud" path="res://scripts/game_over_ui.gd" id="19_jkdwc"]
 
 [node name="UI" type="SubViewportContainer"]
 z_index = 1
-custom_minimum_size = Vector2(800, 600)
-anchors_preset = -1
-anchor_right = 0.96
+custom_minimum_size = Vector2(1280, 720)
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -1120.0
-offset_bottom = -480.0
 grow_horizontal = 2
 grow_vertical = 2
 stretch = true
@@ -35,7 +35,7 @@ script = ExtResource("1_yev5y")
 unique_name_in_owner = true
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(800, 600)
+size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
 [node name="Info" type="Control" parent="windowScale"]
@@ -58,6 +58,7 @@ theme_override_constants/margin_top = 15
 [node name="volumeUI" type="PanelContainer" parent="windowScale/Info/topLeft"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_styles/panel = ExtResource("2_8k7j3")
 
 [node name="MarginContainer" type="MarginContainer" parent="windowScale/Info/topLeft/volumeUI"]
 layout_mode = 2
@@ -87,6 +88,36 @@ max_value = 10.0
 value = -20.0
 script = ExtResource("5_8dubc")
 
+[node name="topMiddle" type="MarginContainer" parent="windowScale/Info"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 15
+
+[node name="infoBox" type="PanelContainer" parent="windowScale/Info/topMiddle"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_8k7j3")
+
+[node name="MarginContainer" type="MarginContainer" parent="windowScale/Info/topMiddle/infoBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="textInfo" type="Label" parent="windowScale/Info/topMiddle/infoBox/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "METEOR SHOWER INCOMING !"
+
 [node name="topRight" type="MarginContainer" parent="windowScale/Info"]
 layout_mode = 1
 anchors_preset = 1
@@ -100,6 +131,7 @@ theme_override_constants/margin_right = 20
 
 [node name="infoUI" type="PanelContainer" parent="windowScale/Info/topRight"]
 layout_mode = 2
+theme_override_styles/panel = ExtResource("2_8k7j3")
 
 [node name="MarginContainer" type="MarginContainer" parent="windowScale/Info/topRight/infoUI"]
 layout_mode = 2
@@ -177,8 +209,22 @@ theme_override_constants/margin_bottom = 15
 layout_mode = 2
 theme_override_constants/separation = 10
 
+[node name="mapStatusPanel" type="PanelContainer" parent="windowScale/Info/bottomRight/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_8k7j3")
+
+[node name="mapStatus" type="Label" parent="windowScale/Info/bottomRight/VBoxContainer/mapStatusPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "MAP DISABLED"
+horizontal_alignment = 1
+
 [node name="nameUI" type="PanelContainer" parent="windowScale/Info/bottomRight/VBoxContainer"]
 layout_mode = 2
+theme_override_styles/panel = ExtResource("2_8k7j3")
 
 [node name="constellationName" type="Label" parent="windowScale/Info/bottomRight/VBoxContainer/nameUI"]
 layout_mode = 2
@@ -191,7 +237,76 @@ script = ExtResource("7_qsv74")
 unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
+theme_override_styles/panel = ExtResource("2_8k7j3")
 script = ExtResource("7_7dvkv")
+
+[node name="horizontal" type="Line2D" parent="windowScale/Info/bottomRight/VBoxContainer/mapUI"]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(2, 2, 2, 1)
+points = PackedVector2Array(219, 101, 70, 136)
+width = 5.0
+default_color = Color(0.984314, 0.94902, 0.211765, 1)
+
+[node name="vertical" type="Line2D" parent="windowScale/Info/bottomRight/VBoxContainer/mapUI"]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(2, 2, 2, 1)
+points = PackedVector2Array(162, 254, 145, 41)
+width = 5.0
+default_color = Color(0.984314, 0.94902, 0.211765, 1)
+
+[node name="alpha" type="TextureButton" parent="windowScale/Info/bottomRight/VBoxContainer/mapUI"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 0
+offset_left = 136.0
+offset_top = 228.0
+offset_right = 192.0
+offset_bottom = 284.0
+texture_normal = ExtResource("10_f7tlh")
+texture_disabled = ExtResource("11_8k7j3")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="beta" type="TextureButton" parent="windowScale/Info/bottomRight/VBoxContainer/mapUI"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 0
+offset_left = 49.0
+offset_top = 115.0
+offset_right = 91.0
+offset_bottom = 157.0
+texture_normal = ExtResource("12_8k7j3")
+texture_disabled = ExtResource("13_jkdwc")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="gamma" type="TextureButton" parent="windowScale/Info/bottomRight/VBoxContainer/mapUI"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 0
+offset_left = 125.0
+offset_top = 21.0
+offset_right = 165.0
+offset_bottom = 61.0
+texture_normal = ExtResource("14_jkdwc")
+texture_disabled = ExtResource("15_rlppe")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="delta" type="TextureButton" parent="windowScale/Info/bottomRight/VBoxContainer/mapUI"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 0
+offset_left = 206.0
+offset_top = 88.0
+offset_right = 232.0
+offset_bottom = 114.0
+texture_normal = ExtResource("16_rlppe")
+texture_disabled = ExtResource("17_ycmcx")
+ignore_texture_size = true
+stretch_mode = 0
 
 [node name="cruxWikipedia" type="TextureRect" parent="windowScale/Info/bottomRight/VBoxContainer/mapUI"]
 visible = false
@@ -200,57 +315,73 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("7_cgfq5")
 
-[node name="alphaEarth" type="TextureRect" parent="windowScale/Info/bottomRight/VBoxContainer/mapUI"]
-texture_filter = 1
-layout_mode = 0
-offset_left = 136.0
-offset_top = 228.0
-offset_right = 192.0
-offset_bottom = 284.0
-mouse_filter = 0
-texture = ExtResource("10_f7tlh")
-expand_mode = 1
-script = ExtResource("9_vdcm2")
+[node name="center" type="MarginContainer" parent="windowScale/Info"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="betaMimosa" type="TextureRect" parent="windowScale/Info/bottomRight/VBoxContainer/mapUI"]
-texture_filter = 1
-layout_mode = 0
-offset_left = 49.0
-offset_top = 115.0
-offset_right = 91.0
-offset_bottom = 157.0
-mouse_filter = 0
-texture = ExtResource("12_8k7j3")
-expand_mode = 1
-script = ExtResource("11_vsj0x")
+[node name="gameOverUI" type="PanelContainer" parent="windowScale/Info/center"]
+visible = false
+custom_minimum_size = Vector2(600, 500)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_8k7j3")
+script = ExtResource("19_jkdwc")
 
-[node name="gammaGacrux" type="TextureRect" parent="windowScale/Info/bottomRight/VBoxContainer/mapUI"]
-self_modulate = Color(2, 1.4, 1.4, 1)
-texture_filter = 1
-layout_mode = 0
-offset_left = 125.0
-offset_top = 21.0
-offset_right = 165.0
-offset_bottom = 61.0
-mouse_filter = 0
-texture = ExtResource("14_jkdwc")
-expand_mode = 1
-script = ExtResource("12_qsv74")
+[node name="MarginContainer" type="MarginContainer" parent="windowScale/Info/center/gameOverUI"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 
-[node name="deltaImai" type="TextureRect" parent="windowScale/Info/bottomRight/VBoxContainer/mapUI"]
-texture_filter = 1
-layout_mode = 0
-offset_left = 206.0
-offset_top = 88.0
-offset_right = 232.0
-offset_bottom = 114.0
-mouse_filter = 0
-texture = ExtResource("16_rlppe")
-expand_mode = 1
-script = ExtResource("13_h1mc3")
+[node name="VBoxContainer" type="VBoxContainer" parent="windowScale/Info/center/gameOverUI/MarginContainer"]
+layout_mode = 2
+
+[node name="gameOver" type="Label" parent="windowScale/Info/center/gameOverUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 150
+text = "GAME OVER"
+horizontal_alignment = 1
+
+[node name="retry" type="Button" parent="windowScale/Info/center/gameOverUI/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 63
+disabled = true
+text = "RETRY"
+flat = true
+
+[node name="exit" type="Button" parent="windowScale/Info/center/gameOverUI/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 63
+disabled = true
+text = "EXIT"
+flat = true
 
 [connection signal="mouse_entered" from="windowScale/Info/topLeft/volumeUI" to="." method="_on_volume_ui_mouse_entered"]
 [connection signal="mouse_exited" from="windowScale/Info/topLeft/volumeUI" to="." method="_on_volume_ui_mouse_exited"]
 [connection signal="mouse_entered" from="windowScale/Info/topLeft/volumeUI/MarginContainer/GridContainer/CenterContainer/Volume" to="." method="_on_volume_mouse_entered"]
 [connection signal="mouse_exited" from="windowScale/Info/topLeft/volumeUI/MarginContainer/GridContainer/CenterContainer/Volume" to="." method="_on_volume_mouse_exited"]
 [connection signal="pressed" from="windowScale/Info/bottomLeft/toggleShop" to="windowScale/Info/bottomLeft/toggleShop" method="_on_pressed"]
+[connection signal="mouse_entered" from="windowScale/Info/bottomRight/VBoxContainer/mapUI/alpha" to="windowScale/Info/bottomRight/VBoxContainer/mapUI" method="_on_mouse_entered" binds= ["alpha"]]
+[connection signal="mouse_exited" from="windowScale/Info/bottomRight/VBoxContainer/mapUI/alpha" to="windowScale/Info/bottomRight/VBoxContainer/mapUI" method="_on_mouse_exited" binds= ["alpha"]]
+[connection signal="pressed" from="windowScale/Info/bottomRight/VBoxContainer/mapUI/alpha" to="windowScale/Info/bottomRight/VBoxContainer/mapUI" method="_on_pressed" binds= ["alpha"]]
+[connection signal="mouse_entered" from="windowScale/Info/bottomRight/VBoxContainer/mapUI/beta" to="windowScale/Info/bottomRight/VBoxContainer/mapUI" method="_on_mouse_entered" binds= ["beta"]]
+[connection signal="mouse_exited" from="windowScale/Info/bottomRight/VBoxContainer/mapUI/beta" to="windowScale/Info/bottomRight/VBoxContainer/mapUI" method="_on_mouse_exited" binds= ["beta"]]
+[connection signal="pressed" from="windowScale/Info/bottomRight/VBoxContainer/mapUI/beta" to="windowScale/Info/bottomRight/VBoxContainer/mapUI" method="_on_pressed" binds= ["beta"]]
+[connection signal="mouse_entered" from="windowScale/Info/bottomRight/VBoxContainer/mapUI/gamma" to="windowScale/Info/bottomRight/VBoxContainer/mapUI" method="_on_mouse_entered" binds= ["gamma"]]
+[connection signal="mouse_exited" from="windowScale/Info/bottomRight/VBoxContainer/mapUI/gamma" to="windowScale/Info/bottomRight/VBoxContainer/mapUI" method="_on_mouse_exited" binds= ["gamma"]]
+[connection signal="pressed" from="windowScale/Info/bottomRight/VBoxContainer/mapUI/gamma" to="windowScale/Info/bottomRight/VBoxContainer/mapUI" method="_on_pressed" binds= ["gamma"]]
+[connection signal="mouse_entered" from="windowScale/Info/bottomRight/VBoxContainer/mapUI/delta" to="windowScale/Info/bottomRight/VBoxContainer/mapUI" method="_on_mouse_entered" binds= ["delta"]]
+[connection signal="mouse_exited" from="windowScale/Info/bottomRight/VBoxContainer/mapUI/delta" to="windowScale/Info/bottomRight/VBoxContainer/mapUI" method="_on_mouse_exited" binds= ["delta"]]
+[connection signal="pressed" from="windowScale/Info/bottomRight/VBoxContainer/mapUI/delta" to="windowScale/Info/bottomRight/VBoxContainer/mapUI" method="_on_pressed" binds= ["delta"]]

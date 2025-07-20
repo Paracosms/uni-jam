@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dngq774sl2if1"]
+[gd_scene load_steps=5 format=3 uid="uid://dngq774sl2if1"]
 
 [ext_resource type="Script" uid="uid://bmnjqiekpo21v" path="res://scripts/main_menu.gd" id="1_l6cm7"]
 [ext_resource type="FontFile" uid="uid://7gt0j4mddmvf" path="res://assets/fonts/Rajdhani-SemiBold.ttf" id="2_ekxnf"]
 [ext_resource type="PackedScene" uid="uid://8kjgtlpptmp4" path="res://scenes/background.tscn" id="2_wu84c"]
+[ext_resource type="PackedScene" uid="uid://b8wfqmyfjyfl0" path="res://scenes/camera.tscn" id="3_8ln24"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -14,9 +15,10 @@ grow_vertical = 2
 script = ExtResource("1_l6cm7")
 
 [node name="background" parent="." instance=ExtResource("2_wu84c")]
-unique_name_in_owner = true
 position = Vector2(960, 573)
 scale = Vector2(0.5, 0.5)
+
+[node name="Camera" parent="." instance=ExtResource("3_8ln24")]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1

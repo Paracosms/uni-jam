@@ -8,6 +8,7 @@ var deadzone_size = 250.0
 
 func _process(delta): # This took me like 2 hours so ignore it if it makes no sense because it works (kinda)
 	# print(str(binocularsCamera.position)) # Debug 
+	
 	if Globals.binocularsEnabled:
 		
 		var screen_size = get_viewport().get_visible_rect().size

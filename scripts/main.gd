@@ -8,8 +8,12 @@ extends Node2D
 @onready var gamma_scene = preload("res://scenes/gamma.tscn")
 @onready var delta_scene = preload("res://scenes/delta.tscn")
 
-
-
+signal meteorShower
+signal disableTP
+signal enableTP
+signal displayLocation
+signal hideInfoBox
+signal gameOver
 
 var chipAudio = [
 	preload("res://assets/audio/Chip0.wav"),
@@ -21,6 +25,8 @@ var explosionAudio = [
 	preload("res://assets/audio/Explosion1.wav"),
 	preload("res://assets/audio/Explosion2.wav"),
 	preload("res://assets/audio/Explosion3.wav")]
+
+
 
 
 
@@ -54,6 +60,7 @@ func get_offscreen_position() -> Vector2: # I still dont know what a vector2 is
 
 func _ready():
 	randomize() # Create random seed i think?
+	Globals.parallaxSpeed = 0.2
 	call_deferred("trulyReady") # Executes when everything has loaded in
 	
 	### BACKGROUND LOGIC ###
@@ -68,7 +75,7 @@ func _ready():
 	
 	### OCCASIONAL METEOR SHOWER LOGIC ###
 	
-	meteorShower_timer.wait_time = 10
+	meteorShower_timer.wait_time = 1 # Meteor showers proc every 60 seconds until the first one hits.
 	meteorShower_timer.one_shot = false
 	meteorShower_timer.connect("timeout", Callable(self, "tryMeteorShower"))
 	add_child(meteorShower_timer)
@@ -76,30 +83,39 @@ func _ready():
 
 func _process(_delta):
 	### SCENERY LOGIC ###
+	Globals.rotation = Globals.parallaxSpeed
+	
 	get_tree().call_group("earth", "set_global_position", Globals.centerScreen)
 	var scaleFactor = Globals.screenSize.y / 1440.0
 	%background.scale = Vector2(scaleFactor, scaleFactor) 
 	if %background.position.x < -Globals.screenSize.x / 2:
 		%background.position.x += 4794 * scaleFactor
-	else: %background.position.x -= 0.2
+	else: %background.position.x -= Globals.parallaxSpeed
 	
+	### DEATH LOGIC ###
+	if Globals.lives <= 0:
+		emit_signal("disableTP")
+		emit_signal("hideInfoBox")
+		emit_signal("gameOver")
+		meteorShower_timer.paused = true
+		spawn_timer.paused = true
+		for asteroid in get_tree().get_nodes_in_group("asteroid"):
+			asteroid.queue_free()
 
 # This function executes after ALL nodes in every scene has loaded in
 func trulyReady():
 	### MAP SELECTION LOGIC ###
-	var mapUI = $"UIResizer/UIRenderer/UI/windowScale/Info/bottomRight/VBoxContainer/mapUI"
-	mapUI.connect("alphaClicked", switchToAlpha)
-	mapUI.connect("betaClicked", switchToBeta)
-	mapUI.connect("gammaClicked", switchToGamma)
-	mapUI.connect("deltaClicked", switchToDelta)
+	var mapUI = $"UIRenderer/UI/windowScale/Info/bottomRight/VBoxContainer/mapUI"
+	mapUI.connect("alphaClicked", func(): switchToStar(0))
+	mapUI.connect("betaClicked", func(): switchToStar(1))
+	mapUI.connect("gammaClicked", func(): switchToStar(2))
+	mapUI.connect("deltaClicked", func(): switchToStar(3))
 	
 	### SHOP SCREEN LOGIC ###
-	$UIResizer/UIRenderer/UI/windowScale/Info/bottomLeft/toggleShop.connect("shopToggled", toggleShop)
-	var screen_size = get_viewport().get_visible_rect().size
-	var shop = shop_scene.instantiate()
-	add_child(shop)
-	get_node("Shop").position = Vector2(screen_size.x / 2, 0)
-	get_node("Shop").visible = false
+	$UIRenderer/UI/windowScale/Info/bottomLeft/toggleShop.connect("shopToggled", toggleShop)
+	%Shop.position = Vector2(Globals.screenSize.x / 2, 0)
+	%Shop.visible = false
+	
 
 func spawn_asteroid(type : String = "base"):
 	var asteroid = asteroid_scene.instantiate()
@@ -183,8 +199,13 @@ func tryMeteorShower():
 	
 	if chance == 1:
 		print("\n\nMeteor Shower!\n\n")
+		emit_signal("meteorShower")
+		
 		spawn_timer.paused = true
 		meteorShower_timer.paused = true
+		
+		await get_tree().create_timer(0.7).timeout # Wait a moment before starting meteor shower, so players can process the warning
+		
 		var old = difficulty
 		difficulty = 0.05
 		for n in range(7): # n = number of asteroids but not actually idk why
@@ -192,6 +213,7 @@ func tryMeteorShower():
 			await get_tree().create_timer(0.2).timeout # Wait for 0.2 seconds
 		difficulty = old
 		spawn_timer.paused = false
+		meteorShower_timer.wait_time = 10
 		meteorShower_timer.paused = false
 	else:
 		print("\nMeteor Failed\n")
@@ -215,69 +237,57 @@ func playExplosionSound():
 func toggleShop():
 	# Toggles the shop
 	if Globals.shopOpened:
-		get_node("Shop").visible = false
+		%Shop.visible = false
 		Globals.shopOpened = false
 	else:
-		get_node("Shop").visible = true
+		%Shop.visible = true
 		Globals.shopOpened = true
 
-# All switchTo functions changes stars and respawns all removed asteroids with +50 base speed
-# Alpha is bottom (earth)
-func switchToAlpha():
-	var alpha = alpha_scene.instantiate()
-	var asteroidsToSpawn : int = 0
-	for star in get_tree().get_nodes_in_group("earth"):
-		star.queue_free()
-	for asteroid in get_tree().get_nodes_in_group("asteroid"):
-		asteroid.queue_free()
-		if asteroidsToSpawn < 5:
-			asteroidsToSpawn += 1
-	for newAsteroid in asteroidsToSpawn:
-		spawn_asteroid("speed")
-	add_child(alpha)
-	Globals.currentStar = 0
+func set_parallax_speed(value):
+	Globals.parallaxSpeed = value
 
-# Beta is left
-func switchToBeta():
-	var beta = beta_scene.instantiate()
+func switchToStar(star : int): # Where star is defined the same way as Globals.currentStar
+	# alpha is bottom, beta is left, gamma is top, delta is right
+	var destinationStar
+	match star:
+		0: destinationStar = alpha_scene.instantiate()
+		1: destinationStar = beta_scene.instantiate()
+		2: destinationStar = gamma_scene.instantiate()
+		3: destinationStar = delta_scene.instantiate()
+	
+	
+	# Disables the map, InfoBox, the asteroid and meteor shower timers, and all currently visible asteroids
+	emit_signal("disableTP")
+	emit_signal("hideInfoBox")
+	meteorShower_timer.paused = true
+	spawn_timer.paused = true
 	var asteroidsToSpawn : int = 0
-	for star in get_tree().get_nodes_in_group("earth"):
-		star.queue_free()
 	for asteroid in get_tree().get_nodes_in_group("asteroid"):
 		asteroid.queue_free()
 		if asteroidsToSpawn < 5:
 			asteroidsToSpawn += 1
+	
+	### PLANET SWITCH CUTSCENE LOGIC ###
+	
+	var currentStar = get_tree().get_nodes_in_group("earth")[0]
+	var globalObject = get_node("Globals")
+	var tween0 = create_tween()
+	tween0.tween_property(currentStar, "scale", Vector2.ZERO, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween0.tween_method(set_parallax_speed, 0.2, 50.0, 2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween0.tween_method(set_parallax_speed, 50.0, 0.2, 2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	await get_tree().create_timer(5.5).timeout
+	currentStar.queue_free()
+	destinationStar.scale = Vector2.ZERO
+	add_child(destinationStar)
+	var tween1 = create_tween()
+	tween1.tween_property(destinationStar, "scale", Vector2.ONE, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	
+	# Respawns all asteroids as speed asteroids, continues timers, sets and displays location, and reenables map
 	for newAsteroid in asteroidsToSpawn:
 		spawn_asteroid("speed")
-	add_child(beta)
-	Globals.currentStar = 1
-
-# Gamma is top
-func switchToGamma():
-	var gamma = gamma_scene.instantiate()
-	var asteroidsToSpawn : int = 0
-	for star in get_tree().get_nodes_in_group("earth"):
-		star.queue_free()
-	for asteroid in get_tree().get_nodes_in_group("asteroid"):
-		asteroid.queue_free()
-		if asteroidsToSpawn < 5:
-			asteroidsToSpawn += 1
-	for newAsteroid in asteroidsToSpawn:
-		spawn_asteroid("speed")
-	add_child(gamma)
-	Globals.currentStar = 2
-
-# Delta is right
-func switchToDelta():
-	var delta = delta_scene.instantiate()
-	var asteroidsToSpawn : int = 0
-	for star in get_tree().get_nodes_in_group("earth"):
-		star.queue_free()
-	for asteroid in get_tree().get_nodes_in_group("asteroid"):
-		asteroid.queue_free()
-		if asteroidsToSpawn < 5:
-			asteroidsToSpawn += 1
-	for newAsteroid in asteroidsToSpawn:
-		spawn_asteroid("speed")
-	add_child(delta)
-	Globals.currentStar = 3
+	spawn_timer.paused = false
+	meteorShower_timer.paused = false
+	Globals.currentStar = star
+	emit_signal("displayLocation")
+	await get_tree().create_timer(1.6).timeout
+	emit_signal("enableTP")

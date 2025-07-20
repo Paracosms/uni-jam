@@ -13,7 +13,8 @@ signal asteroidExploded
 
 
 func _physics_process(delta):
-
+	rotation += 0.01
+	
 	# Variables
 	var direction = (centerPosition - global_position).normalized()
 	var movement = direction * speed * delta
