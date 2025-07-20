@@ -35,13 +35,14 @@ theme_override_constants/separation = 0
 
 [node name="Title" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.422373, 0.219753, 0.550875, 1)
+theme_override_colors/font_shadow_color = Color(0.410399, 0.165894, 0.502648, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 15
 theme_override_constants/shadow_outline_size = 28
 theme_override_fonts/font = ExtResource("2_ekxnf")
 theme_override_font_sizes/font_size = 175
-text = "Game Name!!1!!!!1!"
+text = "Nebula Weaver"
 horizontal_alignment = 1
 
 [node name="StartButton" type="Button" parent="VBoxContainer"]
@@ -68,3 +69,22 @@ theme_override_constants/outline_size = 12
 theme_override_font_sizes/font_size = 63
 text = "Options"
 flat = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -250.0
+offset_top = -44.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="version" type="Label" parent="MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 23
+text = "v1.0.1
+Made in 48 hours for Uni Jam by Andrew and Nathan"
+horizontal_alignment = 2
