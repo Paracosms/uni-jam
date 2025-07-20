@@ -91,7 +91,7 @@ material = SubResource("CanvasItemMaterial_dp4hp")
 points = PackedVector2Array(62, 355, 143, 246, 379, 192, 442, -132, 531, -307, 352, -370, 455, -118, 194, -91, 147, 262)
 width = 2.0
 
-[node name="crush_small" type="TextureButton" parent="." groups=["constellation_0"]]
+[node name="crush_small" type="TextureButton" parent="." groups=["constellation_0", "texture_buttons"]]
 offset_left = 408.0
 offset_top = -160.0
 offset_right = 481.0
@@ -101,7 +101,7 @@ texture_disabled = ExtResource("2_p21vy")
 stretch_mode = 4
 metadata/_edit_use_anchors_ = true
 
-[node name="starpoint_yield" type="TextureButton" parent="." groups=["constellation_0"]]
+[node name="starpoint_yield" type="TextureButton" parent="." groups=["constellation_0", "texture_buttons"]]
 offset_left = 32.0
 offset_top = 320.0
 offset_right = 105.0
@@ -111,7 +111,7 @@ texture_disabled = ExtResource("4_jrpp7")
 stretch_mode = 4
 metadata/_edit_use_anchors_ = true
 
-[node name="damage_output" type="TextureButton" parent="." groups=["constellation_0"]]
+[node name="damage_output" type="TextureButton" parent="." groups=["constellation_0", "texture_buttons"]]
 offset_left = 112.0
 offset_top = 216.0
 offset_right = 185.0
@@ -121,7 +121,7 @@ texture_disabled = ExtResource("6_2gejb")
 stretch_mode = 4
 metadata/_edit_use_anchors_ = true
 
-[node name="slow_asteroids" type="TextureButton" parent="." groups=["constellation_0"]]
+[node name="slow_asteroids" type="TextureButton" parent="." groups=["constellation_0", "texture_buttons"]]
 offset_left = 344.0
 offset_top = 160.0
 offset_right = 417.0
@@ -131,7 +131,7 @@ texture_disabled = ExtResource("8_mxcng")
 stretch_mode = 4
 metadata/_edit_use_anchors_ = true
 
-[node name="critical_hit" type="TextureButton" parent="." groups=["constellation_0"]]
+[node name="critical_hit" type="TextureButton" parent="." groups=["constellation_0", "texture_buttons"]]
 offset_left = 160.0
 offset_top = -120.0
 offset_right = 233.0
@@ -141,7 +141,7 @@ texture_disabled = ExtResource("10_5cnif")
 stretch_mode = 4
 metadata/_edit_use_anchors_ = true
 
-[node name="binoculars" type="TextureButton" parent="." groups=["constellation_0"]]
+[node name="binoculars" type="TextureButton" parent="." groups=["constellation_0", "texture_buttons"]]
 offset_left = 496.0
 offset_top = -334.0
 offset_right = 569.0
@@ -151,7 +151,7 @@ texture_disabled = ExtResource("12_6c6mu")
 stretch_mode = 4
 metadata/_edit_use_anchors_ = true
 
-[node name="beta" type="TextureButton" parent="." groups=["constellation_0"]]
+[node name="beta" type="TextureButton" parent="." groups=["constellation_0", "texture_buttons"]]
 offset_left = 320.0
 offset_top = -400.0
 offset_right = 393.0
@@ -188,7 +188,7 @@ material = SubResource("CanvasItemMaterial_dp4hp")
 points = PackedVector2Array(917, -45, 1186, -130)
 width = 2.0
 
-[node name="soften_asteroids" type="TextureButton" parent="." groups=["constellation_1"]]
+[node name="soften_asteroids" type="TextureButton" parent="." groups=["constellation_1", "texture_buttons"]]
 offset_left = 400.0
 offset_top = 344.0
 offset_right = 473.0
@@ -198,7 +198,7 @@ texture_disabled = ExtResource("15_vnw36")
 stretch_mode = 4
 metadata/_edit_use_anchors_ = true
 
-[node name="passive_starpoints" type="TextureButton" parent="." groups=["constellation_1"]]
+[node name="passive_starpoints" type="TextureButton" parent="." groups=["constellation_1", "texture_buttons"]]
 offset_left = 352.0
 offset_top = 160.0
 offset_right = 425.0
@@ -208,7 +208,7 @@ texture_disabled = ExtResource("17_bqncm")
 stretch_mode = 4
 metadata/_edit_use_anchors_ = true
 
-[node name="overkill" type="TextureButton" parent="." groups=["constellation_1"]]
+[node name="overkill" type="TextureButton" parent="." groups=["constellation_1", "texture_buttons"]]
 offset_left = 336.0
 offset_top = -160.0
 offset_right = 409.0
@@ -218,7 +218,7 @@ texture_disabled = ExtResource("19_lw871")
 stretch_mode = 4
 metadata/_edit_use_anchors_ = true
 
-[node name="life_steal" type="TextureButton" parent="." groups=["constellation_1"]]
+[node name="life_steal" type="TextureButton" parent="." groups=["constellation_1", "texture_buttons"]]
 offset_left = 64.0
 offset_top = -80.0
 offset_right = 137.0
@@ -228,7 +228,7 @@ texture_disabled = ExtResource("21_huajd")
 stretch_mode = 4
 metadata/_edit_use_anchors_ = true
 
-[node name="gamma" type="TextureButton" parent="." groups=["constellation_1"]]
+[node name="gamma" type="TextureButton" parent="." groups=["constellation_1", "texture_buttons"]]
 offset_left = 136.0
 offset_top = -400.0
 offset_right = 209.0
@@ -238,7 +238,7 @@ texture_disabled = ExtResource("27_huajd")
 stretch_mode = 4
 metadata/_edit_use_anchors_ = true
 
-[node name="slow_asteroids2" type="TextureButton" parent="." groups=["constellation_1"]]
+[node name="slow_asteroids2" type="TextureButton" parent="." groups=["constellation_1", "texture_buttons"]]
 offset_left = 32.0
 offset_top = 264.0
 offset_right = 105.0
@@ -248,7 +248,7 @@ texture_disabled = ExtResource("8_mxcng")
 stretch_mode = 4
 metadata/_edit_use_anchors_ = true
 
-[node name="crush_small2" type="TextureButton" parent="." groups=["constellation_1"]]
+[node name="crush_small2" type="TextureButton" parent="." groups=["constellation_1", "texture_buttons"]]
 offset_left = 112.0
 offset_top = 344.0
 offset_right = 185.0
@@ -258,7 +258,7 @@ texture_disabled = ExtResource("2_p21vy")
 stretch_mode = 4
 metadata/_edit_use_anchors_ = true
 
-[node name="starpoint_yield2" type="TextureButton" parent="." groups=["constellation_1"]]
+[node name="starpoint_yield2" type="TextureButton" parent="." groups=["constellation_1", "texture_buttons"]]
 offset_left = 185.0
 offset_top = 256.0
 offset_right = 258.0
@@ -268,7 +268,7 @@ texture_disabled = ExtResource("4_jrpp7")
 stretch_mode = 4
 metadata/_edit_use_anchors_ = true
 
-[node name="passive_starpoints2" type="TextureButton" parent="." groups=["constellation_1"]]
+[node name="passive_starpoints2" type="TextureButton" parent="." groups=["constellation_1", "texture_buttons"]]
 offset_left = 504.0
 offset_top = 240.0
 offset_right = 577.0
@@ -305,7 +305,7 @@ material = SubResource("CanvasItemMaterial_dp4hp")
 points = PackedVector2Array(1904, 120, 2072, 0)
 width = 2.0
 
-[node name="delta" type="TextureButton" parent="." groups=["constellation_2"]]
+[node name="delta" type="TextureButton" parent="." groups=["constellation_2", "texture_buttons"]]
 offset_left = 96.0
 offset_top = -352.0
 offset_right = 169.0
@@ -315,7 +315,7 @@ texture_disabled = ExtResource("25_lw871")
 stretch_mode = 4
 metadata/_edit_use_anchors_ = true
 
-[node name="overkill2" type="TextureButton" parent="." groups=["constellation_2"]]
+[node name="overkill2" type="TextureButton" parent="." groups=["constellation_2", "texture_buttons"]]
 offset_left = 200.0
 offset_top = -285.0
 offset_right = 273.0
@@ -325,7 +325,7 @@ texture_disabled = ExtResource("19_lw871")
 stretch_mode = 4
 metadata/_edit_use_anchors_ = true
 
-[node name="starpoint_yield3" type="TextureButton" parent="." groups=["constellation_2"]]
+[node name="starpoint_yield3" type="TextureButton" parent="." groups=["constellation_2", "texture_buttons"]]
 offset_left = 248.0
 offset_top = 256.0
 offset_right = 321.0
@@ -335,7 +335,7 @@ texture_disabled = ExtResource("4_jrpp7")
 stretch_mode = 4
 metadata/_edit_use_anchors_ = true
 
-[node name="slow_asteroids3" type="TextureButton" parent="." groups=["constellation_2"]]
+[node name="slow_asteroids3" type="TextureButton" parent="." groups=["constellation_2", "texture_buttons"]]
 offset_left = 224.0
 offset_top = 128.0
 offset_right = 297.0
@@ -345,7 +345,7 @@ texture_disabled = ExtResource("8_mxcng")
 stretch_mode = 4
 metadata/_edit_use_anchors_ = true
 
-[node name="starpoint_yield4" type="TextureButton" parent="." groups=["constellation_2"]]
+[node name="starpoint_yield4" type="TextureButton" parent="." groups=["constellation_2", "texture_buttons"]]
 offset_left = 392.0
 offset_top = 8.0
 offset_right = 465.0
@@ -355,7 +355,7 @@ texture_disabled = ExtResource("4_jrpp7")
 stretch_mode = 4
 metadata/_edit_use_anchors_ = true
 
-[node name="passive_starpoints3" type="TextureButton" parent="." groups=["constellation_2"]]
+[node name="passive_starpoints3" type="TextureButton" parent="." groups=["constellation_2", "texture_buttons"]]
 offset_left = 496.0
 offset_top = 65.0
 offset_right = 569.0
@@ -365,7 +365,7 @@ texture_disabled = ExtResource("17_bqncm")
 stretch_mode = 4
 metadata/_edit_use_anchors_ = true
 
-[node name="damage_output2" type="TextureButton" parent="." groups=["constellation_2"]]
+[node name="damage_output2" type="TextureButton" parent="." groups=["constellation_2", "texture_buttons"]]
 offset_left = 216.0
 offset_top = -144.0
 offset_right = 289.0
@@ -375,7 +375,7 @@ texture_disabled = ExtResource("6_2gejb")
 stretch_mode = 4
 metadata/_edit_use_anchors_ = true
 
-[node name="soften_asteroids2" type="TextureButton" parent="." groups=["constellation_2"]]
+[node name="soften_asteroids2" type="TextureButton" parent="." groups=["constellation_2", "texture_buttons"]]
 offset_left = 112.0
 offset_top = -72.0
 offset_right = 185.0
@@ -385,7 +385,7 @@ texture_disabled = ExtResource("15_vnw36")
 stretch_mode = 4
 metadata/_edit_use_anchors_ = true
 
-[node name="critical_hit2" type="TextureButton" parent="." groups=["constellation_2"]]
+[node name="critical_hit2" type="TextureButton" parent="." groups=["constellation_2", "texture_buttons"]]
 offset_left = 112.0
 offset_top = 24.0
 offset_right = 185.0
@@ -395,7 +395,7 @@ texture_disabled = ExtResource("10_5cnif")
 stretch_mode = 4
 metadata/_edit_use_anchors_ = true
 
-[node name="life_steal2" type="TextureButton" parent="." groups=["constellation_2"]]
+[node name="life_steal2" type="TextureButton" parent="." groups=["constellation_2", "texture_buttons"]]
 offset_left = 48.0
 offset_top = -232.0
 offset_right = 121.0
@@ -404,82 +404,3 @@ texture_normal = ExtResource("20_s0fa6")
 texture_disabled = ExtResource("21_huajd")
 stretch_mode = 4
 metadata/_edit_use_anchors_ = true
-
-[connection signal="mouse_entered" from="crush_small" to="." method="_on_button_mouse_entered" binds= ["crush_small"]]
-[connection signal="mouse_exited" from="crush_small" to="." method="_on_button_mouse_exited" binds= ["crush_small"]]
-[connection signal="pressed" from="crush_small" to="." method="_on_upgrade_button_pressed" binds= ["crush_small"]]
-[connection signal="mouse_entered" from="starpoint_yield" to="." method="_on_button_mouse_entered" binds= ["starpoint_yield"]]
-[connection signal="mouse_exited" from="starpoint_yield" to="." method="_on_button_mouse_exited" binds= ["starpoint_yield"]]
-[connection signal="pressed" from="starpoint_yield" to="." method="_on_upgrade_button_pressed" binds= ["starpoint_yield"]]
-[connection signal="mouse_entered" from="damage_output" to="." method="_on_button_mouse_entered" binds= ["damage_output"]]
-[connection signal="mouse_exited" from="damage_output" to="." method="_on_button_mouse_exited" binds= ["damage_output"]]
-[connection signal="pressed" from="damage_output" to="." method="_on_upgrade_button_pressed" binds= ["damage_output"]]
-[connection signal="mouse_entered" from="slow_asteroids" to="." method="_on_button_mouse_entered" binds= ["slow_asteroids"]]
-[connection signal="mouse_exited" from="slow_asteroids" to="." method="_on_button_mouse_exited" binds= ["slow_asteroids"]]
-[connection signal="pressed" from="slow_asteroids" to="." method="_on_upgrade_button_pressed" binds= ["slow_asteroids"]]
-[connection signal="mouse_entered" from="critical_hit" to="." method="_on_button_mouse_entered" binds= ["critical_hit"]]
-[connection signal="mouse_exited" from="critical_hit" to="." method="_on_button_mouse_exited" binds= ["critical_hit"]]
-[connection signal="pressed" from="critical_hit" to="." method="_on_upgrade_button_pressed" binds= ["critical_hit"]]
-[connection signal="mouse_entered" from="binoculars" to="." method="_on_button_mouse_entered" binds= ["binoculars"]]
-[connection signal="mouse_exited" from="binoculars" to="." method="_on_button_mouse_exited" binds= ["binoculars"]]
-[connection signal="pressed" from="binoculars" to="." method="_on_upgrade_button_pressed" binds= ["binoculars"]]
-[connection signal="mouse_entered" from="beta" to="." method="_on_button_mouse_entered" binds= ["beta"]]
-[connection signal="mouse_exited" from="beta" to="." method="_on_button_mouse_exited" binds= ["beta"]]
-[connection signal="pressed" from="beta" to="." method="_on_upgrade_button_pressed" binds= ["beta"]]
-[connection signal="mouse_entered" from="soften_asteroids" to="." method="_on_button_mouse_entered" binds= ["soften_asteroids"]]
-[connection signal="mouse_exited" from="soften_asteroids" to="." method="_on_button_mouse_exited" binds= ["soften_asteroids"]]
-[connection signal="pressed" from="soften_asteroids" to="." method="_on_upgrade_button_pressed" binds= ["soften_asteroids"]]
-[connection signal="mouse_entered" from="passive_starpoints" to="." method="_on_button_mouse_entered" binds= ["passive_starpoints"]]
-[connection signal="mouse_exited" from="passive_starpoints" to="." method="_on_button_mouse_exited" binds= ["passive_starpoints"]]
-[connection signal="pressed" from="passive_starpoints" to="." method="_on_upgrade_button_pressed" binds= ["passive_starpoints"]]
-[connection signal="mouse_entered" from="overkill" to="." method="_on_button_mouse_entered" binds= ["overkill"]]
-[connection signal="mouse_exited" from="overkill" to="." method="_on_button_mouse_exited" binds= ["overkill"]]
-[connection signal="pressed" from="overkill" to="." method="_on_upgrade_button_pressed" binds= ["overkill"]]
-[connection signal="mouse_entered" from="life_steal" to="." method="_on_button_mouse_entered" binds= ["life_steal"]]
-[connection signal="mouse_exited" from="life_steal" to="." method="_on_button_mouse_exited" binds= ["life_steal"]]
-[connection signal="pressed" from="life_steal" to="." method="_on_upgrade_button_pressed" binds= ["life_steal"]]
-[connection signal="mouse_entered" from="gamma" to="." method="_on_button_mouse_entered" binds= ["gamma"]]
-[connection signal="mouse_exited" from="gamma" to="." method="_on_button_mouse_exited" binds= ["gamma"]]
-[connection signal="pressed" from="gamma" to="." method="_on_upgrade_button_pressed" binds= ["gamma"]]
-[connection signal="mouse_entered" from="slow_asteroids2" to="." method="_on_button_mouse_entered" binds= ["slow_asteroids2"]]
-[connection signal="mouse_exited" from="slow_asteroids2" to="." method="_on_button_mouse_exited" binds= ["slow_asteroids2"]]
-[connection signal="pressed" from="slow_asteroids2" to="." method="_on_upgrade_button_pressed" binds= ["slow_asteroids2"]]
-[connection signal="mouse_entered" from="crush_small2" to="." method="_on_button_mouse_entered" binds= ["crush_small2"]]
-[connection signal="mouse_exited" from="crush_small2" to="." method="_on_button_mouse_exited" binds= ["crush_small2"]]
-[connection signal="pressed" from="crush_small2" to="." method="_on_upgrade_button_pressed" binds= ["crush_small2"]]
-[connection signal="mouse_entered" from="starpoint_yield2" to="." method="_on_button_mouse_entered" binds= ["starpoint_yield2"]]
-[connection signal="mouse_exited" from="starpoint_yield2" to="." method="_on_button_mouse_exited" binds= ["starpoint_yield2"]]
-[connection signal="pressed" from="starpoint_yield2" to="." method="_on_upgrade_button_pressed" binds= ["starpoint_yield2"]]
-[connection signal="mouse_entered" from="passive_starpoints2" to="." method="_on_button_mouse_entered" binds= ["passive_starpoints2"]]
-[connection signal="mouse_exited" from="passive_starpoints2" to="." method="_on_button_mouse_exited" binds= ["passive_starpoints2"]]
-[connection signal="pressed" from="passive_starpoints2" to="." method="_on_upgrade_button_pressed" binds= ["passive_starpoints2"]]
-[connection signal="mouse_entered" from="delta" to="." method="_on_button_mouse_entered" binds= ["delta"]]
-[connection signal="mouse_exited" from="delta" to="." method="_on_button_mouse_exited" binds= ["delta"]]
-[connection signal="pressed" from="delta" to="." method="_on_upgrade_button_pressed" binds= ["delta"]]
-[connection signal="mouse_entered" from="overkill2" to="." method="_on_button_mouse_entered" binds= ["overkill2"]]
-[connection signal="mouse_exited" from="overkill2" to="." method="_on_button_mouse_exited" binds= ["overkill2"]]
-[connection signal="pressed" from="overkill2" to="." method="_on_upgrade_button_pressed" binds= ["overkill2"]]
-[connection signal="mouse_entered" from="starpoint_yield3" to="." method="_on_button_mouse_entered" binds= ["starpoint_yield3"]]
-[connection signal="mouse_exited" from="starpoint_yield3" to="." method="_on_button_mouse_exited" binds= ["starpoint_yield3"]]
-[connection signal="pressed" from="starpoint_yield3" to="." method="_on_upgrade_button_pressed" binds= ["starpoint_yield3"]]
-[connection signal="mouse_entered" from="slow_asteroids3" to="." method="_on_button_mouse_entered" binds= ["slow_asteroids3"]]
-[connection signal="mouse_exited" from="slow_asteroids3" to="." method="_on_button_mouse_exited" binds= ["slow_asteroids3"]]
-[connection signal="pressed" from="slow_asteroids3" to="." method="_on_upgrade_button_pressed" binds= ["slow_asteroids3"]]
-[connection signal="mouse_entered" from="starpoint_yield4" to="." method="_on_button_mouse_entered" binds= ["starpoint_yield4"]]
-[connection signal="mouse_exited" from="starpoint_yield4" to="." method="_on_button_mouse_exited" binds= ["starpoint_yield4"]]
-[connection signal="pressed" from="starpoint_yield4" to="." method="_on_upgrade_button_pressed" binds= ["starpoint_yield4"]]
-[connection signal="mouse_entered" from="passive_starpoints3" to="." method="_on_button_mouse_entered" binds= ["passive_starpoints3"]]
-[connection signal="mouse_exited" from="passive_starpoints3" to="." method="_on_button_mouse_exited" binds= ["passive_starpoints3"]]
-[connection signal="pressed" from="passive_starpoints3" to="." method="_on_upgrade_button_pressed" binds= ["passive_starpoints3"]]
-[connection signal="mouse_entered" from="damage_output2" to="." method="_on_button_mouse_entered" binds= ["damage_output2"]]
-[connection signal="mouse_exited" from="damage_output2" to="." method="_on_button_mouse_exited" binds= ["damage_output2"]]
-[connection signal="pressed" from="damage_output2" to="." method="_on_upgrade_button_pressed" binds= ["damage_output2"]]
-[connection signal="mouse_entered" from="soften_asteroids2" to="." method="_on_button_mouse_entered" binds= ["soften_asteroids2"]]
-[connection signal="mouse_exited" from="soften_asteroids2" to="." method="_on_button_mouse_exited" binds= ["soften_asteroids2"]]
-[connection signal="pressed" from="soften_asteroids2" to="." method="_on_upgrade_button_pressed" binds= ["soften_asteroids2"]]
-[connection signal="mouse_entered" from="critical_hit2" to="." method="_on_button_mouse_entered" binds= ["critical_hit2"]]
-[connection signal="mouse_exited" from="critical_hit2" to="." method="_on_button_mouse_exited" binds= ["critical_hit2"]]
-[connection signal="pressed" from="critical_hit2" to="." method="_on_upgrade_button_pressed" binds= ["critical_hit2"]]
-[connection signal="mouse_entered" from="life_steal2" to="." method="_on_button_mouse_entered" binds= ["life_steal2"]]
-[connection signal="mouse_exited" from="life_steal2" to="." method="_on_button_mouse_exited" binds= ["life_steal2"]]
-[connection signal="pressed" from="life_steal2" to="." method="_on_upgrade_button_pressed" binds= ["life_steal2"]]
