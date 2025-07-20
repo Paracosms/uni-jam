@@ -33,6 +33,7 @@ skillButtons=""
 constellation_0=""
 constellation_1=""
 constellation_2=""
+texture_buttons=""
 
 [gui]
 

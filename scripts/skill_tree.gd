@@ -243,8 +243,12 @@ var upgrades = {
 
 var purchases = []
 
-func _process(_delta):
+func _ready():
 	
+	var buttons_list = get_tree().get_nodes_in_group("texture_buttons")
+	for button in buttons_list:
+		if button.name != "starpoint_yield":
+			button.disabled = true
 
 func _on_upgrade_button_pressed(button_name):
 	button_name = button_name.replace("\"", "")
