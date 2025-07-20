@@ -386,6 +386,10 @@ func switchToStar(star : int): # Where star is defined the same way as Globals.c
 	
 	### PLANET SWITCH CUTSCENE LOGIC ###
 	
+	if Globals.skillsOpened:
+		toggleSkills()
+	$UIRenderer/UI/windowScale/Info/centerLeft/toggleSkills.visible = false
+	
 	var currentStar = get_tree().get_nodes_in_group("earth")[0]
 	var _globalObject = get_node("Globals")
 	var tween0 = create_tween()
@@ -408,6 +412,7 @@ func switchToStar(star : int): # Where star is defined the same way as Globals.c
 	emit_signal("enableTP")
 	spawn_timer.paused = false
 	meteorShower_timer.paused = false
+	$UIRenderer/UI/windowScale/Info/centerLeft/toggleSkills.visible = true
 	Globals.binocularsEnabled = true
 
 func resetGame():

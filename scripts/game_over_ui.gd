@@ -8,6 +8,12 @@ func _ready():
 	get_tree().current_scene.connect("gameOver", showDeathUI)
 
 func showDeathUI():
+	
+	# Disable Shop
+	if Globals.skillsOpened:
+		$/root/Main.toggleSkills()
+	$/root/Main/UIRenderer/UI/windowScale/Info/centerLeft/toggleSkills.visible = false
+	
 	visible = true
 	%retry.disabled = false
 	%exit.disabled = false
@@ -16,13 +22,15 @@ func hideDeathUI():
 	visible = false
 	%retry.disabled = true
 	%exit.disabled = true
+	
+	$/root/Main/UIRenderer/UI/windowScale/Info/centerLeft/toggleSkills.visible = true
 
 func resetGlobals():
 	Globals.parallaxSpeed = 0.2
 	Globals.meteorShower = false
 	
 	Globals.lives = 50
-	Globals.starPoints = 099999
+	Globals.starPoints = 0
 	Globals.currentStar = 0 # such that alpha = 0, beta = 1, etc.
 	Globals.currentSkillTree = 0 # 0 - Lyra, 1 - Cepheus 2 - Perseus
 	Globals.skillsOpened = false
