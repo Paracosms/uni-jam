@@ -45,7 +45,7 @@ func _process(_delta):
 			critMult = 2 # Double starpoints
 		
 		var extraStarpoints = abs(health) * Globals.overkill # Overkill ability
-		Globals.starPoints += (Globals.baseYield + extraStarpoints) * critMult # Starpoints Formula
+		Globals.starPoints += (Globals.baseYield + extraStarpoints + Globals.planetYield) * critMult # Starpoints Formula
 		
 		queue_free() # Kill the asteroid
 		
