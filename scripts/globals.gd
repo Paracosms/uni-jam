@@ -1,15 +1,18 @@
 extends Node2D
 
+@onready var selectAudio = preload("res://assets/audio/select.wav")
+
 # code helpers - on ready, values are initialized correctly
 var centerScreen : Vector2
 var screenSize : Vector2
 var parallaxSpeed: float = 0.2
 var meteorShower : bool = false
+var lastStarDiedOn : int
 
-var lives : int = 1000
+var lives : int = 1
 var starPoints : int = 10000
 var currentStar : int = 0 # such that alpha = 0, beta = 1, etc.
-var currentShot : int = 0 # 0 - Lyra, 1 - Cepheus 2 - Perseus
+var currentSkillTree : int = 0 # 0 - Lyra, 1 - Cepheus 2 - Perseus
 var skillsOpened : bool = false
 var volume : float = 0
 var clickDamage : int = 1 ### Done
@@ -29,10 +32,16 @@ var slowAsteroids : float = 0.0 # Slow all asteroids down %float ### DONE
 var softenAsteroids : int = 0 # All asteroids have int less health ### DONE
 var passiveStarpoints : int = 0 # Gain int starpoints every 3 seconds ### DONE
 var overkill : int = 0 # Every 1 damage over necessary to kill rewards int starpoints ### DONE
-var lifeSteal : int = 1000000 # Gain a life every int asteroids broken ### DONE
-
-
+var lifeSteal : int = 9223372036854775807 # Gain a life every int asteroids broken ### DONE
 
 func _process(_delta):
 	screenSize = get_viewport().get_visible_rect().size
 	centerScreen = Vector2(screenSize.x / 2,screenSize.y / 2)
+
+func playSelectSound():
+	var soundPlayer = AudioStreamPlayer.new()
+	soundPlayer.stream = selectAudio
+	soundPlayer.volume_db = Globals.volume
+	add_child(soundPlayer)
+	soundPlayer.play()
+	soundPlayer.finished.connect(soundPlayer.queue_free)

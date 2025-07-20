@@ -8,6 +8,10 @@ extends Node2D
 @onready var gamma_scene = preload("res://scenes/gamma.tscn")
 @onready var delta_scene = preload("res://scenes/delta.tscn")
 
+@onready var asteroidHealthTexture = preload("res://assets/sprites/asteroids/asteroidHealth.png")
+@onready var asteroidSpeedTexture = preload("res://assets/sprites/asteroids/asteroidSpeed.png")
+@onready var asteroidSmallTexture = preload("res://assets/sprites/asteroids/asteroidSmall.png")
+
 signal meteorShower
 signal disableTP
 signal enableTP
@@ -77,7 +81,7 @@ func _ready():
 	
 	### OCCASIONAL METEOR SHOWER LOGIC ###
 	
-	meteorShower_timer.wait_time = 1 # Meteor showers proc every 60 seconds until the first one hits.
+	meteorShower_timer.wait_time = 60 # Meteor showers proc every 60 seconds until the first one hits.
 	meteorShower_timer.one_shot = false
 	meteorShower_timer.connect("timeout", Callable(self, "tryMeteorShower"))
 	add_child(meteorShower_timer)
@@ -105,6 +109,7 @@ func _process(_delta):
 	
 	### DEATH LOGIC ###
 	if Globals.lives <= 0:
+		Globals.lastStarDiedOn = Globals.currentStar
 		emit_signal("disableTP")
 		emit_signal("hideInfoBox")
 		emit_signal("gameOver")
@@ -115,6 +120,11 @@ func _process(_delta):
 
 # This function executes after ALL nodes in every scene has loaded in
 func trulyReady():
+	# Load signals
+	$UIRenderer/UI/windowScale/Info/center/gameOverUI.connect("resetGame", resetGame)
+	emit_signal("enableTP")
+	beginningCutscene()
+	
 	### MAP SELECTION LOGIC ###
 	var mapUI = $"UIRenderer/UI/windowScale/Info/bottomRight/VBoxContainer/mapUI"
 	mapUI.connect("alphaClicked", func(): switchToStar(0))
@@ -140,6 +150,8 @@ func trulyReady():
 
 func spawn_asteroid(type : String = "base"):
 	var asteroid = asteroid_scene.instantiate()
+	var asteroidTexture = asteroid.get_node("Sprite2D")
+	print(asteroidTexture)
 	
 	# Asteroid spawning location
 	asteroid.global_position = get_offscreen_position() # Location off-screen
@@ -173,23 +185,30 @@ func spawn_asteroid(type : String = "base"):
 	
 	# TODO: change sprite depending on the type of asteroid
 	match Globals.currentStar:
-		3: asteroidRandomizer = randi() % 3
-		2: asteroidRandomizer = randi() % 2
-		1: asteroidRandomizer = randi() % 1
-		# 0 should do nothing as it is the base asteroid, so this case is not included
+		3: asteroidRandomizer = randi() % 4 # returns 0-3
+		2: asteroidRandomizer = randi() % 3 # returns 0-2
+		1: asteroidRandomizer = randi() % 2 # returns 0-1
+		0: asteroidRandomizer = randi() % 1 # returns 0
 	
 	match asteroidRandomizer:
-		2: 
-			result = clamp(result, 0.4, 1.0)
-		1:
+		3: # small asteroid
+			result = clamp(result, 0.4, 0.7)
+			asteroidTexture.texture = asteroidSmallTexture
+			asteroid.type = "small"
+		2: # speed asteroid
 			base_speed += 50
-			# change sprite here
-		0: 
+			asteroidTexture.texture = asteroidSpeedTexture
+			asteroid.type = "speed"
+		1: # health asteroid
 			base_health += 2
-			# change sprite here
+			asteroidTexture.texture = asteroidHealthTexture
+			asteroid.type = "health"
+		# 0 is the default asteroid therefore nothing is changed
 	
-	if type == "speed" && asteroidRandomizer != 1:
+	if type == "speed" && asteroidRandomizer != 2:
 		base_speed += 50
+		asteroidTexture.texture = asteroidSpeedTexture
+		asteroid.type = "speed"
 	
 	### SET ASTEROID PROPERTIES ###
 	
@@ -280,6 +299,8 @@ func set_parallax_speed(value):
 
 func switchToStar(star : int): # Where star is defined the same way as Globals.currentStar
 	# alpha is bottom, beta is left, gamma is top, delta is right
+	Globals.playSelectSound()
+	
 	var destinationStar
 	match star:
 		0: destinationStar = alpha_scene.instantiate()
@@ -317,9 +338,29 @@ func switchToStar(star : int): # Where star is defined the same way as Globals.c
 	# Respawns all asteroids as speed asteroids, continues timers, sets and displays location, and reenables map
 	for newAsteroid in asteroidsToSpawn:
 		spawn_asteroid("speed")
-	spawn_timer.paused = false
-	meteorShower_timer.paused = false
 	Globals.currentStar = star
 	emit_signal("displayLocation")
 	await get_tree().create_timer(1.6).timeout
 	emit_signal("enableTP")
+	spawn_timer.paused = false
+	meteorShower_timer.paused = false
+
+func resetGame():
+	emit_signal("enableTP")
+	if Globals.lastStarDiedOn != 0:
+		switchToStar(0) 
+		await get_tree().create_timer(7).timeout
+		spawn_timer.paused = false
+		meteorShower_timer.paused = false
+	else:
+		beginningCutscene()
+		await get_tree().create_timer(1.6).timeout
+		spawn_timer.paused = false
+		meteorShower_timer.paused = false
+
+
+func beginningCutscene(): # Triggers the second half of the switchToStar cutscene
+	%Earth.scale = Vector2.ZERO
+	var tween = create_tween()
+	tween.tween_property(%Earth, "scale", Vector2.ONE, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	emit_signal("displayLocation")

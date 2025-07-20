@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://c1lhoo3nuiyi6"]
+[gd_scene load_steps=8 format=3 uid="uid://c1lhoo3nuiyi6"]
 
 [ext_resource type="PackedScene" uid="uid://cafa1kp7jmpc5" path="res://scenes/asteroid.tscn" id="1"]
 [ext_resource type="Script" uid="uid://8o3ytshbr1qp" path="res://scripts/main.gd" id="1_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://c53rpnk5xwo62" path="res://scenes/earth.tscn" id="2_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://cynt3lbt5jsyb" path="res://scenes/ui.tscn" id="3_tbgi4"]
-[ext_resource type="PackedScene" uid="uid://becbw8nht6jch" path="res://scenes/shop.tscn" id="3_tipki"]
 [ext_resource type="PackedScene" uid="uid://rj1qruh2kyqx" path="res://scenes/globals.tscn" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://b8wfqmyfjyfl0" path="res://scenes/camera.tscn" id="7_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://8kjgtlpptmp4" path="res://scenes/background.tscn" id="7_tipki"]
@@ -18,11 +17,6 @@ asteroid_scene = ExtResource("1")
 [node name="UI" parent="UIRenderer" instance=ExtResource("3_tbgi4")]
 unique_name_in_owner = true
 metadata/_edit_use_anchors_ = true
-
-[node name="Shop" parent="UIRenderer" instance=ExtResource("3_tipki")]
-unique_name_in_owner = true
-visible = false
-z_index = 4
 
 [node name="Camera" parent="." instance=ExtResource("7_o6xl0")]
 
