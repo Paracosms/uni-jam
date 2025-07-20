@@ -98,14 +98,13 @@ func _ready():
 
 func _process(_delta):
 	### SCENERY LOGIC ###
-	Globals.rotation = Globals.parallaxSpeed
-	
 	get_tree().call_group("earth", "set_global_position", Globals.centerScreen)
 	var scaleFactor = Globals.screenSize.y / 1440.0
 	%background.scale = Vector2(scaleFactor, scaleFactor) 
 	if %background.position.x < -Globals.screenSize.x / 2:
 		%background.position.x += 4794 * scaleFactor
 	else: %background.position.x -= Globals.parallaxSpeed
+	var currentStar = get_tree().get_nodes_in_group("earth")[0]
 	
 	### DEATH LOGIC ###
 	if Globals.lives <= 0:
@@ -364,6 +363,7 @@ func set_parallax_speed(value):
 func switchToStar(star : int): # Where star is defined the same way as Globals.currentStar
 	# alpha is bottom, beta is left, gamma is top, delta is right
 	Globals.playSelectSound()
+	Globals.binocularsEnabled = false
 	
 	var destinationStar
 	match star:
@@ -408,6 +408,7 @@ func switchToStar(star : int): # Where star is defined the same way as Globals.c
 	emit_signal("enableTP")
 	spawn_timer.paused = false
 	meteorShower_timer.paused = false
+	Globals.binocularsEnabled = true
 
 func resetGame():
 	emit_signal("enableTP")
