@@ -10,9 +10,12 @@ config_version=5
 
 [application]
 
-config/name="uni jam"
+config/name="Nebula Weaver"
+config/version="v1.0.1"
 run/main_scene="uid://dngq774sl2if1"
 config/features=PackedStringArray("4.4", "Forward Plus")
+config/icon="uid://dmvs2qbii7u14"
+config/windows_native_icon="res://assets/sprites/icon.ico"
 
 [autoload]
 
@@ -22,20 +25,21 @@ Globals="*res://scripts/globals.gd"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/mode=4
 window/size/resizable=false
 window/size/borderless=true
 window/stretch/mode="viewport"
 
 [global_group]
 
-lyra=""
-cepheus=""
-perseus=""
 skillButtons=""
 constellation_0=""
 constellation_1=""
 constellation_2=""
 texture_buttons=""
+lyra=""
+cepheus=""
+perseus=""
 
 [gui]
 
@@ -43,4 +47,5 @@ theme/custom="uid://cebjujnfsoqb4"
 
 [rendering]
 
+textures/vram_compression/import_etc2_astc=true
 viewport/hdr_2d=true
