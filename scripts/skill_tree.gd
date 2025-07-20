@@ -244,7 +244,7 @@ var upgrades = {
 var purchases = []
 
 func _process(_delta):
-	
+	pass
 
 func _on_upgrade_button_pressed(button_name):
 	button_name = button_name.replace("\"", "")
