@@ -23,6 +23,9 @@ var deltaUnlocked : bool = false # right, 4th planet unlock
 var critEnabled : bool = false
 var binocularsEnabled : bool = false
 
+<<<<<<< Updated upstream
+=======
 func _process(_delta):
 	screenSize = get_viewport().get_visible_rect().size
 	centerScreen = Vector2(screenSize.x / 2,screenSize.y / 2)
+>>>>>>> Stashed changes
