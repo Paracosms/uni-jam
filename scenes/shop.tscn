@@ -1,12 +1,26 @@
-[gd_scene load_steps=8 format=3 uid="uid://becbw8nht6jch"]
+[gd_scene load_steps=22 format=3 uid="uid://becbw8nht6jch"]
 
 [ext_resource type="Script" uid="uid://3s1ase5ebu8y" path="res://scripts/shop.gd" id="1_lx5au"]
+[ext_resource type="Texture2D" uid="uid://r114exs72lxa" path="res://assets/sprites/iconSkills/enabled/crush_small.png" id="2_68utx"]
 [ext_resource type="Texture2D" uid="uid://b43beqkvltxwx" path="res://assets/sprites/iconSkills/enabled/double_yield.png" id="2_xfvoa"]
 [ext_resource type="Texture2D" uid="uid://bf0ccmubcn462" path="res://assets/sprites/iconSkills/disabled/disabled_double_yield.png" id="3_1l46r"]
+[ext_resource type="Texture2D" uid="uid://dghtkunvw3bat" path="res://assets/sprites/iconSkills/disabled/disabled_crush_small.png" id="3_ru2r1"]
 [ext_resource type="Texture2D" uid="uid://ddfiuwr65w3nr" path="res://assets/sprites/iconSkills/enabled/double_damage.png" id="4_ajxib"]
 [ext_resource type="Texture2D" uid="uid://due4kccv8ui51" path="res://assets/sprites/iconSkills/disabled/disabled_double_damage.png" id="5_y6sft"]
 [ext_resource type="Texture2D" uid="uid://c45qra3pj86m3" path="res://assets/sprites/iconSkills/enabled/critical_hit.png" id="6_m4ofw"]
 [ext_resource type="Texture2D" uid="uid://dfqe8ushr7rgi" path="res://assets/sprites/iconSkills/disabled/disabled_critical_hit.png" id="7_heatd"]
+[ext_resource type="Texture2D" uid="uid://cas5ud5rbwxno" path="res://assets/sprites/iconSkills/enabled/slow_asteroids.png" id="8_lxs01"]
+[ext_resource type="Texture2D" uid="uid://c0ktc45uovqrb" path="res://assets/sprites/iconSkills/disabled/disabled_slow_asteroids.png" id="9_6nbx6"]
+[ext_resource type="Texture2D" uid="uid://ct56oy022kqh0" path="res://assets/sprites/iconSkills/enabled/soften_asteroids.png" id="12_mihhf"]
+[ext_resource type="Texture2D" uid="uid://ddpns81c5tew6" path="res://assets/sprites/iconSkills/disabled/disabled_soften_asteroids.png" id="13_5lclc"]
+[ext_resource type="Texture2D" uid="uid://d1afpnw47t30" path="res://assets/sprites/iconSkills/enabled/passive_starpoints.png" id="14_ouqob"]
+[ext_resource type="Texture2D" uid="uid://bb0lpnnoe574e" path="res://assets/sprites/iconSkills/disabled/disabled_passive_starpoints.png" id="15_p0at6"]
+[ext_resource type="Texture2D" uid="uid://hxx4unxqgr3b" path="res://assets/sprites/iconSkills/enabled/binoculars.png" id="16_c8dfh"]
+[ext_resource type="Texture2D" uid="uid://cgrjysi251ye" path="res://assets/sprites/iconSkills/disabled/disabled_binoculars.png" id="17_ccf1r"]
+[ext_resource type="Texture2D" uid="uid://bssaep3i0wfnv" path="res://assets/sprites/iconSkills/enabled/overkill.png" id="18_mt8ix"]
+[ext_resource type="Texture2D" uid="uid://bevpe7e1mpgt0" path="res://assets/sprites/iconSkills/disabled/disabled_overkill.png" id="19_a6g3j"]
+[ext_resource type="Texture2D" uid="uid://s2ilirq6t66g" path="res://assets/sprites/iconSkills/enabled/life_steal.png" id="20_posyw"]
+[ext_resource type="Texture2D" uid="uid://4mf0loxptaxo" path="res://assets/sprites/iconSkills/disabled/disabled_life_steal.png" id="21_xogfe"]
 
 [node name="Shop" type="Node2D"]
 script = ExtResource("1_lx5au")
@@ -133,8 +147,8 @@ offset_left = 216.0
 offset_top = 920.0
 offset_right = 323.0
 offset_bottom = 1032.0
-texture_normal = ExtResource("2_xfvoa")
-texture_disabled = ExtResource("3_1l46r")
+texture_normal = ExtResource("2_68utx")
+texture_disabled = ExtResource("3_ru2r1")
 stretch_mode = 4
 
 [node name="crush_small_label" type="Label" parent="crush_small"]
@@ -181,8 +195,8 @@ offset_left = -544.0
 offset_top = 680.0
 offset_right = -437.0
 offset_bottom = 792.0
-texture_normal = ExtResource("2_xfvoa")
-texture_disabled = ExtResource("3_1l46r")
+texture_normal = ExtResource("8_lxs01")
+texture_disabled = ExtResource("9_6nbx6")
 stretch_mode = 4
 
 [node name="slow_asteroids_label" type="Label" parent="slow_asteroids"]
@@ -213,8 +227,8 @@ offset_left = 48.0
 offset_top = 640.0
 offset_right = 155.0
 offset_bottom = 752.0
-texture_normal = ExtResource("2_xfvoa")
-texture_disabled = ExtResource("3_1l46r")
+texture_normal = ExtResource("12_mihhf")
+texture_disabled = ExtResource("13_5lclc")
 stretch_mode = 4
 
 [node name="soften_asteroids_label" type="Label" parent="soften_asteroids"]
@@ -229,8 +243,8 @@ offset_left = -224.0
 offset_top = 704.0
 offset_right = -117.0
 offset_bottom = 816.0
-texture_normal = ExtResource("2_xfvoa")
-texture_disabled = ExtResource("3_1l46r")
+texture_normal = ExtResource("14_ouqob")
+texture_disabled = ExtResource("15_p0at6")
 stretch_mode = 4
 
 [node name="passive_starpoints_label" type="Label" parent="passive_starpoints"]
@@ -245,8 +259,8 @@ offset_left = 288.0
 offset_top = 760.0
 offset_right = 395.0
 offset_bottom = 872.0
-texture_normal = ExtResource("2_xfvoa")
-texture_disabled = ExtResource("3_1l46r")
+texture_normal = ExtResource("16_c8dfh")
+texture_disabled = ExtResource("17_ccf1r")
 stretch_mode = 4
 
 [node name="binoculars_label" type="Label" parent="binoculars"]
@@ -261,8 +275,8 @@ offset_left = -344.0
 offset_top = 904.0
 offset_right = -237.0
 offset_bottom = 1016.0
-texture_normal = ExtResource("2_xfvoa")
-texture_disabled = ExtResource("3_1l46r")
+texture_normal = ExtResource("18_mt8ix")
+texture_disabled = ExtResource("19_a6g3j")
 stretch_mode = 4
 
 [node name="overkill_label" type="Label" parent="overkill"]
@@ -277,8 +291,8 @@ offset_left = -560.0
 offset_top = 888.0
 offset_right = -453.0
 offset_bottom = 1000.0
-texture_normal = ExtResource("2_xfvoa")
-texture_disabled = ExtResource("3_1l46r")
+texture_normal = ExtResource("20_posyw")
+texture_disabled = ExtResource("21_xogfe")
 stretch_mode = 4
 
 [node name="life_steal_label" type="Label" parent="life_steal"]
