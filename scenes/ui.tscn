@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cynt3lbt5jsyb"]
+[gd_scene load_steps=16 format=3 uid="uid://cynt3lbt5jsyb"]
 
 [ext_resource type="Texture2D" uid="uid://7mtyqv42wlaf" path="res://assets/resources/lives.tres" id="1_nt7q6"]
 [ext_resource type="Script" uid="uid://b04y5fmvggnk5" path="res://scripts/ui.gd" id="1_yev5y"]
@@ -11,22 +11,81 @@
 [ext_resource type="Script" uid="uid://qsan87i1eo7w" path="res://scripts/constellation_name.gd" id="7_qsv74"]
 [ext_resource type="Texture2D" uid="uid://txf7hmrxck16" path="res://assets/sprites/Earth.png" id="8_7dvkv"]
 [ext_resource type="Script" uid="uid://cwkygcvqoairj" path="res://scripts/earth_alpha.gd" id="9_vdcm2"]
+[ext_resource type="Texture2D" uid="uid://c1xxd14b4ixnq" path="res://assets/sprites/animations/alpha.png" id="10_h1mc3"]
 [ext_resource type="Script" uid="uid://bhu5q7bmd3rle" path="res://scripts/beta_mimosa.gd" id="11_vsj0x"]
 [ext_resource type="Script" uid="uid://ko6mq3ywcmji" path="res://scripts/gamma_gacrux.gd" id="12_qsv74"]
 [ext_resource type="Script" uid="uid://cyr6ftfqpf8kf" path="res://scripts/delta_imai.gd" id="13_h1mc3"]
 
-[node name="Ui" type="Control"]
+[node name="UI" type="SubViewportContainer"]
 z_index = 1
+custom_minimum_size = Vector2(800, 600)
+anchors_preset = -1
+anchor_right = 0.96
+anchor_bottom = 1.0
+offset_right = -1120.0
+offset_bottom = -480.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+script = ExtResource("1_yev5y")
+
+[node name="windowScale" type="SubViewport" parent="."]
+unique_name_in_owner = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(800, 600)
+render_target_update_mode = 4
+
+[node name="Info" type="Control" parent="windowScale"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("1_yev5y")
+mouse_filter = 1
 
-[node name="topRight" type="MarginContainer" parent="."]
+[node name="topLeft" type="MarginContainer" parent="windowScale/Info"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 0
+offset_right = 230.0
+offset_bottom = 85.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 15
+
+[node name="volumeUI" type="PanelContainer" parent="windowScale/Info/topLeft"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="windowScale/Info/topLeft/volumeUI"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="GridContainer" type="GridContainer" parent="windowScale/Info/topLeft/volumeUI/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+columns = 2
+
+[node name="volumeIcon" type="TextureRect" parent="windowScale/Info/topLeft/volumeUI/MarginContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("4_wm3ai")
+
+[node name="CenterContainer" type="CenterContainer" parent="windowScale/Info/topLeft/volumeUI/MarginContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Volume" type="HSlider" parent="windowScale/Info/topLeft/volumeUI/MarginContainer/GridContainer/CenterContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+min_value = -50.0
+max_value = 10.0
+value = -20.0
+script = ExtResource("5_8dubc")
+
+[node name="topRight" type="MarginContainer" parent="windowScale/Info"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -37,112 +96,74 @@ grow_horizontal = 0
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 20
 
-[node name="infoUI" type="PanelContainer" parent="topRight"]
+[node name="infoUI" type="PanelContainer" parent="windowScale/Info/topRight"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="topRight/infoUI"]
+[node name="MarginContainer" type="MarginContainer" parent="windowScale/Info/topRight/infoUI"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 
-[node name="GridContainer" type="GridContainer" parent="topRight/infoUI/MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="windowScale/Info/topRight/infoUI/MarginContainer"]
 layout_mode = 2
 theme_override_constants/h_separation = 10
 columns = 2
 
-[node name="lives" type="Label" parent="topRight/infoUI/MarginContainer/GridContainer"]
+[node name="lives" type="Label" parent="windowScale/Info/topRight/infoUI/MarginContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "000"
 horizontal_alignment = 2
 
-[node name="livesAnimation" type="TextureRect" parent="topRight/infoUI/MarginContainer/GridContainer"]
+[node name="livesAnimation" type="TextureRect" parent="windowScale/Info/topRight/infoUI/MarginContainer/GridContainer"]
 layout_mode = 2
 texture = ExtResource("1_nt7q6")
 stretch_mode = 2
 
-[node name="starpoints" type="Label" parent="topRight/infoUI/MarginContainer/GridContainer"]
+[node name="starpoints" type="Label" parent="windowScale/Info/topRight/infoUI/MarginContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "000"
 horizontal_alignment = 2
 
-[node name="starpointsAnimation" type="TextureRect" parent="topRight/infoUI/MarginContainer/GridContainer"]
+[node name="starpointsAnimation" type="TextureRect" parent="windowScale/Info/topRight/infoUI/MarginContainer/GridContainer"]
 layout_mode = 2
 texture = ExtResource("2_x4jx1")
 stretch_mode = 2
 
-[node name="topLeft" type="MarginContainer" parent="."]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 0
-offset_right = 230.0
-offset_bottom = 85.0
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 15
-
-[node name="volumeUI" type="PanelContainer" parent="topLeft"]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="topLeft/volumeUI"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 10
-
-[node name="GridContainer" type="GridContainer" parent="topLeft/volumeUI/MarginContainer"]
-layout_mode = 2
-theme_override_constants/h_separation = 20
-columns = 2
-
-[node name="volumeIcon" type="TextureRect" parent="topLeft/volumeUI/MarginContainer/GridContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-texture = ExtResource("4_wm3ai")
-
-[node name="CenterContainer" type="CenterContainer" parent="topLeft/volumeUI/MarginContainer/GridContainer"]
-layout_mode = 2
-
-[node name="Volume" type="HSlider" parent="topLeft/volumeUI/MarginContainer/GridContainer/CenterContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-min_value = -50.0
-max_value = 10.0
-value = -20.0
-script = ExtResource("5_8dubc")
-
-[node name="bottomLeft" type="MarginContainer" parent="."]
+[node name="bottomLeft" type="MarginContainer" parent="windowScale/Info"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -70.0
-offset_right = 210.0
+offset_top = -215.0
+offset_right = 320.0
 grow_vertical = 0
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_bottom = 15
 
-[node name="toggleShop" type="Button" parent="bottomLeft"]
+[node name="toggleShop" type="Button" parent="windowScale/Info/bottomLeft"]
+unique_name_in_owner = true
 z_index = 1
 custom_minimum_size = Vector2(300, 200)
 layout_mode = 2
-text = "shop"
+theme_override_font_sizes/font_size = 100
+text = "SHOP"
 script = ExtResource("6_8dubc")
 
-[node name="bottomRight" type="MarginContainer" parent="."]
+[node name="bottomRight" type="MarginContainer" parent="windowScale/Info"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -40.0
+offset_left = -320.0
+offset_top = -367.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_constants/margin_left = 0
@@ -150,45 +171,45 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="bottomRight"]
+[node name="VBoxContainer" type="VBoxContainer" parent="windowScale/Info/bottomRight"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="nameUI" type="PanelContainer" parent="bottomRight/VBoxContainer"]
+[node name="nameUI" type="PanelContainer" parent="windowScale/Info/bottomRight/VBoxContainer"]
 layout_mode = 2
 
-[node name="constellationName" type="Label" parent="bottomRight/VBoxContainer/nameUI"]
+[node name="constellationName" type="Label" parent="windowScale/Info/bottomRight/VBoxContainer/nameUI"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "CONSTELLATION: C___"
 horizontal_alignment = 1
 script = ExtResource("7_qsv74")
 
-[node name="mapUI" type="Panel" parent="bottomRight/VBoxContainer"]
+[node name="mapUI" type="Panel" parent="windowScale/Info/bottomRight/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
 script = ExtResource("7_7dvkv")
 
-[node name="cruxWikipedia" type="TextureRect" parent="bottomRight/VBoxContainer/mapUI"]
+[node name="cruxWikipedia" type="TextureRect" parent="windowScale/Info/bottomRight/VBoxContainer/mapUI"]
 visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("7_cgfq5")
 
-[node name="alphaEarth" type="TextureRect" parent="bottomRight/VBoxContainer/mapUI"]
+[node name="alphaEarth" type="TextureRect" parent="windowScale/Info/bottomRight/VBoxContainer/mapUI"]
 layout_mode = 0
 offset_left = 136.0
 offset_top = 228.0
 offset_right = 192.0
 offset_bottom = 284.0
 mouse_filter = 0
-texture = ExtResource("8_7dvkv")
+texture = ExtResource("10_h1mc3")
 expand_mode = 1
 script = ExtResource("9_vdcm2")
 
-[node name="betaMimosa" type="TextureRect" parent="bottomRight/VBoxContainer/mapUI"]
+[node name="betaMimosa" type="TextureRect" parent="windowScale/Info/bottomRight/VBoxContainer/mapUI"]
 layout_mode = 0
 offset_left = 49.0
 offset_top = 115.0
@@ -199,7 +220,7 @@ texture = ExtResource("8_7dvkv")
 expand_mode = 1
 script = ExtResource("11_vsj0x")
 
-[node name="gammaGacrux" type="TextureRect" parent="bottomRight/VBoxContainer/mapUI"]
+[node name="gammaGacrux" type="TextureRect" parent="windowScale/Info/bottomRight/VBoxContainer/mapUI"]
 layout_mode = 0
 offset_left = 125.0
 offset_top = 21.0
@@ -210,7 +231,7 @@ texture = ExtResource("8_7dvkv")
 expand_mode = 1
 script = ExtResource("12_qsv74")
 
-[node name="deltaImai" type="TextureRect" parent="bottomRight/VBoxContainer/mapUI"]
+[node name="deltaImai" type="TextureRect" parent="windowScale/Info/bottomRight/VBoxContainer/mapUI"]
 layout_mode = 0
 offset_left = 206.0
 offset_top = 88.0
@@ -221,8 +242,8 @@ texture = ExtResource("8_7dvkv")
 expand_mode = 1
 script = ExtResource("13_h1mc3")
 
-[connection signal="mouse_entered" from="topLeft/volumeUI" to="." method="_on_volume_ui_mouse_entered"]
-[connection signal="mouse_exited" from="topLeft/volumeUI" to="." method="_on_volume_ui_mouse_exited"]
-[connection signal="mouse_entered" from="topLeft/volumeUI/MarginContainer/GridContainer/CenterContainer/Volume" to="." method="_on_volume_mouse_entered"]
-[connection signal="mouse_exited" from="topLeft/volumeUI/MarginContainer/GridContainer/CenterContainer/Volume" to="." method="_on_volume_mouse_exited"]
-[connection signal="pressed" from="bottomLeft/toggleShop" to="bottomLeft/toggleShop" method="_on_pressed"]
+[connection signal="mouse_entered" from="windowScale/Info/topLeft/volumeUI" to="." method="_on_volume_ui_mouse_entered"]
+[connection signal="mouse_exited" from="windowScale/Info/topLeft/volumeUI" to="." method="_on_volume_ui_mouse_exited"]
+[connection signal="mouse_entered" from="windowScale/Info/topLeft/volumeUI/MarginContainer/GridContainer/CenterContainer/Volume" to="." method="_on_volume_mouse_entered"]
+[connection signal="mouse_exited" from="windowScale/Info/topLeft/volumeUI/MarginContainer/GridContainer/CenterContainer/Volume" to="." method="_on_volume_mouse_exited"]
+[connection signal="pressed" from="windowScale/Info/bottomLeft/toggleShop" to="windowScale/Info/bottomLeft/toggleShop" method="_on_pressed"]

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://blbr5747g40em"]
+
+[ext_resource type="Texture2D" uid="uid://bnrsddh7iwhf3" path="res://assets/sprites/beta.png" id="1_3q282"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2umt7"]
+radius = 122.004
+
+[node name="Beta" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." groups=["earth"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("CircleShape2D_2umt7")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+texture_filter = 1
+texture = ExtResource("1_3q282")

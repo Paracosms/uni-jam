@@ -1,10 +1,10 @@
 extends CharacterBody2D
 
 
-@export var speed: float = 350.0
-@export var health: int = 1
-var earth: Node2D = null
+@export var speed : float = 350.0
+@export var health : int = 1
 var chipParticles = preload("res://scenes/asteroid_chip_particles.tscn")
+var centerPosition : Vector2 = Vector2(960, 540)
 
 signal asteroidChipped
 signal asteroidExploded
@@ -13,11 +13,9 @@ signal asteroidExploded
 
 
 func _physics_process(delta):
-	if not earth:
-		return
-	
+
 	# Variables
-	var direction = (earth.global_position - global_position).normalized()
+	var direction = (centerPosition - global_position).normalized()
 	var movement = direction * speed * delta
 	
 	# Collision logic

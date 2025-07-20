@@ -1,11 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://c53rpnk5xwo62"]
+[gd_scene load_steps=4 format=3 uid="uid://c53rpnk5xwo62"]
 
-[ext_resource type="Texture2D" uid="uid://txf7hmrxck16" path="res://assets/sprites/Earth.png" id="1_afhwv"]
+[ext_resource type="Texture2D" uid="uid://c1xxd14b4ixnq" path="res://assets/sprites/animations/alpha.png" id="1_afhwv"]
+
+[sub_resource type="Environment" id="Environment_afhwv"]
+background_mode = 3
+glow_enabled = true
+glow_blend_mode = 1
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2umt7"]
 radius = 96.0
 
 [node name="Earth" type="Node2D"]
+
+[node name="Glow" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_afhwv")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." groups=["earth"]]
 
@@ -13,4 +21,5 @@ radius = 96.0
 shape = SubResource("CircleShape2D_2umt7")
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+self_modulate = Color(2, 2, 2, 1)
 texture = ExtResource("1_afhwv")

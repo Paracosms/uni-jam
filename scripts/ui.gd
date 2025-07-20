@@ -1,9 +1,14 @@
-extends Control
+extends SubViewportContainer
 
 var volumeAnimation = preload("res://assets/resources/volume.tres")
 var volumeStill = preload("res://assets/sprites/animations/volume2.png")
 
+
 func _process(_delta):
+	size = Vector2(Globals.screenSize.x , Globals.screenSize.y)
+	#%windowScale.size.x = Globals.screenSize.x
+	#%windowScale.size.y = Globals.screenSize.y
+	
 	var lives = Globals.lives
 	var starPoints = Globals.starPoints
 	
