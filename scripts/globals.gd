@@ -32,5 +32,3 @@ var lifeSteal : bool = false
 func _process(_delta):
 	screenSize = get_viewport().get_visible_rect().size
 	centerScreen = Vector2(screenSize.x / 2,screenSize.y / 2)
-
-

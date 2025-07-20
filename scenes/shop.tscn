@@ -33,7 +33,6 @@ mouse_force_pass_scroll_events = false
 color = Color(0.243137, 0.537255, 1, 0.0784314)
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-anchors_preset = -1
 offset_left = 1067.0
 offset_right = 2082.0
 offset_bottom = 935.0
