@@ -6,6 +6,7 @@ var upgrades = {
 		"price": 25,
 		"title": "Crush Small Asteroids",
 		"description": "Instantly destroy small asteroids with one click",
+		"prerequisites": ["critical_hit", "slow_asteroids"],
 		"effect": func():
 	Globals.crushSmall = 0.4
 	},
@@ -13,6 +14,7 @@ var upgrades = {
 		"price": 25,
 		"title": "Crush Small Asteroids II",
 		"description": "Instantly destroy even smaller asteroids with one click",
+		"prerequisites": ["slow_asteroids2"],
 		"effect": func():
 	Globals.crushSmall = 0.5
 	},
@@ -22,6 +24,7 @@ var upgrades = {
 		"price": 40,
 		"title": "Starpoint Hoarder",
 		"description": "Breaking asteroids yields 2 starpoints instead of 1.",
+		"prerequisites": [],
 		"effect": func():
 	Globals.baseYield = 2
 	},
@@ -29,6 +32,7 @@ var upgrades = {
 		"price": 40,
 		"title": "Starpoint Hoarder II",
 		"description": "Breaking asteroids yields 3 starpoints instead of 2.",
+		"prerequisites": ["crush_small2"],
 		"effect": func():
 	Globals.baseYield = 3
 	},
@@ -36,6 +40,7 @@ var upgrades = {
 		"price": 40,
 		"title": "Starpoint Hoarder III",
 		"description": "Breaking asteroids yields 5 starpoints instead of 3.",
+		"prerequisites": ["overkill"],
 		"effect": func():
 	Globals.baseYield = 5
 	},
@@ -43,6 +48,7 @@ var upgrades = {
 		"price": 40,
 		"title": "Starpoint Hoarder IV",
 		"description": "Breaking asteroids yields 10 starpoints instead of 5.",
+		"prerequisites": ["slow_asteroids3"],
 		"effect": func():
 	Globals.baseYield = 10
 	},
@@ -52,6 +58,7 @@ var upgrades = {
 		"price": 60,
 		"title": "Asteroid Miner",
 		"description": "Your clicks deal 2 damage to asteroids.",
+		"prerequisites": ["starpoint_yield"],
 		"effect": func():
 	Globals.clickDamage = 2
 	},
@@ -59,6 +66,7 @@ var upgrades = {
 		"price": 60,
 		"title": "Asteroid Miner II",
 		"description": "Your clicks deal 3 damage to asteroids.",
+		"prerequisites": ["starpoint_yield4"],
 		"effect": func():
 	Globals.clickDamage = 3
 	},
@@ -68,6 +76,7 @@ var upgrades = {
 		"price": 75,
 		"title": "Asteroid Tranquilizer",
 		"description": "Asteroids fall 5% slower",
+		"prerequisites": ["damage_output"],
 		"effect": func():
 	Globals.slowAsteroids = 0.05
 	},
@@ -75,6 +84,7 @@ var upgrades = {
 		"price": 75,
 		"title": "Slow Falling Asteroids II",
 		"description": "Asteroids fall 10% slower",
+		"prerequisites": ["beta"],
 		"effect": func():
 	Globals.slowAsteroids = 0.1
 	},
@@ -82,6 +92,7 @@ var upgrades = {
 		"price": 75,
 		"title": "Slow Falling Asteroids III",
 		"description": "Asteroids fall 15% slower",
+		"prerequisites": ["starpoint_yield3"],
 		"effect": func():
 	Globals.slowAsteroids = 0.15
 	},
@@ -91,6 +102,7 @@ var upgrades = {
 		"price": 120,
 		"title": "Critical Clicks",
 		"description": "Your clicks have a 25% chance to yield double starpoints.",
+		"prerequisites": ["damage_output"],
 		"effect": func():
 	Globals.critical_hit = 0.25
 	},
@@ -98,6 +110,7 @@ var upgrades = {
 		"price": 120,
 		"title": "Critical Clicks II",
 		"description": "Your clicks have a 50% chance to yield double starpoints.",
+		"prerequisites": ["slow_asteroids3"],
 		"effect": func():
 	Globals.critical_hit = 0.5
 	},
@@ -107,6 +120,7 @@ var upgrades = {
 		"price": 150,
 		"title": "Soften Asteroids",
 		"description": "All asteroids have 1 less health",
+		"prerequisites": ["passive_starpoints"],
 		"effect": func():
 	Globals.softenAsteroids = 1
 	},
@@ -114,6 +128,7 @@ var upgrades = {
 		"price": 150,
 		"title": "Soften Asteroids II",
 		"description": "All asteroids have 2 less health",
+		"prerequisites": ["critical_hit2"],
 		"effect": func():
 	Globals.softenAsteroids = 2
 	},
@@ -123,6 +138,7 @@ var upgrades = {
 		"price": 180,
 		"title": "Starpoints Factory",
 		"description": "Earn 1 starpoint every 3 seconds automatically.",
+		"prerequisites": ["starpoint_yield2"],
 		"effect": func():
 	Globals.passiveStarpoints = 1
 	},
@@ -130,6 +146,7 @@ var upgrades = {
 		"price": 180,
 		"title": "Starpoints Factory II",
 		"description": "Earn 5 starpoints every 3 seconds automatically.",
+		"prerequisites": ["soften_asteroids"],
 		"effect": func():
 	Globals.passiveStarpoints = 5
 	},
@@ -137,6 +154,7 @@ var upgrades = {
 		"price": 180,
 		"title": "Starpoints Factory III",
 		"description": "Earn 15 starpoints every 3 seconds automatically.",
+		"prerequisites": ["starpoint_yield4"],
 		"effect": func():
 	Globals.passiveStarpoints = 15
 	},
@@ -146,6 +164,7 @@ var upgrades = {
 		"price": 200,
 		"title": "Binoculars",
 		"description": "View expands based on your cursor position.",
+		"prerequisites": ["crush_small"],
 		"effect": func():
 	Globals.binocularsEnabled = true
 	},
@@ -155,6 +174,7 @@ var upgrades = {
 		"price": 300,
 		"title": "Overkill",
 		"description": "Excess damage gives 10 bonus starpoints",
+		"prerequisites": ["life_steal","passive_starpoints"],
 		"effect": func():
 	Globals.overkill = 10
 	},
@@ -162,6 +182,7 @@ var upgrades = {
 		"price": 300,
 		"title": "Overkill II",
 		"description": "Excess damage gives 15 bonus starpoints",
+		"prerequisites": ["gamma"],
 		"effect": func():
 	Globals.overkill = 15
 	},
@@ -169,6 +190,7 @@ var upgrades = {
 		"price": 300,
 		"title": "Overkill III",
 		"description": "Excess damage gives 20 bonus starpoints",
+		"prerequisites": ["damage_output2"],
 		"effect": func():
 	Globals.overkill = 20
 	},
@@ -178,6 +200,7 @@ var upgrades = {
 		"price": 500,
 		"title": "Life Steal",
 		"description": "Gain a life every 10 asteroids broken.",
+		"prerequisites": ["starpoint_yield2"],
 		"effect": func():
 	Globals.lifeSteal = 10
 	},
@@ -185,6 +208,7 @@ var upgrades = {
 		"price": 500,
 		"title": "Life Steal II",
 		"description": "Gain a life every 5 asteroids broken.",
+		"prerequisites": ["soften_asteroids2"],
 		"effect": func():
 	Globals.lifeSteal = 5
 	},
@@ -194,6 +218,7 @@ var upgrades = {
 		"price": 1000,
 		"title": "MIMOSA | BETA CRUCIS",
 		"description": "Unlock Mimosa!",
+		"prerequisites": ["small_crush","binoculars"],
 		"effect": func():
 	Globals.betaUnlocked = true
 	},
@@ -201,6 +226,7 @@ var upgrades = {
 		"price": 2000,
 		"title": "GACRUX | GAMMA CRUCIS",
 		"description": "Unlock Gacrux!",
+		"prerequisites": ["life_steal","overkill"],
 		"effect": func():
 	Globals.gammaUnlocked = true
 	},
@@ -208,11 +234,17 @@ var upgrades = {
 		"price": 1000,
 		"title": "IMAI | DELTA CRUCIS",
 		"description": "Unlock Imai!",
+		"prerequisites": ["life_steal2","overkill2"],
 		"effect": func():
 	Globals.deltaUnlocked = true
 	},
 	
 }
+
+var purchases = []
+
+func _process(_delta):
+	
 
 func _on_upgrade_button_pressed(button_name):
 	button_name = button_name.replace("\"", "")
@@ -229,6 +261,7 @@ func _on_upgrade_button_pressed(button_name):
 			Globals.starPoints -= price
 			upgrade.effect.call()
 			button.disabled = true
+			purchases.append(button.name)
 			print("Obtained " + upgrade.title + " upgrade for " + str(upgrade.price) + " starpoints!",
 					"\nTitle: " + upgrade.title +
 					"\nDescription: " + upgrade.description +
