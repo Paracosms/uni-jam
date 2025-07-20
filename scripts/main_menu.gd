@@ -18,6 +18,9 @@ func _process(_delta):
 	
 
 func _on_start_pressed():
+	Globals.volume = -18 # For some reason the SelectSound plays louder when in the main menu so this is a quick fix
+	Globals.playSelectSound()
+	Globals.volume = 0
 	get_tree().change_scene_to_file("res://scenes/main.tscn")
 	
 func _on_options_pressed():

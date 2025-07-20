@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cafa1kp7jmpc5"]
 
 [ext_resource type="Script" uid="uid://paykvh3r5l5g" path="res://scripts/asteroid.gd" id="1_6mo6b"]
-[ext_resource type="Texture2D" uid="uid://ctl1hiytwc25e" path="res://assets/sprites/asteroid.png" id="1_akfqu"]
+[ext_resource type="Texture2D" uid="uid://ctl1hiytwc25e" path="res://assets/sprites/asteroids/asteroidBase.png" id="1_akfqu"]
 [ext_resource type="Texture2D" uid="uid://ccsviqut7bc6d" path="res://assets/sprites/fire.png" id="3_t4se3"]
 
 [sub_resource type="Environment" id="Environment_t4se3"]
@@ -59,8 +59,5 @@ initial_velocity_min = 113.76
 initial_velocity_max = 325.88
 scale_amount_min = 0.1
 scale_amount_max = 0.25
-
-[node name="Camera2D" type="Camera2D" parent="."]
-visible = false
 
 [connection signal="input_event" from="ClickArea" to="." method="_on_click_area_input_event"]
