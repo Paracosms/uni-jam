@@ -3,7 +3,7 @@ extends Node2D
 var upgrades = {
 	### CRUSH SMALL ###
 	"crush_small": {
-		"price": 100,
+		"price": 120,
 		"title": "Crush Small Asteroids",
 		"description": "Instantly destroy small asteroids with one click",
 		"prerequisites": ["critical_hit", "slow_asteroids"],
@@ -11,7 +11,7 @@ var upgrades = {
 	Globals.crushSmall = 0.4
 	},
 	"crush_small2": {
-		"price": 50,
+		"price": 100,
 		"title": "Crush Small Asteroids II",
 		"description": "Instantly destroy bigger asteroids with one click",
 		"prerequisites": ["slow_asteroids2"],
@@ -29,7 +29,7 @@ var upgrades = {
 	Globals.baseYield = 2
 	},
 	"starpoint_yield2": {
-		"price": 100,
+		"price": 150,
 		"title": "Starpoint Hoarder II",
 		"description": "Breaking asteroids yields 3 starpoints instead of 2.",
 		"prerequisites": ["crush_small2"],
@@ -73,7 +73,7 @@ var upgrades = {
 	
 	### SLOW ASTEROIDS ###
 	"slow_asteroids": {
-		"price": 800,
+		"price": 50,
 		"title": "Asteroid Tranquilizer",
 		"description": "Asteroids fall 5% slower",
 		"prerequisites": ["damage_output"],
@@ -81,7 +81,7 @@ var upgrades = {
 	Globals.slowAsteroids = 0.05
 	},
 	"slow_asteroids2": {
-		"price": 50,
+		"price": 100,
 		"title": "Slow Falling Asteroids II",
 		"description": "Asteroids fall 10% slower",
 		"prerequisites": ["beta"],
@@ -99,7 +99,7 @@ var upgrades = {
 	
 	### CRITICAL HIT ###
 	"critical_hit": {
-		"price": 150,
+		"price": 100,
 		"title": "Critical Clicks",
 		"description": "Your clicks have a 25% chance to yield double starpoints.",
 		"prerequisites": ["damage_output"],

@@ -10,7 +10,7 @@ var meteorShower : bool = false
 var lastStarDiedOn : int
 
 var lives : int = 100
-var starPoints : int = 0
+var starPoints : int = 09999
 var currentStar : int = 0 # such that alpha = 0, beta = 1, etc.
 var currentSkillTree : int = 0 # 0 - Lyra, 1 - Cepheus 2 - Perseus
 var skillsOpened : bool = false
@@ -19,6 +19,7 @@ var clickDamage : int = 1 ### Done
 var baseYield : int = 1 ### Done
 var planetYield : int = 0
 var currentKills : int = 0 # Current number of kills to compare to lifeSteal
+var asteroidSpawnTime : float = 1 # Every [value] seconds, an asteroid will spawn
 
 # star unlocks
 var betaUnlocked : bool = false # left, 2nd planet unlock ### Done
@@ -40,9 +41,15 @@ func _process(_delta):
 	centerScreen = Vector2(screenSize.x / 2,screenSize.y / 2)
 	
 	match currentStar:
-		1: planetYield = 5
-		2: planetYield = 10
-		3: planetYield = 20
+		1: 
+			planetYield = 5
+			asteroidSpawnTime = 0.8
+		2: 
+			planetYield = 10
+			asteroidSpawnTime = 0.6
+		3: 
+			planetYield = 20
+			asteroidSpawnTime = 0.4
 
 func playSelectSound():
 	var soundPlayer = AudioStreamPlayer.new()
