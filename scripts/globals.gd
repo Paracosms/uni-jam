@@ -22,6 +22,12 @@ var deltaUnlocked : bool = false # right, 4th planet unlock
 # special upgrades
 var critEnabled : bool = false
 var binocularsEnabled : bool = false
+var crushSmall : bool = false
+var slowAsteroids : bool = false
+var softenAsteroids : bool = false
+var passiveStarpoints : bool = false
+var overkillEnabled : bool = false
+var lifeSteal : bool = false
 
 func _process(_delta):
 	screenSize = get_viewport().get_visible_rect().size
