@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://to7natsgt0xs"]
 
-[ext_resource type="Texture2D" uid="uid://ctl1hiytwc25e" path="res://assets/sprites/asteroid.png" id="1_0ofyb"]
+[ext_resource type="Texture2D" uid="uid://ctl1hiytwc25e" path="res://assets/sprites/asteroids/asteroidBase.png" id="1_0ofyb"]
 
 [node name="asteroidChipParticles" type="CPUParticles2D"]
 emitting = false
