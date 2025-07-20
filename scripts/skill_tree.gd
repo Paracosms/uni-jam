@@ -3,7 +3,7 @@ extends Node2D
 var upgrades = {
 	### CRUSH SMALL ###
 	"crush_small": {
-		"price": 25,
+		"price": 100,
 		"title": "Crush Small Asteroids",
 		"description": "Instantly destroy small asteroids with one click",
 		"prerequisites": ["critical_hit", "slow_asteroids"],
@@ -11,9 +11,9 @@ var upgrades = {
 	Globals.crushSmall = 0.4
 	},
 	"crush_small2": {
-		"price": 25,
+		"price": 50,
 		"title": "Crush Small Asteroids II",
-		"description": "Instantly destroy even smaller asteroids with one click",
+		"description": "Instantly destroy bigger asteroids with one click",
 		"prerequisites": ["slow_asteroids2"],
 		"effect": func():
 	Globals.crushSmall = 0.5
@@ -21,7 +21,7 @@ var upgrades = {
 	
 	### STARPOINT YIELD###
 	"starpoint_yield": {
-		"price": 40,
+		"price": 10,
 		"title": "Starpoint Hoarder",
 		"description": "Breaking asteroids yields 2 starpoints instead of 1.",
 		"prerequisites": [],
@@ -29,7 +29,7 @@ var upgrades = {
 	Globals.baseYield = 2
 	},
 	"starpoint_yield2": {
-		"price": 40,
+		"price": 100,
 		"title": "Starpoint Hoarder II",
 		"description": "Breaking asteroids yields 3 starpoints instead of 2.",
 		"prerequisites": ["crush_small2"],
@@ -37,7 +37,7 @@ var upgrades = {
 	Globals.baseYield = 3
 	},
 	"starpoint_yield3": {
-		"price": 40,
+		"price": 500,
 		"title": "Starpoint Hoarder III",
 		"description": "Breaking asteroids yields 5 starpoints instead of 3.",
 		"prerequisites": ["overkill"],
@@ -45,7 +45,7 @@ var upgrades = {
 	Globals.baseYield = 5
 	},
 	"starpoint_yield4": {
-		"price": 40,
+		"price": 1000,
 		"title": "Starpoint Hoarder IV",
 		"description": "Breaking asteroids yields 10 starpoints instead of 5.",
 		"prerequisites": ["slow_asteroids3"],
@@ -55,7 +55,7 @@ var upgrades = {
 
 	### DAMAGE OUTPUT ###
 	"damage_output": {
-		"price": 60,
+		"price": 40,
 		"title": "Asteroid Miner",
 		"description": "Your clicks deal 2 damage to asteroids.",
 		"prerequisites": ["starpoint_yield"],
@@ -63,7 +63,7 @@ var upgrades = {
 	Globals.clickDamage = 2
 	},
 	"damage_output2": {
-		"price": 60,
+		"price": 1500,
 		"title": "Asteroid Miner II",
 		"description": "Your clicks deal 3 damage to asteroids.",
 		"prerequisites": ["starpoint_yield4"],
@@ -73,7 +73,7 @@ var upgrades = {
 	
 	### SLOW ASTEROIDS ###
 	"slow_asteroids": {
-		"price": 75,
+		"price": 800,
 		"title": "Asteroid Tranquilizer",
 		"description": "Asteroids fall 5% slower",
 		"prerequisites": ["damage_output"],
@@ -81,7 +81,7 @@ var upgrades = {
 	Globals.slowAsteroids = 0.05
 	},
 	"slow_asteroids2": {
-		"price": 75,
+		"price": 50,
 		"title": "Slow Falling Asteroids II",
 		"description": "Asteroids fall 10% slower",
 		"prerequisites": ["beta"],
@@ -89,7 +89,7 @@ var upgrades = {
 	Globals.slowAsteroids = 0.1
 	},
 	"slow_asteroids3": {
-		"price": 75,
+		"price": 600,
 		"title": "Slow Falling Asteroids III",
 		"description": "Asteroids fall 15% slower",
 		"prerequisites": ["starpoint_yield3"],
@@ -99,7 +99,7 @@ var upgrades = {
 	
 	### CRITICAL HIT ###
 	"critical_hit": {
-		"price": 120,
+		"price": 150,
 		"title": "Critical Clicks",
 		"description": "Your clicks have a 25% chance to yield double starpoints.",
 		"prerequisites": ["damage_output"],
@@ -107,7 +107,7 @@ var upgrades = {
 	Globals.critical_hit = 0.25
 	},
 	"critical_hit2": {
-		"price": 120,
+		"price": 1500,
 		"title": "Critical Clicks II",
 		"description": "Your clicks have a 50% chance to yield double starpoints.",
 		"prerequisites": ["slow_asteroids3"],
@@ -125,7 +125,7 @@ var upgrades = {
 	Globals.softenAsteroids = 1
 	},
 	"soften_asteroids2": {
-		"price": 150,
+		"price": 2000,
 		"title": "Soften Asteroids II",
 		"description": "All asteroids have 2 less health",
 		"prerequisites": ["critical_hit2"],
@@ -135,7 +135,7 @@ var upgrades = {
 	
 	### PASSIVE STARPOINTS ###
 	"passive_starpoints": {
-		"price": 180,
+		"price": 200,
 		"title": "Starpoints Factory",
 		"description": "Earn 1 starpoint every 3 seconds automatically.",
 		"prerequisites": ["starpoint_yield2"],
@@ -143,7 +143,7 @@ var upgrades = {
 	Globals.passiveStarpoints = 1
 	},
 	"passive_starpoints2": {
-		"price": 180,
+		"price": 300,
 		"title": "Starpoints Factory II",
 		"description": "Earn 5 starpoints every 3 seconds automatically.",
 		"prerequisites": ["soften_asteroids"],
@@ -151,7 +151,7 @@ var upgrades = {
 	Globals.passiveStarpoints = 5
 	},
 	"passive_starpoints3": {
-		"price": 180,
+		"price": 1500,
 		"title": "Starpoints Factory III",
 		"description": "Earn 15 starpoints every 3 seconds automatically.",
 		"prerequisites": ["starpoint_yield4"],
@@ -161,7 +161,7 @@ var upgrades = {
 	
 	### BINOCULARS ###
 	"binoculars": {
-		"price": 200,
+		"price": 100,
 		"title": "Binoculars",
 		"description": "View expands based on your cursor position.",
 		"prerequisites": ["crush_small"],
@@ -171,7 +171,7 @@ var upgrades = {
 	
 	### OVERKILL ###
 	"overkill": {
-		"price": 300,
+		"price": 400,
 		"title": "Overkill",
 		"description": "Excess damage gives 10 bonus starpoints",
 		"prerequisites": ["life_steal","passive_starpoints"],
@@ -179,7 +179,7 @@ var upgrades = {
 	Globals.overkill = 10
 	},
 	"overkill2": {
-		"price": 300,
+		"price": 2000,
 		"title": "Overkill II",
 		"description": "Excess damage gives 15 bonus starpoints",
 		"prerequisites": ["damage_output2"],
@@ -205,7 +205,7 @@ var upgrades = {
 	Globals.lifeSteal = 10
 	},
 	"life_steal2": {
-		"price": 500,
+		"price": 2000,
 		"title": "Life Steal II",
 		"description": "Gain a life every 5 asteroids broken.",
 		"prerequisites": ["soften_asteroids2"],
@@ -215,7 +215,7 @@ var upgrades = {
 	
 	### STARS ###
 	"beta": {
-		"price": 1000,
+		"price": 200,
 		"title": "MIMOSA | BETA CRUCIS",
 		"description": "Unlock Mimosa!",
 		"prerequisites": ["crush_small","binoculars"],
@@ -223,7 +223,7 @@ var upgrades = {
 	Globals.betaUnlocked = true
 	},
 	"gamma": {
-		"price": 2000,
+		"price": 1000,
 		"title": "GACRUX | GAMMA CRUCIS",
 		"description": "Unlock Gacrux!",
 		"prerequisites": ["life_steal","overkill"],
@@ -231,7 +231,7 @@ var upgrades = {
 	Globals.gammaUnlocked = true
 	},
 	"delta": {
-		"price": 1000,
+		"price": 4000,
 		"title": "IMAI | DELTA CRUCIS",
 		"description": "Unlock Imai!",
 		"prerequisites": ["life_steal2","overkill2"],
