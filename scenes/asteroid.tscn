@@ -7,8 +7,12 @@
 [sub_resource type="Environment" id="Environment_t4se3"]
 background_mode = 3
 glow_enabled = true
+glow_bloom = 1.0
 glow_blend_mode = 1
 glow_hdr_threshold = 0.0
+glow_hdr_scale = 1.0
+adjustment_enabled = true
+adjustment_contrast = 1.2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_akfqu"]
 radius = 40.0
@@ -28,7 +32,8 @@ environment = SubResource("Environment_t4se3")
 shape = SubResource("CircleShape2D_akfqu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(3, 3, 3, 1)
+modulate = Color(0.39, 0.39, 0.39, 1)
+self_modulate = Color(2, 2, 2, 1)
 position = Vector2(5.96046e-08, 5.96046e-08)
 scale = Vector2(0.39125, 0.39125)
 texture = ExtResource("1_akfqu")
@@ -44,6 +49,7 @@ z_index = -1
 amount = 12
 texture = ExtResource("3_t4se3")
 lifetime = 0.35
+speed_scale = 0.8
 lifetime_randomness = 0.58
 emission_shape = 1
 emission_sphere_radius = 40.0
@@ -53,5 +59,8 @@ initial_velocity_min = 113.76
 initial_velocity_max = 325.88
 scale_amount_min = 0.1
 scale_amount_max = 0.25
+
+[node name="Camera2D" type="Camera2D" parent="."]
+visible = false
 
 [connection signal="input_event" from="ClickArea" to="." method="_on_click_area_input_event"]
