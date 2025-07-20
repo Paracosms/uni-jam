@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bnrsddh7iwhf3"
-path="res://.godot/imported/beta.png-9e0d888edaaf29be06dee1536bfb0078.ctex"
+uid="uid://lmfq8ongfe61"
+path="res://.godot/imported/delta.png-e19ca49caba3dd047133c9b4481fc16a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/beta.png"
-dest_files=["res://.godot/imported/beta.png-9e0d888edaaf29be06dee1536bfb0078.ctex"]
+source_file="res://assets/sprites/stars/delta.png"
+dest_files=["res://.godot/imported/delta.png-e19ca49caba3dd047133c9b4481fc16a.ctex"]
 
 [params]
 
