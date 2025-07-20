@@ -5,7 +5,7 @@
 [ext_resource type="StyleBox" uid="uid://fxb75dkg8ryi" path="res://assets/resources/panelBackground.tres" id="2_8k7j3"]
 [ext_resource type="Texture2D" uid="uid://ygqyjex4xl27" path="res://assets/resources/starpoints.tres" id="2_x4jx1"]
 [ext_resource type="Texture2D" uid="uid://57ky32wfdha2" path="res://assets/sprites/TriangleButton.png" id="2_ycmcx"]
-[ext_resource type="Script" uid="uid://cpbqnhs34e7c3" path="res://scripts/skills_up_button.gd" id="3_41akx"]
+[ext_resource type="Script" path="res://scripts/skills_up_button.gd" id="3_41akx"]
 [ext_resource type="Texture2D" uid="uid://d08k12a7h80bk" path="res://assets/resources/volume.tres" id="4_wm3ai"]
 [ext_resource type="Script" uid="uid://db0mx56hqgh0i" path="res://scripts/volume.gd" id="5_8dubc"]
 [ext_resource type="Texture2D" uid="uid://deanmdjsti7lc" path="res://assets/sprites/TwiceRotatedTriangleButton.png" id="5_kupmu"]
@@ -13,7 +13,7 @@
 [ext_resource type="Script" uid="uid://dbwo657rywmdn" path="res://scripts/map_ui.gd" id="7_7dvkv"]
 [ext_resource type="Texture2D" uid="uid://cy4dlainxcfny" path="res://assets/sprites/crux.png" id="7_cgfq5"]
 [ext_resource type="Script" uid="uid://qsan87i1eo7w" path="res://scripts/constellation_name.gd" id="7_qsv74"]
-[ext_resource type="Script" uid="uid://d20focle2hh6u" path="res://scripts/skills_down_button.gd" id="8_sesyt"]
+[ext_resource type="Script" path="res://scripts/skills_down_button.gd" id="8_sesyt"]
 [ext_resource type="Texture2D" uid="uid://dwti00axm3p3t" path="res://assets/sprites/stars/alpha.png" id="10_f7tlh"]
 [ext_resource type="Texture2D" uid="uid://50i8qk2j810k" path="res://assets/sprites/stars/alphaDisabled.png" id="11_8k7j3"]
 [ext_resource type="Texture2D" uid="uid://by8hq4bc77w5q" path="res://assets/sprites/stars/beta.png" id="12_8k7j3"]
@@ -419,11 +419,11 @@ offset_bottom = 20.0
 grow_horizontal = 0
 grow_vertical = 2
 
+[connection signal="pressed" from="windowScale/Info/topLeft/skillsUpButton" to="windowScale/Info/topLeft/skillsUpButton" method="_on_mouse_pressed"]
 [connection signal="mouse_entered" from="windowScale/Info/topRight/VBoxContainer/volumeUI" to="." method="_on_volume_ui_mouse_entered"]
 [connection signal="mouse_exited" from="windowScale/Info/topRight/VBoxContainer/volumeUI" to="." method="_on_volume_ui_mouse_exited"]
 [connection signal="mouse_entered" from="windowScale/Info/topRight/VBoxContainer/volumeUI/MarginContainer/GridContainer/CenterContainer/Volume" to="." method="_on_volume_mouse_entered"]
 [connection signal="mouse_exited" from="windowScale/Info/topRight/VBoxContainer/volumeUI/MarginContainer/GridContainer/CenterContainer/Volume" to="." method="_on_volume_mouse_exited"]
-[connection signal="pressed" from="windowScale/Info/topLeft/skillsUpButton" to="windowScale/Info/topLeft/skillsUpButton" method="_on_mouse_pressed"]
 [connection signal="pressed" from="windowScale/Info/bottomLeft/skillsDownButton" to="windowScale/Info/bottomLeft/skillsDownButton" method="_on_mouse_pressed"]
 [connection signal="mouse_entered" from="windowScale/Info/bottomRight/VBoxContainer/mapUI/alpha" to="windowScale/Info/bottomRight/VBoxContainer/mapUI" method="_on_mouse_entered" binds= ["alpha"]]
 [connection signal="mouse_exited" from="windowScale/Info/bottomRight/VBoxContainer/mapUI/alpha" to="windowScale/Info/bottomRight/VBoxContainer/mapUI" method="_on_mouse_exited" binds= ["alpha"]]
