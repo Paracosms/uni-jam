@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dngq774sl2if1"]
 
-[ext_resource type="Script" uid="uid://bmnjqiekpo21v" path="res://scripts/main_menu.gd" id="1_l6cm7"]
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_l6cm7"]
 [ext_resource type="FontFile" uid="uid://7gt0j4mddmvf" path="res://assets/fonts/Rajdhani-SemiBold.ttf" id="2_ekxnf"]
 
 [node name="MainMenu" type="Control"]
