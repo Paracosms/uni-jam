@@ -18,7 +18,7 @@ func _process(delta): # This took me like 2 hours so ignore it if it makes no se
 		var mouse_offset = mouse_position - screen_center
 		var camera_target_position : Vector2
 		
-		if Globals.shopOpened == true or mouse_offset.length() < deadzone_size:
+		if Globals.skillsOpened == true or mouse_offset.length() < deadzone_size:
 				camera_target_position = screen_center
 				binocularsCamera.global_position = binocularsCamera.global_position.move_toward(
 					camera_target_position, camera_speed * delta

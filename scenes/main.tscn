@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cynt3lbt5jsyb" path="res://scenes/ui.tscn" id="3_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://becbw8nht6jch" path="res://scenes/shop.tscn" id="3_tipki"]
 [ext_resource type="PackedScene" uid="uid://rj1qruh2kyqx" path="res://scenes/globals.tscn" id="4_jyhfs"]
-[ext_resource type="PackedScene" uid="uid://dxxtc0hd1v12c" path="res://scenes/camera.tscn" id="7_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://b8wfqmyfjyfl0" path="res://scenes/camera.tscn" id="7_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://8kjgtlpptmp4" path="res://scenes/background.tscn" id="7_tipki"]
 
 [node name="Main" type="Node2D"]
@@ -34,7 +34,6 @@ position = Vector2(960, 540)
 
 [node name="background" parent="." instance=ExtResource("7_tipki")]
 unique_name_in_owner = true
-visible = false
 z_index = -2
 texture_filter = 1
 position = Vector2(733, 528)

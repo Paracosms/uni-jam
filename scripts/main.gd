@@ -2,7 +2,7 @@ extends Node2D
 
 @export var asteroid_scene: PackedScene
 
-@onready var shop_scene = preload("res://scenes/skill_tree.tscn")
+@onready var skills_scene = preload("res://scenes/skill_tree.tscn")
 @onready var alpha_scene = preload("res://scenes/earth.tscn")
 @onready var beta_scene = preload("res://scenes/beta.tscn")
 @onready var gamma_scene = preload("res://scenes/gamma.tscn")
@@ -34,8 +34,8 @@ var explosionAudio = [
 @export var difficulty = 0.5
 
 var spawn_timer := Timer.new()
-
 var meteorShower_timer := Timer.new()
+var generator_timer := Timer.new()
 
 
 
@@ -82,6 +82,15 @@ func _ready():
 	meteorShower_timer.connect("timeout", Callable(self, "tryMeteorShower"))
 	add_child(meteorShower_timer)
 	meteorShower_timer.start()
+	
+	### STARPOINT GENERATOR LOGIC ###
+	
+	generator_timer.wait_time = 3
+	generator_timer.one_shot = false
+	generator_timer.connect("timeout", Callable(self, "generateStarpoints"))
+	add_child(generator_timer)
+	generator_timer.start()
+	
 
 func _process(_delta):
 	### SCENERY LOGIC ###
@@ -113,16 +122,21 @@ func trulyReady():
 	mapUI.connect("gammaClicked", func(): switchToStar(2))
 	mapUI.connect("deltaClicked", func(): switchToStar(3))
 	
-	### SHOP SCREEN LOGIC ###
-	$UIResizer/UIRenderer/UI/windowScale/Info/centerLeft/toggleShop.connect("shopToggled", toggleShop)
+	### SKILLS SCREEN LOGIC ###
+	$UIRenderer/UI/windowScale/Info/centerLeft/toggleSkills.connect("skillsToggled", toggleSkills)
 	var screen_size = get_viewport().get_visible_rect().size
-	var shop = shop_scene.instantiate()
+	var skills = skills_scene.instantiate()
 	
-	add_child(shop)
-	get_node("skill_tree").position = Vector2(screen_size.x / 15, screen_size.y / 2)
+	$UIRenderer/UI.add_child(skills)
+	get_node("UIRenderer/UI/skill_tree").position = Vector2(screen_size.x / 15, screen_size.y / 2)
 	var lyra_nodes = get_tree().get_nodes_in_group("lyra")
+	var cepheus_nodes = get_tree().get_nodes_in_group("cepheus")
+	var perseus = get_tree().get_nodes_in_group("perseus")
+	var button_nodes = get_tree().get_nodes_in_group("skillButtons")
 	for node in lyra_nodes:
-			node.visible = false
+		node.visible = false
+	for node in button_nodes:
+		node.visible = false
 
 func spawn_asteroid(type : String = "base"):
 	var asteroid = asteroid_scene.instantiate()
@@ -182,13 +196,13 @@ func spawn_asteroid(type : String = "base"):
 	var variation = base_speed * 0.1
 	var speed = randf_range(base_speed - variation, base_speed + variation)
 	
-	asteroid.speed = speed
+	asteroid.speed = speed * (1 - Globals.slowAsteroids) # Slow asteroid logic
 	
 	# Sets the scale
 	asteroid.scale = Vector2.ONE * result
 	
 	# Scale of Asteroid based on difficulty and size (Bigger = more health)
-	asteroid.health = base_health
+	asteroid.health = clamp((base_health - Globals.softenAsteroids), 1, 10) # Max health decreasing w/ min of 1
 	
 	### END SPAWN LOGIC ###
 	
@@ -225,6 +239,9 @@ func tryMeteorShower():
 	else:
 		print("\nMeteor Failed\n")
 
+func generateStarpoints():
+	Globals.starPoints += Globals.passiveStarpoints
+
 func playChipSound():
 	var soundPlayer = AudioStreamPlayer.new()
 	soundPlayer.stream = chipAudio.pick_random()
@@ -241,15 +258,20 @@ func playExplosionSound():
 	soundPlayer.play()
 	soundPlayer.finished.connect(soundPlayer.queue_free)
 
-func toggleShop():
+func toggleSkills():
 	var lyra_nodes = get_tree().get_nodes_in_group("lyra")
-	# Toggles the shop
+	var button_nodes = get_tree().get_nodes_in_group("skillButtons")
+	# Toggles the skills menu
 	if Globals.skillsOpened:
 		for node in lyra_nodes:
+			node.visible = false
+		for node in button_nodes:
 			node.visible = false
 		Globals.skillsOpened = false
 	else:
 		for node in lyra_nodes:
+			node.visible = true
+		for node in button_nodes:
 			node.visible = true
 		Globals.skillsOpened = true
 
@@ -280,7 +302,7 @@ func switchToStar(star : int): # Where star is defined the same way as Globals.c
 	### PLANET SWITCH CUTSCENE LOGIC ###
 	
 	var currentStar = get_tree().get_nodes_in_group("earth")[0]
-	var globalObject = get_node("Globals")
+	var _globalObject = get_node("Globals")
 	var tween0 = create_tween()
 	tween0.tween_property(currentStar, "scale", Vector2.ZERO, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tween0.tween_method(set_parallax_speed, 0.2, 50.0, 2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)

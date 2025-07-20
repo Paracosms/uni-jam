@@ -11,7 +11,7 @@ func showDeathUI():
 	%exit.disabled = false
 
 func exitToMainMenu():
-	pass
+	get_tree().quit()
 
 func retry():
 	# Reset Globals to default
@@ -21,7 +21,7 @@ func retry():
 	Globals.lives = 50
 	Globals.starPoints = 0
 	Globals.currentStar = 0 # such that alpha = 0, beta = 1, etc.
-	Globals.shopOpened = false
+	Globals.skillsOpened = false
 	Globals.volume = 0
 	Globals.clickDamage = 1
 	Globals.baseYield = 1

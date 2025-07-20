@@ -36,17 +36,27 @@ func _process(_delta):
 		emit_signal("asteroidExploded")
 		
 		### STARPOINTS AWARDED LOGIC ###
-		var critActive : int = 0 #
-		if Globals.critEnabled && (randi() % 4) == 0: # Critical hit procs if a random integer between 0 - 3 is equal to 0 (aka 1 in 4 chance)
-			critActive = 1
-			#print("Critical hit!")
-		Globals.starPoints += Globals.baseYield + (Globals.baseYield * Globals.critMultiplier * critActive)
-		critActive = 0 # Prepares for next click
-		queue_free()
+		var critMult : int = 1 # Critical Multiplier 
+		if randf() <= Globals.critical_hit: # 25% or 50% chance
+			critMult = 2 # Double starpoints
+		
+		var extraStarpoints = abs(health) * Globals.overkill # Overkill ability
+		Globals.starPoints += (Globals.baseYield + extraStarpoints) * critMult # Starpoints Formula
+		
+		queue_free() # Kill the asteroid
+		
+		Globals.currentKills += 1 # Kill count
+		if Globals.currentKills >= Globals.lifeSteal: # LifeSteal logic
+			Globals.currentKills = 0
+			Globals.lives += 1
 
 
 func _on_click_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		
+		if scale.x <= Globals.crushSmall: # Crush small asteroid logic
+			health = 0
+		
 		health -= Globals.clickDamage
 		var newParticles = chipParticles.instantiate()
 		add_child(newParticles)
