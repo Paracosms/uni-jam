@@ -9,7 +9,7 @@ var meteorShower : bool = false
 var lives : int = 1000
 var starPoints : int = 10000
 var currentStar : int = 0 # such that alpha = 0, beta = 1, etc.
-var currentShot : int = 0 # 0 - Lyra, 1 - Cepheus 2 - Perseus
+var currentSkillTree : int = 0 # 0 - Lyra, 1 - Cepheus 2 - Perseus
 var skillsOpened : bool = false
 var volume : float = 0
 var clickDamage : int = 1 ### Done
