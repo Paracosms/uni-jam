@@ -210,7 +210,7 @@ func toggleShop():
 		Globals.shopOpened = false
 	else:
 		get_node("Shop").visible = true
-    Globals.shopOpened = true
+	Globals.shopOpened = true
 
 # All switchTo functions changes stars and respawns all removed asteroids with +50 base speed
 # Alpha is bottom (earth)

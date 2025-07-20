@@ -47,6 +47,7 @@ mouse_filter = 1
 
 [node name="topLeft" type="MarginContainer" parent="windowScale/Info"]
 custom_minimum_size = Vector2(100, 0)
+layout_mode = 0
 offset_right = 230.0
 offset_bottom = 85.0
 theme_override_constants/margin_left = 20
