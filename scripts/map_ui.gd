@@ -29,21 +29,34 @@ func _process(_delta):
 	if Globals.betaUnlocked:
 		%beta.disabled = false
 		%beta.visible = true
+	else:
+		%beta.disabled = true
+		%beta.visible = false
 	
 	if Globals.gammaUnlocked:
 		%gamma.disabled = false
 		%gamma.visible = true
+	else:
+		%gamma.disabled = true
+		%gamma.visible = false
 	
 	if Globals.deltaUnlocked:
 		%delta.disabled = false
 		%delta.visible = true
+	else:
+		%delta.disabled = true
+		%delta.visible = false
 	
 	
 	if Globals.betaUnlocked && Globals.deltaUnlocked:
 		%horizontal.visible = true
+	else:
+		%horizontal.visible = false
 	
 	if Globals.gammaUnlocked:
 		%vertical.visible = true
+	else:
+		%vertical.visible = false
 	
 	match Globals.currentStar:
 		0: %alpha.disabled = true

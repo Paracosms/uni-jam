@@ -113,45 +113,82 @@ grow_horizontal = 0
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 20
 
-[node name="infoUI" type="PanelContainer" parent="windowScale/Info/topRight"]
+[node name="VBoxContainer" type="VBoxContainer" parent="windowScale/Info/topRight"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="infoUI" type="PanelContainer" parent="windowScale/Info/topRight/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("2_8k7j3")
 
-[node name="MarginContainer" type="MarginContainer" parent="windowScale/Info/topRight/infoUI"]
+[node name="MarginContainer" type="MarginContainer" parent="windowScale/Info/topRight/VBoxContainer/infoUI"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 
-[node name="GridContainer" type="GridContainer" parent="windowScale/Info/topRight/infoUI/MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="windowScale/Info/topRight/VBoxContainer/infoUI/MarginContainer"]
 layout_mode = 2
 theme_override_constants/h_separation = 10
 columns = 2
 
-[node name="lives" type="Label" parent="windowScale/Info/topRight/infoUI/MarginContainer/GridContainer"]
+[node name="lives" type="Label" parent="windowScale/Info/topRight/VBoxContainer/infoUI/MarginContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "000"
 horizontal_alignment = 2
 
-[node name="livesAnimation" type="TextureRect" parent="windowScale/Info/topRight/infoUI/MarginContainer/GridContainer"]
+[node name="livesAnimation" type="TextureRect" parent="windowScale/Info/topRight/VBoxContainer/infoUI/MarginContainer/GridContainer"]
 layout_mode = 2
 texture = ExtResource("1_nt7q6")
 stretch_mode = 2
 
-[node name="starpoints" type="Label" parent="windowScale/Info/topRight/infoUI/MarginContainer/GridContainer"]
+[node name="starpoints" type="Label" parent="windowScale/Info/topRight/VBoxContainer/infoUI/MarginContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "000"
 horizontal_alignment = 2
 
-[node name="starpointsAnimation" type="TextureRect" parent="windowScale/Info/topRight/infoUI/MarginContainer/GridContainer"]
+[node name="starpointsAnimation" type="TextureRect" parent="windowScale/Info/topRight/VBoxContainer/infoUI/MarginContainer/GridContainer"]
 layout_mode = 2
 texture = ExtResource("2_x4jx1")
 stretch_mode = 2
+
+[node name="volumeUI" type="PanelContainer" parent="windowScale/Info/topRight/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_8k7j3")
+
+[node name="MarginContainer" type="MarginContainer" parent="windowScale/Info/topRight/VBoxContainer/volumeUI"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="GridContainer" type="GridContainer" parent="windowScale/Info/topRight/VBoxContainer/volumeUI/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+columns = 2
+
+[node name="volumeIcon" type="TextureRect" parent="windowScale/Info/topRight/VBoxContainer/volumeUI/MarginContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("4_wm3ai")
+
+[node name="CenterContainer" type="CenterContainer" parent="windowScale/Info/topRight/VBoxContainer/volumeUI/MarginContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Volume" type="HSlider" parent="windowScale/Info/topRight/VBoxContainer/volumeUI/MarginContainer/GridContainer/CenterContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+min_value = -50.0
+max_value = 10.0
+value = -20.0
+script = ExtResource("5_8dubc")
 
 [node name="bottomLeft" type="MarginContainer" parent="windowScale/Info"]
 layout_mode = 1
@@ -382,38 +419,10 @@ offset_bottom = 20.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="volumeUI" type="PanelContainer" parent="windowScale/Info/centerRight"]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="windowScale/Info/centerRight/volumeUI"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 10
-
-[node name="GridContainer" type="GridContainer" parent="windowScale/Info/centerRight/volumeUI/MarginContainer"]
-layout_mode = 2
-theme_override_constants/h_separation = 20
-columns = 2
-
-[node name="volumeIcon" type="TextureRect" parent="windowScale/Info/centerRight/volumeUI/MarginContainer/GridContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-texture = ExtResource("4_wm3ai")
-
-[node name="CenterContainer" type="CenterContainer" parent="windowScale/Info/centerRight/volumeUI/MarginContainer/GridContainer"]
-layout_mode = 2
-
-[node name="Volume" type="HSlider" parent="windowScale/Info/centerRight/volumeUI/MarginContainer/GridContainer/CenterContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-min_value = -50.0
-max_value = 10.0
-value = -20.0
-script = ExtResource("5_8dubc")
-
+[connection signal="mouse_entered" from="windowScale/Info/topRight/VBoxContainer/volumeUI" to="." method="_on_volume_ui_mouse_entered"]
+[connection signal="mouse_exited" from="windowScale/Info/topRight/VBoxContainer/volumeUI" to="." method="_on_volume_ui_mouse_exited"]
+[connection signal="mouse_entered" from="windowScale/Info/topRight/VBoxContainer/volumeUI/MarginContainer/GridContainer/CenterContainer/Volume" to="." method="_on_volume_mouse_entered"]
+[connection signal="mouse_exited" from="windowScale/Info/topRight/VBoxContainer/volumeUI/MarginContainer/GridContainer/CenterContainer/Volume" to="." method="_on_volume_mouse_exited"]
 [connection signal="pressed" from="windowScale/Info/topLeft/skillsUpButton" to="windowScale/Info/topLeft/skillsUpButton" method="_on_mouse_pressed"]
 [connection signal="pressed" from="windowScale/Info/bottomLeft/skillsDownButton" to="windowScale/Info/bottomLeft/skillsDownButton" method="_on_mouse_pressed"]
 [connection signal="mouse_entered" from="windowScale/Info/bottomRight/VBoxContainer/mapUI/alpha" to="windowScale/Info/bottomRight/VBoxContainer/mapUI" method="_on_mouse_entered" binds= ["alpha"]]
@@ -429,7 +438,3 @@ script = ExtResource("5_8dubc")
 [connection signal="mouse_exited" from="windowScale/Info/bottomRight/VBoxContainer/mapUI/delta" to="windowScale/Info/bottomRight/VBoxContainer/mapUI" method="_on_mouse_exited" binds= ["delta"]]
 [connection signal="pressed" from="windowScale/Info/bottomRight/VBoxContainer/mapUI/delta" to="windowScale/Info/bottomRight/VBoxContainer/mapUI" method="_on_pressed" binds= ["delta"]]
 [connection signal="mouse_entered" from="windowScale/Info/centerLeft/toggleSkills" to="windowScale/Info/centerLeft/toggleSkills" method="_on_mouse_entered"]
-[connection signal="mouse_entered" from="windowScale/Info/centerRight/volumeUI" to="." method="_on_volume_ui_mouse_entered"]
-[connection signal="mouse_exited" from="windowScale/Info/centerRight/volumeUI" to="." method="_on_volume_ui_mouse_exited"]
-[connection signal="mouse_entered" from="windowScale/Info/centerRight/volumeUI/MarginContainer/GridContainer/CenterContainer/Volume" to="." method="_on_volume_mouse_entered"]
-[connection signal="mouse_exited" from="windowScale/Info/centerRight/volumeUI/MarginContainer/GridContainer/CenterContainer/Volume" to="." method="_on_volume_mouse_exited"]
