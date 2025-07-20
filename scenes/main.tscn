@@ -31,6 +31,8 @@ metadata/_edit_use_anchors_ = true
 [node name="Globals" parent="." instance=ExtResource("4_jyhfs")]
 
 [node name="Earth" parent="." instance=ExtResource("2_0wfyh")]
+unique_name_in_owner = true
 position = Vector2(960, 540)
 
 [node name="Camera" parent="." instance=ExtResource("7_o6xl0")]
+visible = false
