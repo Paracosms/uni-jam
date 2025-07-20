@@ -28,10 +28,10 @@ window/stretch/mode="viewport"
 
 [global_group]
 
-lyra=""
-cepheus=""
-perseus=""
 skillButtons=""
+constellation_0=""
+constellation_1=""
+constellation_2=""
 
 [gui]
 

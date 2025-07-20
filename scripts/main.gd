@@ -134,17 +134,24 @@ func trulyReady():
 	
 	### SKILLS SCREEN LOGIC ###
 	$UIRenderer/UI/windowScale/Info/centerLeft/toggleSkills.connect("skillsToggled", toggleSkills)
+	$UIRenderer/UI/windowScale/Info/topLeft/skillsUpButton.connect("skillsUpToggled", toggleUpSkills)
+	$UIRenderer/UI/windowScale/Info/bottomLeft/skillsDownButton.connect("skillsDownToggled", toggleDownSkills)
 	var screen_size = get_viewport().get_visible_rect().size
 	var skills = skills_scene.instantiate()
 	
 	$UIRenderer/UI.add_child(skills)
 	get_node("UIRenderer/UI/skill_tree").position = Vector2(screen_size.x / 15, screen_size.y / 2)
-	var lyra_nodes = get_tree().get_nodes_in_group("lyra")
-	var cepheus_nodes = get_tree().get_nodes_in_group("cepheus")
-	var perseus = get_tree().get_nodes_in_group("perseus")
+	var lyra_nodes = get_tree().get_nodes_in_group("constellation_0")
+	var cepheus_nodes = get_tree().get_nodes_in_group("constellation_1")
+	var perseus_nodes = get_tree().get_nodes_in_group("constellation_2")
 	var button_nodes = get_tree().get_nodes_in_group("skillButtons")
+	
 	for node in lyra_nodes:
 		node.visible = false
+	for node in cepheus_nodes:
+		node.visible = false
+	for node in perseus_nodes:
+		node.visible = false # I KNOW THIS IS BAD CODING IM TIRED OKAY
 	for node in button_nodes:
 		node.visible = false
 
@@ -277,22 +284,79 @@ func playExplosionSound():
 	soundPlayer.play()
 	soundPlayer.finished.connect(soundPlayer.queue_free)
 
+var constellation_nodes = {}
+var target_position = Vector2.ZERO
+
 func toggleSkills():
-	var lyra_nodes = get_tree().get_nodes_in_group("lyra")
+	var lyra_nodes = get_tree().get_nodes_in_group("constellation_0")
+	var cepheus_nodes = get_tree().get_nodes_in_group("constellation_1")
+	var perseus_nodes = get_tree().get_nodes_in_group("constellation_2")
 	var button_nodes = get_tree().get_nodes_in_group("skillButtons")
+	
 	# Toggles the skills menu
 	if Globals.skillsOpened:
 		for node in lyra_nodes:
+			node.visible = false
+		for node in cepheus_nodes:
+			node.visible = false
+		for node in perseus_nodes:
 			node.visible = false
 		for node in button_nodes:
 			node.visible = false
 		Globals.skillsOpened = false
 	else:
-		for node in lyra_nodes:
+		for node in get_tree().get_nodes_in_group("constellation_" + str(Globals.currentSkillTree)):
 			node.visible = true
 		for node in button_nodes:
 			node.visible = true
 		Globals.skillsOpened = true
+
+func toggleUpSkills():
+	var current = Globals.currentSkillTree
+	match current:
+		0:
+			Globals.currentSkillTree = 2
+			for node in get_tree().get_nodes_in_group("constellation_0"):
+				node.visible = false
+			for node in get_tree().get_nodes_in_group("constellation_2"):
+				node.visible = true
+		1:
+			Globals.currentSkillTree = 0
+			for node in get_tree().get_nodes_in_group("constellation_1"):
+				node.visible = false
+			for node in get_tree().get_nodes_in_group("constellation_0"):
+				node.visible = true
+		2:
+			Globals.currentSkillTree = 1
+			for node in get_tree().get_nodes_in_group("constellation_2"):
+				node.visible = false
+			for node in get_tree().get_nodes_in_group("constellation_1"):
+				node.visible = true
+	
+
+func toggleDownSkills():
+	var current = Globals.currentSkillTree
+	match current:
+		0:
+			Globals.currentSkillTree = 1
+			for node in get_tree().get_nodes_in_group("constellation_0"):
+				node.visible = false
+			for node in get_tree().get_nodes_in_group("constellation_1"):
+				node.visible = true
+		1:
+			Globals.currentSkillTree = 2
+			for node in get_tree().get_nodes_in_group("constellation_1"):
+				node.visible = false
+			for node in get_tree().get_nodes_in_group("constellation_2"):
+				node.visible = true
+		2:
+			Globals.currentSkillTree = 0
+			for node in get_tree().get_nodes_in_group("constellation_2"):
+				node.visible = false
+			for node in get_tree().get_nodes_in_group("constellation_0"):
+				node.visible = true
+	
+
 
 func set_parallax_speed(value):
 	Globals.parallaxSpeed = value
