@@ -1,6 +1,5 @@
-[gd_scene load_steps=22 format=3 uid="uid://becbw8nht6jch"]
+[gd_scene load_steps=21 format=3 uid="uid://becbw8nht6jch"]
 
-[ext_resource type="Script" uid="uid://3s1ase5ebu8y" path="res://scripts/shop.gd" id="1_lx5au"]
 [ext_resource type="Texture2D" uid="uid://r114exs72lxa" path="res://assets/sprites/iconSkills/enabled/crush_small.png" id="2_68utx"]
 [ext_resource type="Texture2D" uid="uid://b43beqkvltxwx" path="res://assets/sprites/iconSkills/enabled/double_yield.png" id="2_xfvoa"]
 [ext_resource type="Texture2D" uid="uid://bf0ccmubcn462" path="res://assets/sprites/iconSkills/disabled/disabled_double_yield.png" id="3_1l46r"]
@@ -23,7 +22,6 @@
 [ext_resource type="Texture2D" uid="uid://4mf0loxptaxo" path="res://assets/sprites/iconSkills/disabled/disabled_life_steal.png" id="21_xogfe"]
 
 [node name="Shop" type="Node2D"]
-script = ExtResource("1_lx5au")
 
 [node name="shop title" type="Label" parent="."]
 clip_contents = true
@@ -45,102 +43,6 @@ offset_bottom = 1080.0
 mouse_filter = 1
 mouse_force_pass_scroll_events = false
 color = Color(0.243137, 0.537255, 1, 0.0784314)
-
-[node name="MarginContainer" type="MarginContainer" parent="."]
-offset_left = 1067.0
-offset_right = 2082.0
-offset_bottom = 935.0
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 150
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 50
-
-[node name="upgrades" type="GridContainer" parent="MarginContainer"]
-layout_mode = 2
-theme_override_constants/h_separation = 50
-theme_override_constants/v_separation = 50
-columns = 2
-
-[node name="crush_small" type="Button" parent="MarginContainer/upgrades"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-text = "You deal maximum damage to
-the smallest asteroid
-[300 Starpoints]"
-
-[node name="double_yield" type="Button" parent="MarginContainer/upgrades"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-mouse_filter = 1
-text = "Breaking asteroids yields 2 starpoints.
-[30 Starpoints]"
-
-[node name="double_damage" type="Button" parent="MarginContainer/upgrades"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-mouse_filter = 1
-text = "Your clicks break asteroids twice as fast.
-[50 Starpoints]"
-
-[node name="slow_asteroids" type="Button" parent="MarginContainer/upgrades"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-text = "All Asteroids are 5% slower
-[50 Starpoints]"
-
-[node name="critical_hit" type="Button" parent="MarginContainer/upgrades"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-mouse_filter = 1
-text = "Your clicks have a 1 in 4 chance to
- yield double the starpoints.
-[100 Starpoints]"
-
-[node name="soften_asteroids" type="Button" parent="MarginContainer/upgrades"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-text = "All Asteroids spawn with 1 less health
-[200 Starpoints]"
-
-[node name="passive_starpoints" type="Button" parent="MarginContainer/upgrades"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-text = "You earn 1 starpoint passively every 
-5 seconds
-[200 Starpoints]"
-
-[node name="binoculars" type="Button" parent="MarginContainer/upgrades"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-text = "Your view range expands based on 
-your cursor location
-[200 Starpoints]"
-
-[node name="overkill" type="Button" parent="MarginContainer/upgrades"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-text = "When destroying an asteroid with 
-more damage than needed, you 
-get bonus starpoints
-[200 Starpoints]"
-
-[node name="life_steal" type="Button" parent="MarginContainer/upgrades"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-mouse_filter = 1
-text = "Your view range expands based on 
-your cursor location
-[200 Starpoints]"
 
 [node name="crush_small" type="TextureButton" parent="."]
 offset_left = 216.0
@@ -301,44 +203,3 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 21.0
 horizontal_alignment = 1
-
-[connection signal="pressed" from="MarginContainer/upgrades/crush_small" to="." method="_on_upgrade_button_pressed" binds= ["crush_small"]]
-[connection signal="pressed" from="MarginContainer/upgrades/double_yield" to="." method="_on_upgrade_button_pressed" binds= ["double_yield"]]
-[connection signal="pressed" from="MarginContainer/upgrades/double_damage" to="." method="_on_upgrade_button_pressed" binds= ["double_damage"]]
-[connection signal="pressed" from="MarginContainer/upgrades/slow_asteroids" to="." method="_on_upgrade_button_pressed" binds= ["slow_asteroids"]]
-[connection signal="pressed" from="MarginContainer/upgrades/critical_hit" to="." method="_on_upgrade_button_pressed" binds= ["critical_hit"]]
-[connection signal="pressed" from="MarginContainer/upgrades/soften_asteroids" to="." method="_on_upgrade_button_pressed" binds= ["soften_asteroids"]]
-[connection signal="pressed" from="MarginContainer/upgrades/passive_starpoints" to="." method="_on_upgrade_button_pressed" binds= ["passive_starpoints"]]
-[connection signal="pressed" from="MarginContainer/upgrades/binoculars" to="." method="_on_upgrade_button_pressed" binds= ["binoculars"]]
-[connection signal="pressed" from="MarginContainer/upgrades/overkill" to="." method="_on_upgrade_button_pressed" binds= ["overkill"]]
-[connection signal="pressed" from="MarginContainer/upgrades/life_steal" to="." method="_on_upgrade_button_pressed" binds= ["life_steal"]]
-[connection signal="mouse_entered" from="crush_small" to="." method="_on_button_mouse_entered" binds= ["crush_small"]]
-[connection signal="mouse_exited" from="crush_small" to="." method="_on_button_mouse_exited" binds= ["crush_small"]]
-[connection signal="pressed" from="crush_small" to="." method="_on_upgrade_button_pressed" binds= ["crush_small"]]
-[connection signal="mouse_entered" from="double_yield" to="." method="_on_button_mouse_entered" binds= ["double_yield"]]
-[connection signal="mouse_exited" from="double_yield" to="." method="_on_button_mouse_exited" binds= ["double_yield"]]
-[connection signal="pressed" from="double_yield" to="." method="_on_upgrade_button_pressed" binds= ["double_yield"]]
-[connection signal="mouse_entered" from="double_damage" to="." method="_on_button_mouse_entered" binds= ["double_damage"]]
-[connection signal="mouse_exited" from="double_damage" to="." method="_on_button_mouse_exited" binds= ["double_damage"]]
-[connection signal="pressed" from="double_damage" to="." method="_on_upgrade_button_pressed" binds= ["double_damage"]]
-[connection signal="mouse_entered" from="slow_asteroids" to="." method="_on_button_mouse_entered" binds= ["slow_asteroids"]]
-[connection signal="mouse_exited" from="slow_asteroids" to="." method="_on_button_mouse_exited" binds= ["slow_asteroids"]]
-[connection signal="pressed" from="slow_asteroids" to="." method="_on_upgrade_button_pressed" binds= ["slow_asteroids"]]
-[connection signal="mouse_entered" from="critical_hit" to="." method="_on_button_mouse_entered" binds= ["critical_hit"]]
-[connection signal="mouse_exited" from="critical_hit" to="." method="_on_button_mouse_exited" binds= ["critical_hit"]]
-[connection signal="pressed" from="critical_hit" to="." method="_on_upgrade_button_pressed" binds= ["critical_hit"]]
-[connection signal="mouse_entered" from="soften_asteroids" to="." method="_on_button_mouse_entered" binds= ["soften_asteroids"]]
-[connection signal="mouse_exited" from="soften_asteroids" to="." method="_on_button_mouse_exited" binds= ["soften_asteroids"]]
-[connection signal="pressed" from="soften_asteroids" to="." method="_on_upgrade_button_pressed" binds= ["soften_asteroids"]]
-[connection signal="mouse_entered" from="passive_starpoints" to="." method="_on_button_mouse_entered" binds= ["passive_starpoints"]]
-[connection signal="mouse_exited" from="passive_starpoints" to="." method="_on_button_mouse_exited" binds= ["passive_starpoints"]]
-[connection signal="pressed" from="passive_starpoints" to="." method="_on_upgrade_button_pressed" binds= ["passive_starpoints"]]
-[connection signal="mouse_entered" from="binoculars" to="." method="_on_button_mouse_entered" binds= ["binoculars"]]
-[connection signal="mouse_exited" from="binoculars" to="." method="_on_button_mouse_exited" binds= ["binoculars"]]
-[connection signal="pressed" from="binoculars" to="." method="_on_upgrade_button_pressed" binds= ["binoculars"]]
-[connection signal="mouse_entered" from="overkill" to="." method="_on_button_mouse_entered" binds= ["overkill"]]
-[connection signal="mouse_exited" from="overkill" to="." method="_on_button_mouse_exited" binds= ["overkill"]]
-[connection signal="pressed" from="overkill" to="." method="_on_upgrade_button_pressed" binds= ["overkill"]]
-[connection signal="mouse_entered" from="life_steal" to="." method="_on_button_mouse_entered" binds= ["life_steal"]]
-[connection signal="mouse_exited" from="life_steal" to="." method="_on_button_mouse_exited" binds= ["life_steal"]]
-[connection signal="pressed" from="life_steal" to="." method="_on_upgrade_button_pressed" binds= ["life_steal"]]

@@ -1,11 +1,13 @@
-[gd_scene load_steps=20 format=3 uid="uid://cynt3lbt5jsyb"]
+[gd_scene load_steps=25 format=3 uid="uid://cynt3lbt5jsyb"]
 
 [ext_resource type="Texture2D" uid="uid://7mtyqv42wlaf" path="res://assets/resources/lives.tres" id="1_nt7q6"]
 [ext_resource type="Script" uid="uid://b04y5fmvggnk5" path="res://scripts/ui.gd" id="1_yev5y"]
 [ext_resource type="StyleBox" uid="uid://fxb75dkg8ryi" path="res://assets/resources/panelBackground.tres" id="2_8k7j3"]
 [ext_resource type="Texture2D" uid="uid://ygqyjex4xl27" path="res://assets/resources/starpoints.tres" id="2_x4jx1"]
+[ext_resource type="Texture2D" uid="uid://57ky32wfdha2" path="res://assets/sprites/TriangleButton.png" id="2_ycmcx"]
 [ext_resource type="Texture2D" uid="uid://d08k12a7h80bk" path="res://assets/resources/volume.tres" id="4_wm3ai"]
 [ext_resource type="Script" uid="uid://db0mx56hqgh0i" path="res://scripts/volume.gd" id="5_8dubc"]
+[ext_resource type="Texture2D" uid="uid://deanmdjsti7lc" path="res://assets/sprites/TwiceRotatedTriangleButton.png" id="5_kupmu"]
 [ext_resource type="Script" uid="uid://br4uuvp853cs2" path="res://scripts/toggle_shop.gd" id="6_8dubc"]
 [ext_resource type="Script" uid="uid://dbwo657rywmdn" path="res://scripts/map_ui.gd" id="7_7dvkv"]
 [ext_resource type="Texture2D" uid="uid://cy4dlainxcfny" path="res://assets/sprites/crux.png" id="7_cgfq5"]
@@ -13,10 +15,13 @@
 [ext_resource type="Texture2D" uid="uid://dwti00axm3p3t" path="res://assets/sprites/stars/alpha.png" id="10_f7tlh"]
 [ext_resource type="Texture2D" uid="uid://50i8qk2j810k" path="res://assets/sprites/stars/alphaDisabled.png" id="11_8k7j3"]
 [ext_resource type="Texture2D" uid="uid://by8hq4bc77w5q" path="res://assets/sprites/stars/beta.png" id="12_8k7j3"]
+[ext_resource type="Script" uid="uid://ko6mq3ywcmji" path="res://scripts/gamma_gacrux.gd" id="12_qsv74"]
+[ext_resource type="Script" uid="uid://cyr6ftfqpf8kf" path="res://scripts/delta_imai.gd" id="13_h1mc3"]
 [ext_resource type="Texture2D" uid="uid://dvjba0rdw6ryq" path="res://assets/sprites/stars/betaDisabled.png" id="13_jkdwc"]
 [ext_resource type="Texture2D" uid="uid://bnc7vhojayye2" path="res://assets/sprites/stars/gamma.png" id="14_jkdwc"]
 [ext_resource type="Texture2D" uid="uid://crm6uxah53mh3" path="res://assets/sprites/stars/gammaDisabled.png" id="15_rlppe"]
 [ext_resource type="Texture2D" uid="uid://lmfq8ongfe61" path="res://assets/sprites/stars/delta.png" id="16_rlppe"]
+[ext_resource type="Texture2D" uid="uid://bpohbffcjlfnc" path="res://assets/sprites/RotatedTriangleButton.png" id="17_8k7j3"]
 [ext_resource type="Texture2D" uid="uid://c213p0sw3n7dd" path="res://assets/sprites/stars/deltaDisabled.png" id="17_ycmcx"]
 [ext_resource type="Script" uid="uid://cwx5syvfolhud" path="res://scripts/game_over_ui.gd" id="19_jkdwc"]
 
@@ -49,44 +54,20 @@ mouse_filter = 1
 
 [node name="topLeft" type="MarginContainer" parent="windowScale/Info"]
 custom_minimum_size = Vector2(100, 0)
-layout_mode = 0
-offset_right = 230.0
-offset_bottom = 85.0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.2
+anchor_bottom = 0.126
+offset_left = 224.0
+offset_top = 40.0
+offset_right = 64.0
+offset_bottom = -3.08
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 15
 
-[node name="volumeUI" type="PanelContainer" parent="windowScale/Info/topLeft"]
-unique_name_in_owner = true
+[node name="skillsUpButton" type="TextureButton" parent="windowScale/Info/topLeft"]
 layout_mode = 2
-theme_override_styles/panel = ExtResource("2_8k7j3")
-
-[node name="MarginContainer" type="MarginContainer" parent="windowScale/Info/topLeft/volumeUI"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 10
-
-[node name="GridContainer" type="GridContainer" parent="windowScale/Info/topLeft/volumeUI/MarginContainer"]
-layout_mode = 2
-theme_override_constants/h_separation = 20
-columns = 2
-
-[node name="volumeIcon" type="TextureRect" parent="windowScale/Info/topLeft/volumeUI/MarginContainer/GridContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-texture = ExtResource("4_wm3ai")
-
-[node name="CenterContainer" type="CenterContainer" parent="windowScale/Info/topLeft/volumeUI/MarginContainer/GridContainer"]
-layout_mode = 2
-
-[node name="Volume" type="HSlider" parent="windowScale/Info/topLeft/volumeUI/MarginContainer/GridContainer/CenterContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-min_value = -50.0
-max_value = 10.0
-value = -20.0
-script = ExtResource("5_8dubc")
+texture_normal = ExtResource("2_ycmcx")
 
 [node name="topMiddle" type="MarginContainer" parent="windowScale/Info"]
 layout_mode = 1
@@ -174,20 +155,15 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -215.0
-offset_right = 320.0
+offset_top = -74.0
+offset_right = 220.0
 grow_vertical = 0
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_bottom = 15
 
-[node name="toggleShop" type="Button" parent="windowScale/Info/bottomLeft"]
-unique_name_in_owner = true
-z_index = 1
-custom_minimum_size = Vector2(300, 200)
+[node name="skillsDownButton" type="TextureButton" parent="windowScale/Info/bottomLeft"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 100
-text = "SHOP"
-script = ExtResource("6_8dubc")
+texture_normal = ExtResource("5_kupmu")
 
 [node name="bottomRight" type="MarginContainer" parent="windowScale/Info"]
 layout_mode = 1
@@ -368,11 +344,73 @@ disabled = true
 text = "EXIT"
 flat = true
 
-[connection signal="mouse_entered" from="windowScale/Info/topLeft/volumeUI" to="." method="_on_volume_ui_mouse_entered"]
-[connection signal="mouse_exited" from="windowScale/Info/topLeft/volumeUI" to="." method="_on_volume_ui_mouse_exited"]
-[connection signal="mouse_entered" from="windowScale/Info/topLeft/volumeUI/MarginContainer/GridContainer/CenterContainer/Volume" to="." method="_on_volume_mouse_entered"]
-[connection signal="mouse_exited" from="windowScale/Info/topLeft/volumeUI/MarginContainer/GridContainer/CenterContainer/Volume" to="." method="_on_volume_mouse_exited"]
-[connection signal="pressed" from="windowScale/Info/bottomLeft/toggleShop" to="windowScale/Info/bottomLeft/toggleShop" method="_on_pressed"]
+
+[node name="centerLeft" type="MarginContainer" parent="windowScale/Info"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -100.0
+offset_right = 59.0
+offset_bottom = 100.0
+grow_vertical = 2
+
+[node name="toggleShop" type="TextureButton" parent="windowScale/Info/centerLeft"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_normal = ExtResource("17_8k7j3")
+script = ExtResource("6_8dubc")
+
+[node name="centerRight" type="MarginContainer" parent="windowScale/Info"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="volumeUI" type="PanelContainer" parent="windowScale/Info/centerRight"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="windowScale/Info/centerRight/volumeUI"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="GridContainer" type="GridContainer" parent="windowScale/Info/centerRight/volumeUI/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+columns = 2
+
+[node name="volumeIcon" type="TextureRect" parent="windowScale/Info/centerRight/volumeUI/MarginContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("4_wm3ai")
+
+[node name="CenterContainer" type="CenterContainer" parent="windowScale/Info/centerRight/volumeUI/MarginContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Volume" type="HSlider" parent="windowScale/Info/centerRight/volumeUI/MarginContainer/GridContainer/CenterContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+min_value = -50.0
+max_value = 10.0
+value = -20.0
+script = ExtResource("5_8dubc")
+
+[connection signal="mouse_entered" from="windowScale/Info/centerLeft/toggleShop" to="windowScale/Info/centerLeft/toggleShop" method="_on_mouse_entered"]
+[connection signal="mouse_entered" from="windowScale/Info/centerRight/volumeUI" to="." method="_on_volume_ui_mouse_entered"]
+[connection signal="mouse_exited" from="windowScale/Info/centerRight/volumeUI" to="." method="_on_volume_ui_mouse_exited"]
+[connection signal="mouse_entered" from="windowScale/Info/centerRight/volumeUI/MarginContainer/GridContainer/CenterContainer/Volume" to="." method="_on_volume_mouse_entered"]
+[connection signal="mouse_exited" from="windowScale/Info/centerRight/volumeUI/MarginContainer/GridContainer/CenterContainer/Volume" to="." method="_on_volume_mouse_exited"]
 [connection signal="mouse_entered" from="windowScale/Info/bottomRight/VBoxContainer/mapUI/alpha" to="windowScale/Info/bottomRight/VBoxContainer/mapUI" method="_on_mouse_entered" binds= ["alpha"]]
 [connection signal="mouse_exited" from="windowScale/Info/bottomRight/VBoxContainer/mapUI/alpha" to="windowScale/Info/bottomRight/VBoxContainer/mapUI" method="_on_mouse_exited" binds= ["alpha"]]
 [connection signal="pressed" from="windowScale/Info/bottomRight/VBoxContainer/mapUI/alpha" to="windowScale/Info/bottomRight/VBoxContainer/mapUI" method="_on_pressed" binds= ["alpha"]]

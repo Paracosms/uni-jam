@@ -9,7 +9,7 @@ var meteorShower : bool = false
 var lives : int = 1
 var starPoints : int = 0
 var currentStar : int = 0 # such that alpha = 0, beta = 1, etc.
-var shopOpened : bool = false
+var skillsOpened : bool = false
 var volume : float = 0
 var clickDamage : int = 1
 var baseYield : int = 100

@@ -26,6 +26,10 @@ window/size/resizable=false
 window/size/borderless=true
 window/stretch/mode="viewport"
 
+[global_group]
+
+lyra=""
+
 [gui]
 
 theme/custom="uid://cebjujnfsoqb4"

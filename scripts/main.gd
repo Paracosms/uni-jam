@@ -2,7 +2,7 @@ extends Node2D
 
 @export var asteroid_scene: PackedScene
 
-@onready var shop_scene = preload("res://scenes/shop.tscn")
+@onready var shop_scene = preload("res://scenes/skill_tree.tscn")
 @onready var alpha_scene = preload("res://scenes/earth.tscn")
 @onready var beta_scene = preload("res://scenes/beta.tscn")
 @onready var gamma_scene = preload("res://scenes/gamma.tscn")
@@ -36,6 +36,8 @@ var explosionAudio = [
 var spawn_timer := Timer.new()
 
 var meteorShower_timer := Timer.new()
+
+
 
 func get_offscreen_position() -> Vector2: # I still dont know what a vector2 is
 	var screen_size = get_viewport().get_visible_rect().size
@@ -112,10 +114,15 @@ func trulyReady():
 	mapUI.connect("deltaClicked", func(): switchToStar(3))
 	
 	### SHOP SCREEN LOGIC ###
-	$UIRenderer/UI/windowScale/Info/bottomLeft/toggleShop.connect("shopToggled", toggleShop)
-	%Shop.position = Vector2(Globals.screenSize.x / 2, 0)
-	%Shop.visible = false
+	$UIResizer/UIRenderer/UI/windowScale/Info/centerLeft/toggleShop.connect("shopToggled", toggleShop)
+	var screen_size = get_viewport().get_visible_rect().size
+	var shop = shop_scene.instantiate()
 	
+	add_child(shop)
+	get_node("skill_tree").position = Vector2(screen_size.x / 15, screen_size.y / 2)
+	var lyra_nodes = get_tree().get_nodes_in_group("lyra")
+	for node in lyra_nodes:
+			node.visible = false
 
 func spawn_asteroid(type : String = "base"):
 	var asteroid = asteroid_scene.instantiate()
@@ -235,13 +242,16 @@ func playExplosionSound():
 	soundPlayer.finished.connect(soundPlayer.queue_free)
 
 func toggleShop():
+	var lyra_nodes = get_tree().get_nodes_in_group("lyra")
 	# Toggles the shop
-	if Globals.shopOpened:
-		%Shop.visible = false
-		Globals.shopOpened = false
+	if Globals.skillsOpened:
+		for node in lyra_nodes:
+			node.visible = false
+		Globals.skillsOpened = false
 	else:
-		%Shop.visible = true
-		Globals.shopOpened = true
+		for node in lyra_nodes:
+			node.visible = true
+		Globals.skillsOpened = true
 
 func set_parallax_speed(value):
 	Globals.parallaxSpeed = value
