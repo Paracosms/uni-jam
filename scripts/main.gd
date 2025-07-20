@@ -73,7 +73,7 @@ func _ready():
 	%background.position = Vector2(Globals.screenSize.x - Globals.screenSize.x * 0.8, Globals.screenSize.y / 2)
 	
 	### CONSTANT METEOR SPAWNING LOGIC ###
-	spawn_timer.wait_time = 1  # Delay, i tried to make it an exported variable but it didnt work :(
+	spawn_timer.wait_time = Globals.asteroidSpawnTime
 	spawn_timer.one_shot = false
 	spawn_timer.connect("timeout", Callable(self, "spawn_asteroid")) # I think this makes it run when the time is up
 	add_child(spawn_timer)
@@ -215,6 +215,11 @@ func spawn_asteroid(type : String = "base"):
 		base_speed += 50
 		asteroidTexture.texture = asteroidSpeedTexture
 		asteroid.type = "speed"
+		
+	match Globals.currentStar:
+		3: base_health += 4
+		2: base_health += 2
+		1: base_health += 1
 	
 	### SET ASTEROID PROPERTIES ###
 	
